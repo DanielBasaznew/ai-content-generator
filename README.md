@@ -48,7 +48,7 @@ The completed project will produce:
 | Development assistant | Antigravity | Coding assistant and workflow development |
 | Media assembly & export | FFmpeg | Cutting, ducking, normalization, subtitles, end card, 9:16 & 16:9 exports |
 
-> **Setup & Verification Notice:** Local tools (such as FFmpeg and Python test/helper dependencies) and API access/credentials for Google AI Studio (Gemini), Cloudflare Workers AI, and Kaggle have **not** been configured or verified yet. Never commit `.env` files, API keys, tokens, or credentials to version control.
+> **Setup & Verification Notice:** Python dependencies (`google-genai`, `jsonschema`, `python-dotenv`, `pytest`, `kaggle`, and `imageio-ffmpeg` bundling FFmpeg `9.0.2`) are installed, while API credentials for Google AI Studio (Gemini), Cloudflare Workers AI, and Kaggle still need to be configured in a local untracked `.env` file (see `.env.example` and `docs/CREDENTIALS_AND_SETUP.md`). Never commit `.env`, `kaggle.json`, or API tokens to version control.
 
 ---
 
@@ -56,6 +56,8 @@ The completed project will produce:
 
 ```text
 day-2-ai-content-generation/
+├── .env.example                # Safe placeholder template for local API keys (copy to .env)
+├── .gitignore                  # Excludes .env, credentials, and Python cache artifacts
 ├── AI-Content Generation.pdf   # Original assignment reference document
 ├── README.md                   # Project overview, status, and future run instructions
 ├── DESIGN.md                   # Audience definition, film intention, creative boundaries, and test log
@@ -69,6 +71,7 @@ day-2-ai-content-generation/
 ├── docs/
 │   ├── AUDIENCE_TEST_1.md          # Participant feedback template for the first radio cut test
 │   ├── CHARACTER_REFERENCE_SHEET.md # Option A fictional character design & continuity guide (Step 6)
+│   ├── CREDENTIALS_AND_SETUP.md    # Guide to obtaining & storing API keys and setting up local tools
 │   ├── NARRATION_REVIEW.md         # Amharic narration & English subtitle script for author review
 │   ├── STORYBOARD_STRUCTURE.md     # Detailed guide to the storyboard schema and fields
 │   └── VISUAL_STYLE_SHEET.md       # Color palette, lighting, aspect-ratio framing & style sheet (Step 6)

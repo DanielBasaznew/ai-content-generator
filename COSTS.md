@@ -12,10 +12,10 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 
 | Provider / Tool | Planned Usage | Current Access / Quota Status | Notes |
 | --- | --- | --- | --- |
-| Google AI Studio / Gemini API | Script, storyboard, translation, TTS narration | Pending verification | API key not yet configured |
-| Cloudflare Workers AI | FLUX image generation (references & keyframes) | Pending verification | Account ID / token not yet configured |
-| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | Pending verification | Account / CLI not yet configured |
-| FFmpeg (Local) | Video & audio assembly, exports | Not installed locally | Needs installation before assembly stage |
+| Google AI Studio / Gemini API | Script, storyboard, translation, TTS narration | Pending verification | API key not yet configured (`GEMINI_API_KEY`) |
+| Cloudflare Workers AI | FLUX image generation (references & keyframes) | Pending verification | Account ID / token not yet configured (`CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`) |
+| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | Pending verification | `kaggle 2.2.5` CLI installed; account phone verification & credentials pending |
+| FFmpeg (Local) | Video & audio assembly, exports | Installed via `imageio-ffmpeg 0.8.1` (`ffmpeg 9.0.2`) | Available to Python scripts; optional global `ffmpeg`/`ffprobe` on PATH can be added via `winget` |
 
 ---
 
