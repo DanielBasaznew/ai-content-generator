@@ -16,6 +16,7 @@ This file records controlled experiments across script, keyframe, video, narrati
 | `EXP-001` | 2026-11-25 | narration | Pilot Gemini TTS Amharic clarity & WAV format on `shot-01` | `gemini-3.8-flash-tts` (`Charon`) | Pass (`5.240s`, 24 kHz mono; verified clear Amharic) |
 | `EXP-002` | 2026-11-25 | narration | Rate-limit pacing (`21s`) + `retryDelay` + SHA-256 caching | `gemini-3.8-flash-tts` (`Charon`) | Pass (`generated: 2, cached: 8`; clean rerun `0/10`) |
 | `EXP-003` | 2026-11-25 | narration / radio_cut | Adjust shot slots to measured TTS audio lengths (`75s -> 80s`) | `gemini-3.8-flash-tts` + `ffmpeg 9.0.2` | Pass (`0` slot overflows; continuous `80.000s` radio cut) |
+| `EXP-004` | 2026-11-25 | references | Generate Step 6 Option A character & environment sheets via FLUX | `@cf/black-forest-labs/flux-2-klein-4b` | Pass (`4/4` PNGs; `0/4` cached rerun; continuity verified) |
 
 ---
 
@@ -68,3 +69,13 @@ Copy this template for each new experiment:
 - **Seed:** N/A
 - **Result:** Pass — Initial check flagged 3 overflows (`shot-03`: `8.03s` vs `8.0s`; `shot-09`: `9.31s` vs `7.5s`; `shot-10`: `7.83s` vs `7.5s`). Adjusting slot durations to `80.0s` total (`7.0, 8.0, 8.5, 7.5, 6.5, 7.5, 7.5, 9.0, 10.0, 8.5`) resolved all overflows and produced `outputs/radio_cut/radio_cut_v1.wav` (`80.000s`) and `radio_cut_v1.mp3`.
 - **Observations:** `gemini-2.5-flash` full-cut audio transcription verified clear Amharic across all 10 shots (`00:00`–`01:15`) including `ሐረር`, `የራስ መኮንን ሐውልት`, `አዳማ`, and `አዲስ አበባ`; note the model heard `ብመለስም` in Shot 9 slightly close to `በምመለስም` (`01:02`), which human listeners should double-check during Audience Test 1.
+
+### EXP-004: Step 6 Character & Environment Reference Sheets via Cloudflare FLUX (`flux-2-klein-4b`)
+- **Date:** 2026-11-25
+- **Stage:** references
+- **Objective / Hypothesis:** Generate consistent 3-view Option A character turnaround sheets (`1344x768`) and center-balanced Harar environment sheets (`1024x1024`) using `@cf/black-forest-labs/flux-2-klein-4b` (`multipart/form-data`, fixed 4 steps, deterministic seeds `1001–1004`), expecting visual continuity between child and young adult and clean dual-aspect framing without garbled text or archival photo borders.
+- **Model:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0 via Cloudflare Workers AI)
+- **Parameters:** `multipart/form-data`, `steps=4` (model-fixed), `1344x768` (`ref_narrator_child` seed `1001`, `ref_narrator_adult` seed `1002`), `1024x1024` (`ref_harar_roundabout_memory` seed `1003`, `ref_harar_streets` seed `1004`).
+- **Seed:** `1001`, `1002`, `1003`, `1004`
+- **Result:** Pass — All 4 PNGs generated (`13.572s`, `24.148s`, `13.833s`, `13.378s`; total `64.931s`), validated with Pillow, and verified via SHA-256 cache (`generated: 0, cached: 4` on rerun).
+- **Observations:** Visual inspection confirmed: (1) `ref_narrator_child.png` cleanly renders front, 3/4, and back views of an ~8-year-old Ethiopian child in cream collared shirt + ochre-mustard vest; (2) `ref_narrator_adult.png` maintains skin, cropped curly hair, and facial continuity into an ~22-year-old in slate-navy overshirt over off-white shirt; (3) `ref_harar_roundabout_memory.png` keeps a generalized non-specific pedestal silhouette centered inside the `9:16` crop band without invented plaques or archival borders; and (4) `ref_harar_streets.png` maintains warm Harar textures with zero garbled signage.

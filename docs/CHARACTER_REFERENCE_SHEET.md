@@ -47,13 +47,13 @@ Used in **Shots 5, 6, 7, 8, and 9** so the audience experiences a clear, natural
 
 ---
 
-## 4. Reference-Sheet Generation Prompts & Model Config (Ready After Audience Test 1)
+## 4. Reference-Sheet Generation Prompts & Model Config (Generated & Verified)
 
-> **Status:** Cloudflare credentials and model schema are verified and `pipeline/references.py` is implemented and unit-tested, **but live image generation is intentionally held** until Step 5 Audience Test 1 (`docs/AUDIENCE_TEST_1.md`) is completed with 3 real listeners.
+> **Status:** Generated on 2026-11-25 via `pipeline/references.py` and visually verified (`assets/references/ref_narrator_child.png` and `assets/references/ref_narrator_adult.png`).
 
-- **Primary Model:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0, Cloudflare Workers AI `multipart/form-data`, fixed 4-step inference)
+- **Model Used:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0, Cloudflare Workers AI `multipart/form-data`, fixed 4-step inference)
 - **Fallback Model:** `@cf/black-forest-labs/flux-1-schnell` (Apache 2.0, `application/json`, `steps=4`)
-- **Planned Dimensions & Seeds:** `1344x768` (landscape 3-view turnaround), deterministic seeds `1001` (`ref_narrator_child`) and `1002` (`ref_narrator_adult`)
+- **Generated Dimensions & Seeds:** `1344x768` (landscape 3-view turnaround), deterministic seeds `1001` (`ref_narrator_child`, latency `13.572s`) and `1002` (`ref_narrator_adult`, latency `24.148s`)
 
 ### A. `ref_narrator_child` Sheet Prompt (for FLUX)
 - **Prompt:** `Character reference sheet on a neutral warm cream studio background, fictional generic Ethiopian child age 8, warm medium-brown skin, short cropped tightly curled black hair, soft natural child facial proportions, gentle warm dark eyes, wearing a clean off-white collared cotton shirt under a muted warm ochre-mustard knit vest, dark brown casual shorts, natural subtle expression, three clean views side by side (front view, three-quarter view, back view), warm soft daylight, 35mm film grain texture, realistic documentary film look, no text, no labels, no borders, no archival sepia frame.`

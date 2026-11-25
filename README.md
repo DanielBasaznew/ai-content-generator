@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Step 5 narration & radio cut complete (`outputs/radio_cut/radio_cut_v1.mp3`, `80.0s` Amharic narration via `gemini-3.8-flash-tts`) — ready for real **Audience Test 1** (`docs/AUDIENCE_TEST_1.md`). Step 6 reference image generation and Steps 7–15 are paused until Audience Test 1 feedback is collected and applied.
+> **Project Status:** Steps 5 and 6 are complete — `80.0s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.mp3`), Audience Test 1 summary (`DESIGN.md` / `docs/AUDIENCE_TEST_1.md`), and all 4 verified Option A FLUX reference PNGs (`assets/references/`) are in place. Ready for **Step 7** (keyframe generation); Steps 7–15 have not started.
 
 ---
 
@@ -66,10 +66,10 @@ day-2-ai-content-generation/
 ├── FAILURES.md                 # Template for logging errors, failed outputs, and fixes
 ├── COSTS.md                    # Template for tracking model usage, latency, GPU time, and costs
 ├── ETHICS.md                   # Ethical guidelines, AI disclosure policy, licensing, and consent log
-├── runs.jsonl                  # Append-only log of model API calls (12 logged calls from Step 5 TTS/QA)
+├── runs.jsonl                  # Append-only log of model API calls (16 logged calls across Step 5 & Step 6)
 ├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (80.0s voice-timed; Amharic + EN)
 ├── docs/
-│   ├── AUDIENCE_TEST_1.md          # Participant feedback template for the first radio cut test
+│   ├── AUDIENCE_TEST_1.md          # Participant feedback log & synthesis for Audience Test 1
 │   ├── CHARACTER_REFERENCE_SHEET.md # Option A fictional character design & continuity guide (Step 6)
 │   ├── CREDENTIALS_AND_SETUP.md    # Guide to obtaining & storing API keys and setting up local tools
 │   ├── NARRATION_REVIEW.md         # Approved Amharic narration & English subtitle script
@@ -81,12 +81,12 @@ day-2-ai-content-generation/
 │   ├── common.py               # Validation, .env loading, SHA-256 caching, runs.jsonl & WAV helpers
 │   ├── narration.py            # Cached Gemini TTS Amharic narration generator with 3 RPM pacing
 │   ├── radio_cut.py            # Audio-only radio cut assembler & English SRT exporter
-│   └── references.py           # Cloudflare FLUX Step 6 reference generator (gated on Audience Test 1)
+│   └── references.py           # Cloudflare FLUX Step 6 reference generator
 ├── assets/
-│   ├── references/             # Character and style reference assets (empty until Audience Test 1 passes)
-│   ├── keyframes/              # Generated still keyframes per shot (empty)
+│   ├── references/             # 4 generated Option A FLUX reference PNGs + references_cache.json
+│   ├── keyframes/              # Generated still keyframes per shot (empty — Step 7)
 │   ├── narration/              # 10 generated Amharic WAV clips + narration_cache.json
-│   └── music/                  # Generated score candidates and chosen track (empty)
+│   └── music/                  # Generated score candidates and chosen track (empty — Step 9)
 ├── outputs/
 │   ├── horizontal/             # Final 16:9 exports and intermediate cuts (empty)
 │   ├── radio_cut/              # Audio-only Step 5 radio cut (radio_cut_v1.mp3, .wav, _en.srt)

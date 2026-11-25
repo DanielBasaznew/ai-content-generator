@@ -113,11 +113,11 @@ Testing the story at the audio-only stage helps catch:
 
 ---
 
-## 4. Synthesis & Planned Storyboard Changes *(Complete After Testing)*
+## 4. Synthesis & Planned Storyboard Changes *(Recorded 2026-11-25)*
 
 - **Common Strengths Noted:**
-  - *(To be filled after real participant sessions)*
+  - Author reported on 2026-11-25 that all 3 listeners gave positive feedback (`"all of them said its nice"`) after listening to `outputs/radio_cut/radio_cut_v1.mp3`.
 - **Repeated Confusion Points or Pacing Issues:**
-  - *(To be filled after real participant sessions)*
+  - None reported by the author. *(Note: individual per-question responses in Section 3 above remain blank and can be filled with exact listener quotes by the author prior to final assignment submission.)*
 - **Specific Changes to Apply to `storyboard.json` and `DESIGN.md`:**
-  - *(To be filled after real participant sessions)*
+  - No wording or `80.0s` timeline changes requested; summary recorded in `DESIGN.md` Section 9 (`Test 1: Radio Cut`).

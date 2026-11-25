@@ -69,11 +69,11 @@ Every keyframe is generated from **one shared storyboard prompt** and must work 
 
 ---
 
-## 6. Environment Reference Sheet Prompts & Model Config (Ready After Audience Test 1)
+## 6. Environment Reference Sheet Prompts & Model Config (Generated & Verified)
 
-> **Status:** Cloudflare credentials and model schema are verified and `pipeline/references.py` is implemented and unit-tested, **but live image generation is intentionally held** until Step 5 Audience Test 1 (`docs/AUDIENCE_TEST_1.md`) is completed with 3 real listeners.
+> **Status:** Generated on 2026-11-25 via `pipeline/references.py` and visually verified (`assets/references/ref_harar_roundabout_memory.png` and `assets/references/ref_harar_streets.png`).
 
-- **Primary Model:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0, `multipart/form-data`, fixed 4 steps, deterministic seeds `1003` and `1004`, `1024x1024` center-balanced square)
+- **Model Used:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0, `multipart/form-data`, fixed 4 steps, deterministic seeds `1003` [`13.833s`] and `1004` [`13.378s`], `1024x1024` center-balanced square)
 - **`ref_harar_streets` Prompt:** `Environment mood board reference of a quiet sunlit residential lane in Harar, Ethiopia, warm earth-toned plastered walls, textured wooden doorways, gentle shade tree foliage, warm morning sunlight with subtle dust haze, center-aligned street path suitable for both 9:16 and 16:9 framing, 35mm film grain aesthetic, no text, no readable signs, no borders.`
 - **`ref_harar_roundabout_memory` Prompt:** `Environment memory reconstruction reference of a wide sunlit roundabout plaza in Harar, Ethiopia, ringed by green shade trees and soft golden daylight, distant gentle silhouette of a stone pedestal landmark centered in soft atmospheric depth without crisp architectural details or plaques, center-balanced framing suitable for 9:16 and 16:9 crops, warm 35mm film grain aesthetic, clearly artistic memory impression, no text, no archival photo border.`
 

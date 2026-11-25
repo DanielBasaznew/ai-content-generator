@@ -93,7 +93,7 @@
         "reference_id": "ref_narrator_child",
         "type": "character",
         "description": "Option A fictional, generic Ethiopian child (age 7-9), warm medium-brown skin, short cropped tightly curled black hair, soft child proportions, gentle dark eyes, wearing an off-white collared cotton shirt under a muted warm ochre-mustard knit vest and dark brown casual shorts.",
-        "file_path": null,
+        "file_path": "assets/references/ref_narrator_child.png",
         "ai_generated": true,
         "notes": "See docs/CHARACTER_REFERENCE_SHEET.md. Strictly fictional generic AI character; does not recreate the author's or any real person's face, and no real-person likeness consent is claimed."
       },
@@ -101,7 +101,7 @@
         "reference_id": "ref_narrator_adult",
         "type": "character",
         "description": "Option A fictional, generic Ethiopian young adult (age 20-24) preserving continuity from ref_narrator_child: warm medium-brown skin, short cropped curly black hair, calm reflective dark eyes, wearing an off-white shirt under a muted slate-navy overshirt and dark casual trousers.",
-        "file_path": null,
+        "file_path": "assets/references/ref_narrator_adult.png",
         "ai_generated": true,
         "notes": "See docs/CHARACTER_REFERENCE_SHEET.md. Fictional continuity counterpart across university and return shots (Shots 5-9); no real-person likeness used."
       },
@@ -109,7 +109,7 @@
         "reference_id": "ref_harar_roundabout_memory",
         "type": "monument_reconstruction",
         "description": "Memory-based artistic reconstruction of a wide sunlit roundabout in Harar featuring a non-specific stone pedestal landmark silhouette softened by mature shade trees and warm atmospheric perspective.",
-        "file_path": null,
+        "file_path": "assets/references/ref_harar_roundabout_memory.png",
         "ai_generated": true,
         "notes": "See docs/VISUAL_STYLE_SHEET.md. Missing authentic visual reference: no verified historical photograph of the Ras Makonnen Monument is currently in assets/references/. Keep reconstruction non-specific and clearly distinct from authentic historical photography."
       },
@@ -117,7 +117,7 @@
         "reference_id": "ref_harar_streets",
         "type": "environment",
         "description": "Warm Harar residential streetscapes with textured earth-toned plastered walls, wooden doorways, shade trees, and quiet twilight skyline silhouettes.",
-        "file_path": null,
+        "file_path": "assets/references/ref_harar_streets.png",
         "ai_generated": true,
         "notes": "See docs/VISUAL_STYLE_SHEET.md. Center-weighted composition inside the middle 56% band so both 9:16 and 16:9 exports frame cleanly."
       }

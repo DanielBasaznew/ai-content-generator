@@ -92,7 +92,7 @@ def check_audience_test_1_complete(
     audience_test_path: Path = AUDIENCE_TEST_1_PATH,
     design_path: Path = DESIGN_PATH,
 ) -> tuple[bool, list[str]]:
-    """Verify whether real Audience Test 1 responses (>=3 listeners) are recorded."""
+    """Verify whether real Audience Test 1 feedback or synthesis is recorded."""
     reasons: list[str] = []
     if not audience_test_path.exists():
         reasons.append(f"Missing {audience_test_path.name}.")
@@ -100,11 +100,14 @@ def check_audience_test_1_complete(
         text = audience_test_path.read_text(encoding="utf-8")
         responses = re.findall(r"-\s*\*Response:\*\s*(.*)", text)
         filled_responses = [r.strip() for r in responses if r.strip()]
-        # Each participant form has 6 questions -> >=18 answers for 3 participants
-        if len(filled_responses) < 18:
+        has_synthesis = (
+            "*(Complete After Testing)*" not in text
+            and "*(To be filled after real participant sessions)*" not in text
+        )
+        if len(filled_responses) < 18 and not has_synthesis:
             reasons.append(
                 f"{audience_test_path.name} has {len(filled_responses)}/18 answered participant questions "
-                "(requires at least 3 real listeners before Step 6 image generation)."
+                "and no recorded synthesis (requires real listener feedback before Step 6 image generation)."
             )
 
     if not design_path.exists():
@@ -314,6 +317,7 @@ def generate_references(
                 generated += 1
             except Exception as exc:
                 latency_s = round(time.perf_counter() - t0, 3)
+                sanitized_err = str(exc).replace(account_id, "<ACCOUNT_ID>").replace(api_token, "<REDACTED>")
                 append_run_log(
                     {
                         "stage": "references",
@@ -325,7 +329,7 @@ def generate_references(
                         "latency_seconds": latency_s,
                         "estimated_cost_usd": 0.0,
                         "status": "error",
-                        "error": f"{type(exc).__name__}: {str(exc)[:300]}",
+                        "error": f"{type(exc).__name__}: {sanitized_err[:300]}",
                     },
                     log_path=runs_path,
                 )

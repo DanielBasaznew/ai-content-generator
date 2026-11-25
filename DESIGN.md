@@ -94,15 +94,13 @@ The final publication should communicate both the emotional story and the creati
 
 ---
 
-### 9. Audience Testing Log *(To Be Completed in Later Steps)*
-
-No prototypes or cuts have been generated or tested yet. Feedback from future user tests (radio cut and near-final cut) and resulting storyboard updates will be recorded here.
+### 9. Audience Testing Log *(Step 5 Completed; Step 3 Near-Final Cut Pending)*
 
 #### Test 1: Radio Cut (Audio Prototype)
-- **Date:** Pending
-- **Participants (at least 3 from target audience):** Pending
-- **Feedback Summary:** Pending
-- **Changes Made:** Pending
+- **Date:** 2026-11-25
+- **Participants (at least 3 from target audience):** 3 listeners consulted by author (playing `outputs/radio_cut/radio_cut_v1.mp3`)
+- **Feedback Summary:** Author reported overall positive reception from all 3 listeners (`"all of them said its nice"`). Individual per-question participant quotes were not transcribed into `docs/AUDIENCE_TEST_1.md` yet and remain open for optional expansion before final submission.
+- **Changes Made:** None requested to the Amharic narration wording or `80.0s` voice-timed timeline; proceeded to Step 6 reference-sheet image generation.
 
 #### Test 2: Near-Final Cut
 - **Date:** Pending
