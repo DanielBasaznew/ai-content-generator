@@ -12,9 +12,9 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 
 | Provider / Tool | Planned Usage | Current Access / Quota Status | Notes |
 | --- | --- | --- | --- |
-| Google AI Studio / Gemini API | Script, storyboard, translation, TTS narration | Pending verification | API key not yet configured (`GEMINI_API_KEY`) |
-| Cloudflare Workers AI | FLUX image generation (references & keyframes) | Pending verification | Account ID / token not yet configured (`CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`) |
-| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | Pending verification | `kaggle 2.2.5` CLI installed; account phone verification & credentials pending |
+| Google AI Studio / Gemini API | Script, storyboard, translation, TTS narration | Verified (`models.list` OK; 65 models incl. `gemini-3.8-flash-tts`) | Key configured in `.env` (git-ignored); quota usage not yet tested with generation calls |
+| Cloudflare Workers AI | FLUX image generation (references & keyframes) | Verified (`token active`, Workers AI HTTP 200; FLUX models incl. `flux-2-klein-4b`, `flux-1-schnell`) | Account ID & token configured in `.env`; daily free quota limits to be measured during generation |
+| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | API auth verified (`Kaggle CLI 2.2.5`, dataset query OK) | Credentials configured in `.env`; confirm phone verification in Kaggle UI for weekly GPU quota |
 | FFmpeg (Local) | Video & audio assembly, exports | Installed via `imageio-ffmpeg 0.8.1` (`ffmpeg 9.0.2`) | Available to Python scripts; optional global `ffmpeg`/`ffprobe` on PATH can be added via `winget` |
 
 ---
