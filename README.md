@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Step 4 complete — storyboard data contract structure and strict JSON Schema (`schema/storyboard.schema.json`) are in place. `storyboard.json` (Step 5), pipeline scripts, API calls, and media assets have not been created yet.
+> **Project Status:** Step 5 in progress / awaiting narration review — `storyboard.json` (10 shots, 75.0 s), `docs/NARRATION_REVIEW.md`, and `docs/AUDIENCE_TEST_1.md` are prepared. Narration audio and the first radio cut (`outputs/radio_cut/`) are pending script approval, `GEMINI_API_KEY`, and `ffmpeg` installation. Steps 6–15 have not started.
 
 ---
 
@@ -65,7 +65,10 @@ day-2-ai-content-generation/
 ├── COSTS.md                    # Template for tracking model usage, latency, GPU time, and costs
 ├── ETHICS.md                   # Ethical guidelines, AI disclosure policy, licensing, and consent log
 ├── runs.jsonl                  # Append-only log for future model API/inference calls (currently empty)
+├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (75.0s; Amharic + EN subtitles)
 ├── docs/
+│   ├── AUDIENCE_TEST_1.md      # Participant feedback template for the first radio cut test
+│   ├── NARRATION_REVIEW.md     # Amharic narration & English subtitle script for author review
 │   └── STORYBOARD_STRUCTURE.md # Detailed guide to the storyboard schema and fields
 ├── schema/
 │   └── storyboard.schema.json  # Strict JSON Schema (Draft 2020-12) for validating storyboard.json
@@ -76,23 +79,22 @@ day-2-ai-content-generation/
 │   ├── narration/              # Generated narration audio clips (empty)
 │   └── music/                  # Generated score candidates and chosen track (empty)
 ├── outputs/
-│   ├── vertical/               # Final 9:16 exports and intermediate cuts (empty)
-│   └── horizontal/             # Final 16:9 exports and intermediate cuts (empty)
+│   ├── horizontal/             # Final 16:9 exports and intermediate cuts (empty)
+│   ├── radio_cut/              # Future audio-only prototype cut after narration approval (empty)
+│   └── vertical/               # Final 9:16 exports and intermediate cuts (empty)
 └── tests/
     └── test_storyboard_schema.py # Lightweight schema validation check using an in-memory fixture
 ```
 
-*(Note: `storyboard.json` will be authored in Step 5 and validated against `schema/storyboard.schema.json`.)*
-
 ---
 
-## Storyboard JSON Schema (Step 4)
+## Storyboard JSON Schema & Current Draft (Steps 4–5)
 
 The project uses a strict **JSON Schema Draft 2020-12** contract located at [schema/storyboard.schema.json](schema/storyboard.schema.json) and documented in [docs/STORYBOARD_STRUCTURE.md](docs/STORYBOARD_STRUCTURE.md).
 
-- **Purpose:** Validate the structure, types, allowed enums, 10-shot layout, 60–90 second target duration bounds, dual-aspect-ratio (`9:16` and `16:9`) configuration, narration/subtitle fields, and AI provenance rules before any pipeline stage runs.
-- **How it will be used:** When `storyboard.json` is created in Step 5 and throughout pipeline execution, automated validation will check the storyboard against `schema/storyboard.schema.json` (supplemented by Python cross-field checks for summed shot durations, unique shot IDs, and contiguous ordering).
-- **Current status:** Only the schema, documentation, and a lightweight in-memory schema test exist so far; the actual `storyboard.json` will be created in **Step 5**.
+- **Storyboard contract:** [storyboard.json](storyboard.json) defines the 10-shot, 75.0-second narrative arc, Amharic narration (`am`), English subtitles (`en`), visual prompts, and AI provenance records shared by both `9:16` and `16:9` outputs.
+- **Validation:** [schema/storyboard.schema.json](schema/storyboard.schema.json) validates structure, types, enums, and disclosure rules, supplemented by Python checks for total duration (`60–90` s), unique `shot_id`s, contiguous `order` (`1–10`), and continuous timeline intervals.
+- **Review status:** The Amharic script in [docs/NARRATION_REVIEW.md](docs/NARRATION_REVIEW.md) is awaiting user review and approval before generating TTS audio or assembling the first radio cut for [docs/AUDIENCE_TEST_1.md](docs/AUDIENCE_TEST_1.md).
 
 ---
 

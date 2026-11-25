@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** Step 4 complete — the storyboard contract schema (`schema/storyboard.schema.json`) is defined, while `storyboard.json` (Step 5) and pipeline stage scripts are not yet implemented.
+> **Status:** Step 5 in progress — `storyboard.json` (10 shots, 75.0 s) has been authored and validated against `schema/storyboard.schema.json`, while narration audio awaits review (`docs/NARRATION_REVIEW.md`) and pipeline stage scripts under `pipeline/` are not yet implemented.
 
 ---
 
@@ -14,7 +14,7 @@ Instead of assembling assets manually, each production step will be isolated int
 
 ## 2. Central Contract (`storyboard.json` & `schema/storyboard.schema.json`)
 
-A single `storyboard.json` file (to be authored in Step 5) will serve as the shared production contract connecting all pipeline stages:
+A single `storyboard.json` file serves as the shared production contract connecting all pipeline stages:
 
 - **Schema Validation (`schema/storyboard.schema.json`):** Before any stage executes, `storyboard.json` will be validated against the strict JSON Schema Draft 2020-12 contract in `schema/storyboard.schema.json`, catching missing fields, invalid types, or broken provenance flags before spending API quotas or GPU time. Companion Python validation will enforce cross-item rules that JSON Schema cannot express directly (such as unique `shot_id` values, contiguous `order` 1–10, and verifying that summed shot durations fall between 60 and 90 seconds).
 - **Single Source for Both Aspect Ratios:** Both `9:16` (vertical) and `16:9` (horizontal) exports will consume the exact same `storyboard.json` data—sharing story beats, durations, narration, music cues, and core visual prompts while reading optional format-specific composition guidance (`editing.composition.vertical_9_16` and `horizontal_16_9`) during assembly.
@@ -52,6 +52,6 @@ To satisfy software engineering and reproducibility goals when the pipeline is b
 ## 5. Future Implementation Roadmap
 
 The following will be implemented sequentially in later assignment steps:
-- Author `storyboard.json` against `schema/storyboard.schema.json` (Step 5).
+- Complete Amharic narration review, TTS generation, radio cut, and Audience Test 1 (Step 5 completion).
 - Build stage modules under `pipeline/`, companion cross-field storyboard validation, and automated tests under `tests/`.
 - Add a single documented top-level command to run the end-to-end pipeline cleanly.

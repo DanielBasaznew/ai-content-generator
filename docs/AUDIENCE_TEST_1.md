@@ -1,0 +1,116 @@
+# Audience Test 1 — Radio Cut Feedback Log
+
+**Project:** The Monument That Lives in My Memory  
+**Stage:** Step 5 — First Audience Prototype Test (Audio-Only Radio Cut)  
+**Target Sample:** At least **3 people** representing the intended audiences (people from Harar/Ethiopia, people with similar childhood-place memories, or international viewers).
+
+---
+
+## 1. Purpose of This Test
+
+The radio cut is an audio-only rough cut built from the Amharic narration (and optional English subtitle read-along for non-Amharic listeners) with natural pauses—before generating images, video clips, or original music.
+
+Testing the story at the audio-only stage helps catch:
+- Whether the story flow and central message are clear without visuals.
+- Where the emotional arc works (childhood joy -> leaving home -> loss -> reflection) and where it feels flat or rushed.
+- Any unnatural Amharic phrasing, pacing issues, or confusing transitions before spending GPU quota or API credits on visuals.
+
+---
+
+## 2. Instructions for Running the Session
+
+1. **Before playing:** Explain briefly that this is an early **audio-only** draft (no visuals or music yet) of a 60–90 second personal short film about a childhood memory in Harar, Ethiopia.
+2. **During playback:** Play the radio cut from `outputs/radio_cut/` straight through once without interrupting or explaining extra context. (For non-Amharic-speaking test listeners, allow them to read the English subtitles from `docs/NARRATION_REVIEW.md` while listening.)
+3. **After playback:** Ask the 6 questions below and write down the participant's real answers faithfully. Do not defend or over-explain the story during feedback—note where confusion or emotion naturally occurred.
+4. **After all 3 sessions:** Summarize patterns and record what changes will be made to `storyboard.json` and `DESIGN.md`.
+
+---
+
+## 3. Participant Feedback Forms
+
+### Participant 1
+- **Participant Label / Relationship (optional, anonymized):** *(e.g., Friend from Harar / Colleague)*
+- **Audience Group:** *(Harar/Ethiopia | Similar experience | International)*
+- **Date:** `YYYY-MM-DD`
+- **Format Tested:** *(Audio-only Amharic | Audio + English subtitle text)*
+
+1. **What do you understand the story to be about?**
+   - *Response:* 
+
+2. **Which part of the story affected you most emotionally?**
+   - *Response:* 
+
+3. **Was any part confusing?**
+   - *Response:* 
+
+4. **Did the narration sound natural and understandable?**
+   - *Response:* 
+
+5. **Did you understand the connection between the monument and childhood memories?**
+   - *Response:* 
+
+6. **What would you improve?**
+   - *Response:* 
+
+---
+
+### Participant 2
+- **Participant Label / Relationship (optional, anonymized):**
+- **Audience Group:** *(Harar/Ethiopia | Similar experience | International)*
+- **Date:** `YYYY-MM-DD`
+- **Format Tested:** *(Audio-only Amharic | Audio + English subtitle text)*
+
+1. **What do you understand the story to be about?**
+   - *Response:* 
+
+2. **Which part of the story affected you most emotionally?**
+   - *Response:* 
+
+3. **Was any part confusing?**
+   - *Response:* 
+
+4. **Did the narration sound natural and understandable?**
+   - *Response:* 
+
+5. **Did you understand the connection between the monument and childhood memories?**
+   - *Response:* 
+
+6. **What would you improve?**
+   - *Response:* 
+
+---
+
+### Participant 3
+- **Participant Label / Relationship (optional, anonymized):**
+- **Audience Group:** *(Harar/Ethiopia | Similar experience | International)*
+- **Date:** `YYYY-MM-DD`
+- **Format Tested:** *(Audio-only Amharic | Audio + English subtitle text)*
+
+1. **What do you understand the story to be about?**
+   - *Response:* 
+
+2. **Which part of the story affected you most emotionally?**
+   - *Response:* 
+
+3. **Was any part confusing?**
+   - *Response:* 
+
+4. **Did the narration sound natural and understandable?**
+   - *Response:* 
+
+5. **Did you understand the connection between the monument and childhood memories?**
+   - *Response:* 
+
+6. **What would you improve?**
+   - *Response:* 
+
+---
+
+## 4. Synthesis & Planned Storyboard Changes *(Complete After Testing)*
+
+- **Common Strengths Noted:**
+  - *(To be filled after real participant sessions)*
+- **Repeated Confusion Points or Pacing Issues:**
+  - *(To be filled after real participant sessions)*
+- **Specific Changes to Apply to `storyboard.json` and `DESIGN.md`:**
+  - *(To be filled after real participant sessions)*

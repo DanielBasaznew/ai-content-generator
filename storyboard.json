@@ -1,0 +1,999 @@
+{
+  "schema_version": "1.0.0",
+  "project": {
+    "title": "The Monument That Lives in My Memory",
+    "location": "Harar, Ethiopia",
+    "logline": "A personal journey back to Harar reveals that even when a beloved childhood landmark is gone, its memories remain part of who we are.",
+    "central_message": "Heritage is not only about physical monuments; it is also about the memories and emotions people attach to places.",
+    "target_duration_seconds": 75.0,
+    "fps": 24,
+    "creative_boundaries": {
+      "non_political": true,
+      "no_invented_history": true,
+      "distinguish_ai_reconstructions": true,
+      "notes": [
+        "First-person personal story only; no political commentary or blame.",
+        "No fabricated historical dates or unverified architectural claims about the Ras Makonnen Monument.",
+        "All AI-generated reconstructions must be explicitly distinguished from authentic historical photographs."
+      ]
+    }
+  },
+  "outputs": {
+    "aspect_ratios": [
+      "9:16",
+      "16:9"
+    ],
+    "vertical": {
+      "aspect_ratio": "9:16",
+      "width": 1080,
+      "height": 1920,
+      "safe_area": {
+        "top_margin_px": 180,
+        "bottom_margin_px": 320,
+        "horizontal_margin_px": 80
+      },
+      "subtitle_style": {
+        "max_chars_per_line": 34,
+        "max_lines": 2,
+        "position": "bottom_safe"
+      }
+    },
+    "horizontal": {
+      "aspect_ratio": "16:9",
+      "width": 1920,
+      "height": 1080,
+      "safe_area": {
+        "top_margin_px": 60,
+        "bottom_margin_px": 90,
+        "horizontal_margin_px": 100
+      },
+      "subtitle_style": {
+        "max_chars_per_line": 42,
+        "max_lines": 2,
+        "position": "lower_third"
+      }
+    },
+    "audio_mix": {
+      "target_lufs": -14.0,
+      "true_peak_db": -1.0,
+      "music_ducking_enabled": true,
+      "ducking_notes": "Duck instrumental score smoothly beneath Amharic narration using FFmpeg sidechain compression during assembly (Step 10+)."
+    },
+    "end_card": {
+      "enabled": true,
+      "duration_seconds": 3.0,
+      "disclosure_text": "Created with AI tools (Gemini, FLUX, Wan 2.2, ACE-Step) as an artistic personal-memory reconstruction. Not archival footage or historical photography."
+    }
+  },
+  "narration_config": {
+    "language": "Amharic",
+    "language_code": "am",
+    "subtitle_language": "en",
+    "voice_settings": {
+      "provider": "gemini",
+      "model": null,
+      "voice_id": null,
+      "speaking_style": "calm, warm, reflective, unhurried first-person storytelling",
+      "speed": 0.95,
+      "sample_rate_hz": null
+    }
+  },
+  "style_guide": {
+    "shared_style_block": "Warm cinematic memory film aesthetic, gentle 35mm film grain, natural daylight and golden-hour textures, soft shallow depth of field, emotionally grounded Ethiopian urban atmosphere, respectful personal-memory visual reconstruction without archival photo framing or overlaid text.",
+    "global_negative_prompt": "text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment",
+    "color_palette": [
+      "warm sunlit terracotta and ochre (childhood in Harar)",
+      "golden amber and lively street warmth (family outings)",
+      "cool neutral blues and muted twilight tones (years away at university)",
+      "soft overcast dusk and desaturated earth tones (return and absence)",
+      "warm twilight glow (memory and heritage reflection)"
+    ],
+    "reference_sheets": [
+      {
+        "reference_id": "ref_narrator_child",
+        "type": "character",
+        "description": "Generalized young Ethiopian child representing the narrator in childhood memory scenes (to be generated in Step 6).",
+        "file_path": null,
+        "ai_generated": true,
+        "notes": "Keep clothing warm and simple; avoid modeling any real third party's likeness without recorded consent."
+      },
+      {
+        "reference_id": "ref_narrator_adult",
+        "type": "character",
+        "description": "Generalized Ethiopian university student / returning young adult representing the narrator later in life (to be generated in Step 6).",
+        "file_path": null,
+        "ai_generated": true,
+        "notes": "Consistent facial silhouette and grounded everyday attire across university and return shots."
+      },
+      {
+        "reference_id": "ref_harar_roundabout_memory",
+        "type": "monument_reconstruction",
+        "description": "Memory-based artistic reconstruction of a wide sunlit roundabout in Harar featuring a stone pedestal landmark silhouette softened by trees and perspective.",
+        "file_path": null,
+        "ai_generated": true,
+        "notes": "Missing authentic visual reference: no verified historical photograph of the Ras Makonnen Monument is currently in assets/references/. Keep reconstruction non-specific and clearly labeled as personal memory rather than historical documentation."
+      },
+      {
+        "reference_id": "ref_harar_streets",
+        "type": "environment",
+        "description": "Warm residential streetscapes and textured walls evocative of Harar neighborhoods (to be generated in Step 6).",
+        "file_path": null,
+        "ai_generated": true,
+        "notes": "Center-balanced composition so both 9:16 and 16:9 frames retain clear focal subjects."
+      }
+    ]
+  },
+  "music_plan": {
+    "provider": "kaggle_ace_step",
+    "model": null,
+    "instrumental_only": true,
+    "tempo_bpm": null,
+    "musical_key": null,
+    "overall_prompt": "Gentle, reflective instrumental film score blending warm acoustic plucked strings, soft felt piano, and subtle atmospheric warmth; uplifting nostalgia opening, quiet distance in the middle, tender melancholy on return, and peaceful resolution. No vocals.",
+    "seed": null,
+    "audio_path": null
+  },
+  "ai_disclosure": {
+    "contains_ai_generated_content": true,
+    "distinguishes_reconstructions_from_archival_photos": true,
+    "disclosure_statement": "All visual scenes, synthetic voice narration, and original background music in this short film are created using generative AI as an artistic representation of personal childhood memories in Harar, Ethiopia, and are not authentic historical photographs or documentary footage.",
+    "consent_verified": false,
+    "consent_record_ref": "ETHICS.md#2-consent-record (pending final voice/reference review prior to Step 6 asset generation)"
+  },
+  "shots": [
+    {
+      "shot_id": "shot-01",
+      "order": 1,
+      "duration_seconds": 7.0,
+      "start_seconds": 0.0,
+      "end_seconds": 7.0,
+      "story_beat": "Introduction to Harar",
+      "narrative": {
+        "narration_text": "ተወልጄ ያደግኩት በሐረር ከተማ ነው። የልጅነት ትዝታዎቼ ሁሉ የጀመሩት እዚያ ነው።",
+        "english_subtitle_text": "I was born and raised in Harar. All my childhood memories began there.",
+        "emotional_purpose": "Ground the viewer warmly in Harar and establish the personal, first-person voice of childhood memory."
+      },
+      "visual": {
+        "main_prompt": "Warm early-morning sunlight illuminating a quiet residential neighborhood street in Harar, Ethiopia, textured earth-toned walls and wooden doorways, gentle dust motes in golden rays, peaceful timeless childhood atmosphere, center-framed path leading into the town.",
+        "negative_prompt": "modern billboards, heavy traffic, harsh shadows, overlaid text, archival border",
+        "visual_style": "Warm cinematic 35mm film memory aesthetic with soft natural grain and golden-hour warmth",
+        "subject_description": "Quiet sunlit residential lane and childhood neighborhood surroundings in Harar",
+        "environment_description": "Harar residential street with traditional plastered walls, warm stone textures, and morning trees",
+        "lighting_atmosphere": "Soft golden morning light with gentle haze and nostalgic warmth",
+        "camera_framing": "establishing",
+        "camera_movement": "dolly_in",
+        "reference_ids": [
+          "ref_harar_streets"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_01_harar_dawn",
+        "music_mood": "warm, gentle, nostalgic acoustic opening",
+        "music_intensity": "low",
+        "narration_sync": {
+          "offset_seconds": 0.8,
+          "expected_duration_seconds": 5.2,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "fade_from_black",
+        "transition_out": "crossfade",
+        "transition_duration_seconds": 0.8,
+        "composition": {
+          "shared_subject_position": "center-framed sunlit lane",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Keep upper street archway and central vanishing path centered inside 9:16 frame.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Wide neighborhood architecture fills horizontal edges cleanly.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_reconstruction",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated creative reconstruction evoking childhood streets of Harar; not an authentic historical photograph.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Author's childhood memory of growing up in Harar, Ethiopia.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-02",
+      "order": 2,
+      "duration_seconds": 8.0,
+      "start_seconds": 7.0,
+      "end_seconds": 15.0,
+      "story_beat": "The familiar monument",
+      "narrative": {
+        "narration_text": "ከልጅነት ቤታችን ሁለት ኪሎ ሜትር ተኩል ገደማ ርቆ፣ በአንድ ሰፊ አደባባይ ላይ የራስ መኮንን ሐውልት ነበር።",
+        "english_subtitle_text": "About 2.5 kilometers from my childhood home stood the Ras Makonnen Monument at a large roundabout.",
+        "emotional_purpose": "Introduce the Ras Makonnen Monument at the wide roundabout as an anchoring landmark of everyday childhood geography."
+      },
+      "visual": {
+        "main_prompt": "Wide sunlit Ethiopian city roundabout framed gently through warm memory, green shade trees ringing a spacious circular plaza, soft distant silhouette of a tall stone pedestal monument at the center of the roundabout, warm nostalgic daylight, generalized artistic reconstruction without crisp inscriptions.",
+        "negative_prompt": "legible plaques, fabricated historical inscriptions, crowded traffic jam, harsh HDR look, text",
+        "visual_style": "Warm cinematic 35mm film memory aesthetic with painterly atmospheric depth",
+        "subject_description": "Wide circular roundabout plaza with a generalized stone pedestal landmark silhouette at its center",
+        "environment_description": "Spacious Harar roundabout surrounded by trees, open sky, and neighborhood buildings in warm sunlight",
+        "lighting_atmosphere": "Clear, inviting mid-morning sun with soft atmospheric distance",
+        "camera_framing": "wide",
+        "camera_movement": "slow_pan_right",
+        "reference_ids": [
+          "ref_harar_roundabout_memory"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_02_landmark_theme",
+        "music_mood": "steady, affectionate, gently melodic",
+        "music_intensity": "low",
+        "narration_sync": {
+          "offset_seconds": 0.6,
+          "expected_duration_seconds": 6.4,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "crossfade",
+        "transition_out": "crossfade",
+        "transition_duration_seconds": 0.6,
+        "composition": {
+          "shared_subject_position": "roundabout center landmark centered horizontally and vertically",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Ensure the central roundabout landmark and surrounding trees fit inside the vertical center third.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Allow the full width of the roundabout road curve to frame the center.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_reconstruction",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "Generalized AI reconstruction from personal memory; architectural details are intentionally atmospheric because no archival reference image is supplied.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Author's memory of the Ras Makonnen Monument located about 2.5 km from home at a large roundabout. Missing authentic archival photo reference.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-03",
+      "order": 3,
+      "duration_seconds": 8.0,
+      "start_seconds": 15.0,
+      "end_seconds": 23.0,
+      "story_beat": "Childhood happiness",
+      "narrative": {
+        "narration_text": "በልጅነቴ በዚያ ሐውልት አጠገብ ስናልፍ፣ ብዙ ጊዜ ወላጆቼ አዲስ ልብስ ሊገዙልኝ ወይም ወደ ልዩ ቦታ ሊወስዱኝ ነበር።",
+        "english_subtitle_text": "As a child, passing that monument often meant my parents were buying me new clothes or taking me somewhere special.",
+        "emotional_purpose": "Connect the sight of the monument directly to childhood excitement, love, and special parent-child outings."
+      },
+      "visual": {
+        "main_prompt": "Warm over-the-shoulder perspective from behind a young Ethiopian child walking hand-in-hand with parents along the sunlit edge of the tree-lined Harar roundabout, the generalized monument pedestal visible gently ahead in golden sunlight, joyful anticipation.",
+        "negative_prompt": "identifiable real family faces, harsh artificial lighting, modern signage, text, distorted hands",
+        "visual_style": "Warm cinematic 35mm film memory aesthetic with bright hopeful warmth",
+        "subject_description": "Young child seen from behind or soft profile holding hands with mother and father while passing the roundabout",
+        "environment_description": "Tree-lined Harar sidewalk curving past the sunlit roundabout plaza",
+        "lighting_atmosphere": "Bright warm sunshine, dappled leaf shadows, uplifting joyful glow",
+        "camera_framing": "over_the_shoulder",
+        "camera_movement": "tracking",
+        "reference_ids": [
+          "ref_narrator_child",
+          "ref_harar_roundabout_memory"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_03_childhood_joy",
+        "music_mood": "bright, tender, hopeful warmth",
+        "music_intensity": "medium",
+        "narration_sync": {
+          "offset_seconds": 0.5,
+          "expected_duration_seconds": 6.8,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "crossfade",
+        "transition_out": "crossfade",
+        "transition_duration_seconds": 0.5,
+        "composition": {
+          "shared_subject_position": "child and parents centered in lower-middle foreground",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Keep joined hands and child centered above the bottom subtitle safe area.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Maintain wide sidewalk context alongside central family silhouettes.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_reconstruction",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated memory reconstruction with non-identifiable generalized characters; not a real photograph.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Childhood memory of passing the monument with parents on the way to buy new clothes or visit special places.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-04",
+      "order": 4,
+      "duration_seconds": 7.0,
+      "start_seconds": 23.0,
+      "end_seconds": 30.0,
+      "story_beat": "Family memories",
+      "narrative": {
+        "narration_text": "ከቤተሰብ ጋር የምንወጣበት የማይረሳ ጊዜ ነበር። ሐውልቱን ባየሁ ቁጥር ደስታና ጉጉት ይሰማኝ ነበር።",
+        "english_subtitle_text": "Those were unforgettable family outings. Seeing the monument always filled me with happiness and excitement.",
+        "emotional_purpose": "Deepen the emotional peak of childhood joy before the story transitions to growing up and leaving home."
+      },
+      "visual": {
+        "main_prompt": "Warm medium close-up of the young Ethiopian child smiling softly while looking out toward the sunlit roundabout landmark through warm afternoon air, holding a small parcel of newly wrapped cloth or clothing, soft bokeh of trees and warm amber light behind.",
+        "negative_prompt": "unnatural teeth, extra fingers, text on packaging, cold blue lighting, dark shadows",
+        "visual_style": "Warm cinematic 35mm film memory aesthetic with gentle shallow depth of field",
+        "subject_description": "Young child smiling gently with bright eyes of anticipation, holding a modest folded parcel",
+        "environment_description": "Warm sunlit street backdrop near the tree-lined Harar roundabout in soft bokeh",
+        "lighting_atmosphere": "Rich golden afternoon sunlight catching warm skin tones and gentle lens warmth",
+        "camera_framing": "medium_close_up",
+        "camera_movement": "dolly_in",
+        "reference_ids": [
+          "ref_narrator_child"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_04_memory_peak",
+        "music_mood": "warm, glowing, heartfelt childhood peak",
+        "music_intensity": "medium",
+        "narration_sync": {
+          "offset_seconds": 0.6,
+          "expected_duration_seconds": 5.8,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "crossfade",
+        "transition_out": "dissolve",
+        "transition_duration_seconds": 0.7,
+        "composition": {
+          "shared_subject_position": "child face and eyes centered in upper-middle frame",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Preserve headroom below top platform UI and keep face well above subtitles.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Soft golden street bokeh extends gracefully on both sides.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_reconstruction",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated creative depiction of childhood excitement; fictionalized character rendering representing personal memory.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Emotional association between seeing the monument, new clothes, family outings, and happiness.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-05",
+      "order": 5,
+      "duration_seconds": 7.0,
+      "start_seconds": 30.0,
+      "end_seconds": 37.0,
+      "story_beat": "Growing up",
+      "narrative": {
+        "narration_text": "ዓመታት አለፉ፤ እኔም አድጌ ለዩኒቨርሲቲ ትምህርት ሐረርን ለቅቄ ወጣሁ።",
+        "english_subtitle_text": "Years passed, and I grew up and left Harar to attend university.",
+        "emotional_purpose": "Bridge childhood warmth into young adulthood and gently introduce the bittersweet departure from home."
+      },
+      "visual": {
+        "main_prompt": "Quiet late-afternoon departure scene on an Ethiopian highway road leading away from a distant hillside town resembling Harar, young adult seen from behind carrying a single backpack looking briefly back toward warm hills before stepping forward, shifting from warm amber to cooler evening blue.",
+        "negative_prompt": "airport planes, dramatic storm clouds, text on road signs, distorted bag straps",
+        "visual_style": "Cinematic 35mm film aesthetic transitioning from warm amber to muted transitional tones",
+        "subject_description": "Young adult traveler carrying a simple backpack along a quiet departing roadside",
+        "environment_description": "Open road extending away from warm distant town hills in late afternoon light",
+        "lighting_atmosphere": "Fading late-afternoon sun meeting cooler open-sky twilight",
+        "camera_framing": "medium_wide",
+        "camera_movement": "slow_pan_left",
+        "reference_ids": [
+          "ref_narrator_adult"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_05_departure",
+        "music_mood": "bittersweet, transitional, unhurried strings",
+        "music_intensity": "low",
+        "narration_sync": {
+          "offset_seconds": 0.8,
+          "expected_duration_seconds": 4.8,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "dissolve",
+        "transition_out": "crossfade",
+        "transition_duration_seconds": 0.7,
+        "composition": {
+          "shared_subject_position": "traveler and road center-aligned",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Keep traveler figure centered vertically with open sky above and road below.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Wide horizon emphasizes distance and transition.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_atmospheric",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated atmospheric transition representing leaving Harar for university.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Author leaving Harar after growing up to attend university.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-06",
+      "order": 6,
+      "duration_seconds": 7.5,
+      "start_seconds": 37.0,
+      "end_seconds": 44.5,
+      "story_beat": "Years away",
+      "narrative": {
+        "narration_text": "በአዳማና በአዲስ አበባ አምስት ዓመት ገደማ አሳለፍኩ፤ ከትውልድ ከተማዬ ርቄ ትምህርቴን ቀጠልኩ።",
+        "english_subtitle_text": "I spent around five years in Adama and Addis Ababa, continuing my studies far from my hometown.",
+        "emotional_purpose": "Convey the passage of five years of university life and physical distance from Harar."
+      },
+      "visual": {
+        "main_prompt": "Contemplative quiet evening study scene in a modest Ethiopian university room or library window overlooking distant city lights of a larger metropolis, open notebooks on a wooden desk, young adult seated thoughtfully in cool soft lamp and twilight glow, sense of time passing away from home.",
+        "negative_prompt": "readable English or Amharic text on pages, futuristic monitors, neon cyberpunk colors, cluttered hands",
+        "visual_style": "Cinematic 35mm film aesthetic with subdued cool blues and soft warm desk lamp contrast",
+        "subject_description": "Young adult student seated beside a wooden desk and window at dusk",
+        "environment_description": "Quiet study space overlooking distant unfamiliar city evening lights",
+        "lighting_atmosphere": "Cool evening window light contrasted with one gentle warm desk lamp",
+        "camera_framing": "medium",
+        "camera_movement": "dolly_out",
+        "reference_ids": [
+          "ref_narrator_adult"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_06_years_away",
+        "music_mood": "quiet, distant, contemplative",
+        "music_intensity": "low",
+        "narration_sync": {
+          "offset_seconds": 0.6,
+          "expected_duration_seconds": 5.8,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "crossfade",
+        "transition_out": "crossfade",
+        "transition_duration_seconds": 0.6,
+        "composition": {
+          "shared_subject_position": "student and desk window centered",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Keep student silhouette and window light inside the central vertical band.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Bookshelf and window city bokeh frame the scene naturally.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_atmospheric",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated atmospheric scene representing roughly five university years spent in Adama and Addis Ababa.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Author's ~5 years of university study in Adama and Addis Ababa.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-07",
+      "order": 7,
+      "duration_seconds": 7.0,
+      "start_seconds": 44.5,
+      "end_seconds": 51.5,
+      "story_beat": "Returning home",
+      "narrative": {
+        "narration_text": "ከዓመታት በኋላ ወደ ሐረር ስመለስ፣ የለመድኳቸውን ቦታዎች ሁሉ እንደገና አያለሁ ብዬ አስቤ ነበር።",
+        "english_subtitle_text": "When I returned to Harar years later, I expected to see all the familiar places again.",
+        "emotional_purpose": "Establish the narrator's hopeful expectation right before the emotional reveal of the missing landmark."
+      },
+      "visual": {
+        "main_prompt": "Point-of-view walking approach along a familiar Harar avenue toward the open intersection ahead in soft muted afternoon light, returning adult steps slowly into frame from behind, trees framing the distant roundabout entrance, quiet anticipation tempered by subtle overcast calm.",
+        "negative_prompt": "banners, crowds cheering, dramatic storm, readable street text",
+        "visual_style": "Subdued cinematic 35mm film aesthetic with softer contrast and muted earth tones",
+        "subject_description": "Returning adult walking slowly along a familiar street toward the roundabout intersection",
+        "environment_description": "Approach road in Harar leading toward the wide intersection",
+        "lighting_atmosphere": "Soft subdued afternoon light, gentle shadows, calm expectation",
+        "camera_framing": "pov",
+        "camera_movement": "dolly_in",
+        "reference_ids": [
+          "ref_narrator_adult",
+          "ref_harar_streets"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_07_return_approach",
+        "music_mood": "gentle expectant swell thinning into stillness",
+        "music_intensity": "low",
+        "narration_sync": {
+          "offset_seconds": 0.6,
+          "expected_duration_seconds": 5.5,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "crossfade",
+        "transition_out": "crossfade",
+        "transition_duration_seconds": 0.5,
+        "composition": {
+          "shared_subject_position": "central vanishing street line",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Center the forward street perspective cleanly for vertical viewing.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Sidewalk buildings frame the approaching perspective.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_reconstruction",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated atmospheric scene evoking the author's return to Harar.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Returning to Harar after university expecting familiar childhood landmarks.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-08",
+      "order": 8,
+      "duration_seconds": 8.5,
+      "start_seconds": 51.5,
+      "end_seconds": 60.0,
+      "story_beat": "The absence",
+      "narrative": {
+        "narration_text": "ነገር ግን ሐውልቱ መፍረሱን ሳይ በጣም ቅር አለኝ፤ አዘንኩም። የለመድኩት የልጅነት ትዝታዬ አንድ ክፍል ጠፍቶ ነበር።",
+        "english_subtitle_text": "But when I saw that the monument had been demolished, I felt deeply disappointed and sad. A familiar part of my childhood memories was gone.",
+        "emotional_purpose": "Deliver the emotional turning point gently and honestly—expressing personal disappointment and loss without blame or political framing."
+      },
+      "visual": {
+        "main_prompt": "Subdued wide shot of an open roundabout intersection in Harar in muted late-afternoon light where the central monument is absent, empty open pavement at the roundabout center surrounded by quiet trees, returning adult standing still in the foreground edge looking toward the empty center.",
+        "negative_prompt": "construction machinery, rubble piles, protest signs, police, dramatic smoke, any political symbols",
+        "visual_style": "Subdued, desaturated cinematic 35mm film aesthetic emphasizing quiet absence",
+        "subject_description": "Open roundabout center devoid of the monument, with the returning adult standing quietly looking on",
+        "environment_description": "Wide Harar roundabout intersection with an empty central space in muted dusk light",
+        "lighting_atmosphere": "Quiet overcast / muted late-afternoon stillness, cool desaturated shadows",
+        "camera_framing": "wide",
+        "camera_movement": "static",
+        "reference_ids": [
+          "ref_narrator_adult"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_08_absence_stillness",
+        "music_mood": "tender, sparse, melancholic solo piano notes",
+        "music_intensity": "low",
+        "narration_sync": {
+          "offset_seconds": 0.6,
+          "expected_duration_seconds": 6.4,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "crossfade",
+        "transition_out": "dissolve",
+        "transition_duration_seconds": 0.8,
+        "composition": {
+          "shared_subject_position": "empty roundabout center centered with viewer silhouette just below",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Show open empty roundabout center in the middle third and quiet observer above subtitles.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Wide empty expanse emphasizes the emotional feeling of absence.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_atmospheric",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated reflective scene expressing the personal experience of absence; does not depict real-time demolition circumstances.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Discovering upon returning to Harar that the monument had been demolished and feeling disappointed and sad.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-09",
+      "order": 9,
+      "duration_seconds": 7.5,
+      "start_seconds": 60.0,
+      "end_seconds": 67.5,
+      "story_beat": "Reflection",
+      "narrative": {
+        "narration_text": "ወደ ትውልድ ከተማዬ ብመለስም፣ ሐረር ከማስታውሳት የተለየች መሰለችኝ። የለመድናቸው ቦታዎች ትዝታችንን ይዘው የማንነታችን አካል ይሆናሉ።",
+        "english_subtitle_text": "Even though I was back in my hometown, Harar felt different from the place I remembered. Familiar places hold our memories and become part of who we are.",
+        "emotional_purpose": "Articulate why the monument's loss changed how home felt—connecting physical places to personal identity."
+      },
+      "visual": {
+        "main_prompt": "Reflective medium close-up of the returning adult standing quietly along a warm textured Harar street wall at soft twilight, gentle expression of memory and quiet contemplation, warm evening window light subtly glowing nearby as a bridge back to memory.",
+        "negative_prompt": "exaggerated crying, melodramatic expression, harsh flash lighting, text",
+        "visual_style": "Reflective cinematic 35mm film aesthetic blending cool dusk shadows with a subtle warm glow",
+        "subject_description": "Returning adult pausing thoughtfully beside a familiar textured hometown wall",
+        "environment_description": "Quiet evening Harar street with soft twilight air and gentle distant warm lights",
+        "lighting_atmosphere": "Soft twilight balance between cool dusk and warm subtle golden reflections",
+        "camera_framing": "medium_close_up",
+        "camera_movement": "slow_pan_left",
+        "reference_ids": [
+          "ref_narrator_adult",
+          "ref_harar_streets"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_09_reflection_theme",
+        "music_mood": "gentle, reflective return of opening theme in a tender minor-to-warm phrasing",
+        "music_intensity": "low",
+        "narration_sync": {
+          "offset_seconds": 0.5,
+          "expected_duration_seconds": 6.3,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "dissolve",
+        "transition_out": "crossfade",
+        "transition_duration_seconds": 0.8,
+        "composition": {
+          "shared_subject_position": "subject face and shoulders centered with gentle side space",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Keep face comfortably centered above subtitle safe area.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Evening street depth extends naturally across horizontal frame.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_atmospheric",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated reflective portrait of personal contemplation; fictionalized character rendering.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Personal reflection that Harar felt different upon returning and that familiar landmarks become part of identity.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    },
+    {
+      "shot_id": "shot-10",
+      "order": 10,
+      "duration_seconds": 7.5,
+      "start_seconds": 67.5,
+      "end_seconds": 75.0,
+      "story_beat": "Final message",
+      "narrative": {
+        "narration_text": "ቅርስ ማለት በአካል የሚታይ ሐውልት ብቻ አይደለም። ከቦታዎች ጋር የምናያይዘው ትዝታና ስሜትም ጭምር ነው።",
+        "english_subtitle_text": "Heritage is not only about physical monuments; it is also about the memories and emotions we attach to places.",
+        "emotional_purpose": "Leave the audience with the film's central reflective message: physical structures may vanish, yet memory and feeling endure."
+      },
+      "visual": {
+        "main_prompt": "Warm sunset glow spreading peacefully over the rooftops and tree-lined horizon of Harar, Ethiopia, soft golden light catching the trees and quiet evening sky, serene hopeful closure evoking enduring memory and belonging.",
+        "negative_prompt": "on-screen titles, overlaid text, artificial flares, dark ominous clouds",
+        "visual_style": "Warm, serene cinematic 35mm film aesthetic returning gently to golden warmth",
+        "subject_description": "Harar skyline, trees, and sunlit evening horizon bathed in calm golden twilight",
+        "environment_description": "Wide poetic view over Harar rooftops and warm evening sky",
+        "lighting_atmosphere": "Warm amber sunset fading peacefully into calm dusk",
+        "camera_framing": "extreme_wide",
+        "camera_movement": "ken_burns_zoom_out",
+        "reference_ids": [
+          "ref_harar_streets"
+        ]
+      },
+      "generation": {
+        "image": {
+          "provider": "cloudflare_workers_ai",
+          "model": null,
+          "seed": null,
+          "keyframe_path": null
+        },
+        "video": {
+          "mode": "image_to_video",
+          "provider": "kaggle",
+          "model": null,
+          "seed": null,
+          "clip_path": null
+        }
+      },
+      "audio": {
+        "music_cue": "cue_10_memory_remains_outro",
+        "music_mood": "peaceful, warm, resonant closing chord fading gently",
+        "music_intensity": "medium",
+        "narration_sync": {
+          "offset_seconds": 0.6,
+          "expected_duration_seconds": 5.8,
+          "actual_duration_seconds": null,
+          "audio_path": null,
+          "duck_music": true
+        }
+      },
+      "editing": {
+        "transition_in": "crossfade",
+        "transition_out": "fade_to_black",
+        "transition_duration_seconds": 1.0,
+        "composition": {
+          "shared_subject_position": "horizon and warm sun glow centered across middle band",
+          "vertical_9_16": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Balanced sky and rooftop silhouette cleanly visible above subtitles.",
+            "subtitle_placement": "bottom_safe"
+          },
+          "horizontal_16_9": {
+            "crop_anchor": "center",
+            "safe_area_notes": "Full panoramic horizon frames closing note before AI end card.",
+            "subtitle_placement": "lower_third"
+          }
+        }
+      },
+      "provenance": {
+        "uses_ai_imagery": true,
+        "imagery_type": "ai_atmospheric",
+        "is_authentic_historical_photo": false,
+        "disclosure_note": "AI-generated atmospheric closing landscape of Harar; transitions cleanly into the mandatory AI disclosure end card.",
+        "source_references": [
+          {
+            "source_type": "personal_memory",
+            "description": "Closing reflection on personal memory, belonging, and heritage in Harar.",
+            "uri_or_path": null,
+            "consent_or_licence": null
+          }
+        ]
+      }
+    }
+  ],
+  "notes": "Step 5 initial 10-shot storyboard (75.0s across 10 shots, plus 3.0s AI disclosure end card = 78.0s final runtime). Amharic narration awaits author review in docs/NARRATION_REVIEW.md prior to TTS generation and radio cut assembly."
+}
