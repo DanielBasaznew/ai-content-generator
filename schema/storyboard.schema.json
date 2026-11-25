@@ -1,0 +1,1075 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.project/schema/storyboard.schema.json",
+  "title": "The Monument That Lives in My Memory — Storyboard Schema",
+  "description": "Strict JSON Schema (Draft 2020-12) for the single-source-of-truth storyboard.json contract powering a 10-shot, 60-90 second heritage short film exported in both 9:16 vertical and 16:9 horizontal aspect ratios. Note: cross-item checks (unique shot_id and order values, exact sum of shot durations between 60-90s, contiguous start/end timing, and reference ID lookups) must be enforced by a companion pipeline validator.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "outputs",
+    "narration_config",
+    "ai_disclosure",
+    "shots"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Version of the storyboard contract schema."
+    },
+    "project": {
+      "$ref": "#/$defs/projectInfo",
+      "description": "High-level metadata, target duration, and creative boundaries for the film."
+    },
+    "outputs": {
+      "$ref": "#/$defs/outputsConfig",
+      "description": "Shared export configuration covering both 9:16 vertical and 16:9 horizontal formats, audio mix targets, and the required AI disclosure end card."
+    },
+    "narration_config": {
+      "$ref": "#/$defs/narrationConfig",
+      "description": "Configurable language, subtitle language, and optional TTS voice generation settings."
+    },
+    "style_guide": {
+      "$ref": "#/$defs/styleGuide",
+      "description": "Optional shared visual style block, palette, and character/environment reference sheets for cross-shot consistency."
+    },
+    "music_plan": {
+      "$ref": "#/$defs/musicPlan",
+      "description": "Optional top-level plan and generation settings for the original musical score."
+    },
+    "ai_disclosure": {
+      "$ref": "#/$defs/globalAiDisclosure",
+      "description": "Global AI transparency, historical-reconstruction distinction, and consent verification record."
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/shot"
+      },
+      "description": "Ordered sequence of exactly 10 shots. Companion code validation must verify unique shot_id values, contiguous order values 1..10, and total summed duration within 60-90 seconds."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional author notes or revision context for the storyboard."
+    }
+  },
+  "$defs": {
+    "projectInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "location",
+        "central_message",
+        "target_duration_seconds",
+        "creative_boundaries"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Film title."
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Primary geographic and cultural setting (e.g., Harar, Ethiopia)."
+        },
+        "logline": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional one-sentence summary of the film."
+        },
+        "central_message": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Core emotional and thematic takeaway of the story."
+        },
+        "target_duration_seconds": {
+          "type": "number",
+          "minimum": 60,
+          "maximum": 90,
+          "description": "Target total runtime in seconds (must stay within the 60-90 second assignment window)."
+        },
+        "fps": {
+          "type": "integer",
+          "enum": [24, 25, 30],
+          "description": "Target constant frame rate for final exports (24 fps recommended for cinema and Wan 2.2)."
+        },
+        "creative_boundaries": {
+          "$ref": "#/$defs/creativeBoundaries"
+        }
+      }
+    },
+    "creativeBoundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "non_political",
+        "no_invented_history",
+        "distinguish_ai_reconstructions"
+      ],
+      "properties": {
+        "non_political": {
+          "type": "boolean",
+          "const": true,
+          "description": "Confirms storytelling remains strictly personal and non-political."
+        },
+        "no_invented_history": {
+          "type": "boolean",
+          "const": true,
+          "description": "Confirms no unverified historical facts or dates are fabricated."
+        },
+        "distinguish_ai_reconstructions": {
+          "type": "boolean",
+          "const": true,
+          "description": "Confirms AI-generated scenes are never presented as authentic historical photographs."
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Optional additional creative guardrails."
+        }
+      }
+    },
+    "outputsConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aspect_ratios",
+        "vertical",
+        "horizontal",
+        "end_card"
+      ],
+      "properties": {
+        "aspect_ratios": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["9:16", "16:9"]
+          },
+          "description": "Required export aspect ratios rendered from this shared storyboard."
+        },
+        "vertical": {
+          "allOf": [
+            { "$ref": "#/$defs/aspectOutputSpec" },
+            {
+              "properties": {
+                "aspect_ratio": { "const": "9:16" }
+              }
+            }
+          ],
+          "description": "Output specifications for the 9:16 vertical export."
+        },
+        "horizontal": {
+          "allOf": [
+            { "$ref": "#/$defs/aspectOutputSpec" },
+            {
+              "properties": {
+                "aspect_ratio": { "const": "16:9" }
+              }
+            }
+          ],
+          "description": "Output specifications for the 16:9 horizontal export."
+        },
+        "audio_mix": {
+          "$ref": "#/$defs/audioMixConfig",
+          "description": "Optional mastering, music ducking, and loudness targets."
+        },
+        "end_card": {
+          "$ref": "#/$defs/endCardConfig",
+          "description": "Configuration for the mandatory visible AI disclosure end card."
+        }
+      }
+    },
+    "aspectOutputSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aspect_ratio"],
+      "properties": {
+        "aspect_ratio": {
+          "type": "string",
+          "enum": ["9:16", "16:9"],
+          "description": "Aspect ratio identifier."
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 240,
+          "maximum": 3840,
+          "description": "Optional output pixel width (e.g., 1080 for 9:16, 1920 for 16:9)."
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 240,
+          "maximum": 3840,
+          "description": "Optional output pixel height (e.g., 1920 for 9:16, 1080 for 16:9)."
+        },
+        "safe_area": {
+          "$ref": "#/$defs/safeAreaSpec"
+        },
+        "subtitle_style": {
+          "$ref": "#/$defs/subtitleStyleSpec"
+        }
+      }
+    },
+    "safeAreaSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "top_margin_px": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bottom_margin_px": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "horizontal_margin_px": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "subtitleStyleSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_chars_per_line": {
+          "type": "integer",
+          "minimum": 15,
+          "maximum": 80
+        },
+        "max_lines": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "position": {
+          "type": "string",
+          "enum": ["bottom_safe", "lower_third", "center_lower"]
+        }
+      }
+    },
+    "audioMixConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_lufs": {
+          "type": "number",
+          "minimum": -24,
+          "maximum": -8,
+          "description": "Integrated loudness target in LUFS (typically -14 LUFS)."
+        },
+        "true_peak_db": {
+          "type": "number",
+          "minimum": -6,
+          "maximum": 0,
+          "description": "Maximum true peak ceiling in dBTP (typically -1.0 dBTP)."
+        },
+        "music_ducking_enabled": {
+          "type": "boolean",
+          "description": "Whether background music is ducked under narration."
+        },
+        "ducking_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "endCardConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "duration_seconds",
+        "disclosure_text"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "const": true,
+          "description": "Assignment requires a visible AI disclosure end card."
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 1.5,
+          "maximum": 5.0,
+          "description": "Display duration of the end card in seconds."
+        },
+        "disclosure_text": {
+          "type": "string",
+          "minLength": 10,
+          "description": "On-screen text clearly disclosing AI generation."
+        }
+      }
+    },
+    "narrationConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "subtitle_language"
+      ],
+      "properties": {
+        "language": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 64,
+          "description": "Configurable spoken narration language (name or BCP-47 tag, e.g., 'Amharic', 'en', 'am', or 'undetermined' until chosen)."
+        },
+        "language_code": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$",
+          "description": "Optional BCP-47 language code once selected (e.g., 'am', 'en', 'om')."
+        },
+        "subtitle_language": {
+          "type": "string",
+          "enum": ["en", "English"],
+          "description": "Language of burned-in or paired subtitles (assignment requires English subtitles)."
+        },
+        "voice_settings": {
+          "$ref": "#/$defs/voiceSettings",
+          "description": "Optional TTS provider and voice configuration; fields unknown before production may be omitted or null."
+        }
+      }
+    },
+    "voiceSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": ["string", "null"],
+          "enum": ["gemini", "google_cloud_tts", "other", null],
+          "description": "TTS service provider."
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "description": "TTS model identifier."
+        },
+        "voice_id": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "description": "Voice preset or identifier."
+        },
+        "speaking_style": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "description": "Plain-language prosody or tone guidance (e.g., calm, warm, unhurried)."
+        },
+        "speed": {
+          "type": ["number", "null"],
+          "minimum": 0.5,
+          "maximum": 2.0,
+          "description": "Relative speaking rate multiplier (1.0 is default)."
+        },
+        "sample_rate_hz": {
+          "type": ["integer", "null"],
+          "enum": [16000, 22050, 24000, 44100, 48000, null],
+          "description": "Target audio sample rate in Hz."
+        },
+        "additional_params": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Extensible container for provider-specific TTS parameters."
+        }
+      }
+    },
+    "styleGuide": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shared_style_block": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Consistent visual look description appended or referenced across shots."
+        },
+        "global_negative_prompt": {
+          "type": "string",
+          "description": "Shared negative prompt terms to avoid unwanted artifacts."
+        },
+        "color_palette": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Key color or mood descriptors across emotional phases."
+        },
+        "reference_sheets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/referenceAsset"
+          },
+          "description": "Character, monument, or environment reference sheets used to maintain continuity."
+        }
+      }
+    },
+    "referenceAsset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_id",
+        "type",
+        "description",
+        "ai_generated"
+      ],
+      "properties": {
+        "reference_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$",
+          "description": "Unique identifier for this reference asset."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["character", "monument_reconstruction", "environment", "style", "prop"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 2
+        },
+        "file_path": {
+          "type": ["string", "null"],
+          "description": "Relative workspace path once generated or added."
+        },
+        "ai_generated": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "musicPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": ["string", "null"],
+          "enum": ["kaggle_ace_step", "colab_ace_step", "local", "other", null]
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "instrumental_only": {
+          "type": "boolean"
+        },
+        "tempo_bpm": {
+          "type": ["integer", "null"],
+          "minimum": 40,
+          "maximum": 220
+        },
+        "musical_key": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "overall_prompt": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "seed": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "audio_path": {
+          "type": ["string", "null"]
+        },
+        "extra_params": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "globalAiDisclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contains_ai_generated_content",
+        "distinguishes_reconstructions_from_archival_photos",
+        "disclosure_statement",
+        "consent_verified"
+      ],
+      "properties": {
+        "contains_ai_generated_content": {
+          "type": "boolean",
+          "const": true,
+          "description": "Must be true because this project uses generative AI media tools."
+        },
+        "distinguishes_reconstructions_from_archival_photos": {
+          "type": "boolean",
+          "const": true,
+          "description": "Confirms AI reconstructions are clearly separated from real historical photographs."
+        },
+        "disclosure_statement": {
+          "type": "string",
+          "minLength": 10,
+          "description": "Human-readable AI disclosure summary."
+        },
+        "consent_verified": {
+          "type": "boolean",
+          "description": "Whether required consent entries in ETHICS.md have been verified before generation."
+        },
+        "consent_record_ref": {
+          "type": ["string", "null"],
+          "description": "Reference to consent documentation (e.g., ETHICS.md)."
+        }
+      }
+    },
+    "shot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shot_id",
+        "order",
+        "duration_seconds",
+        "narrative",
+        "visual",
+        "audio",
+        "editing",
+        "provenance"
+      ],
+      "properties": {
+        "shot_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$",
+          "description": "Unique slug identifier for this shot (e.g., shot-01)."
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "1-based playback position within the 10-shot sequence."
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 3,
+          "maximum": 15,
+          "description": "Planned shot duration in seconds (recommended 6-9s per shot so 10 shots total 60-90s)."
+        },
+        "start_seconds": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 90,
+          "description": "Optional timeline start offset in seconds."
+        },
+        "end_seconds": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 90,
+          "description": "Optional timeline end offset in seconds."
+        },
+        "story_beat": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional short label for the narrative beat or emotional stage."
+        },
+        "narrative": {
+          "$ref": "#/$defs/shotNarrative"
+        },
+        "visual": {
+          "$ref": "#/$defs/shotVisual"
+        },
+        "generation": {
+          "$ref": "#/$defs/shotGeneration",
+          "description": "Optional image and video generation model settings, parameters, and seeds."
+        },
+        "audio": {
+          "$ref": "#/$defs/shotAudio"
+        },
+        "editing": {
+          "$ref": "#/$defs/shotEditing"
+        },
+        "provenance": {
+          "$ref": "#/$defs/shotProvenance"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional production or revision notes for this shot."
+        }
+      }
+    },
+    "shotNarrative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "narration_text",
+        "english_subtitle_text",
+        "emotional_purpose"
+      ],
+      "properties": {
+        "narration_text": {
+          "type": "string",
+          "description": "First-person narration line(s) in the selected narration language (empty string allowed only for intentional silent beats)."
+        },
+        "english_subtitle_text": {
+          "type": "string",
+          "description": "English subtitle text corresponding to this shot."
+        },
+        "emotional_purpose": {
+          "type": "string",
+          "minLength": 3,
+          "description": "Explicit reason this shot exists and what the audience should feel."
+        }
+      }
+    },
+    "shotVisual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "main_prompt",
+        "visual_style",
+        "subject_description",
+        "environment_description",
+        "lighting_atmosphere",
+        "camera_framing",
+        "camera_movement"
+      ],
+      "properties": {
+        "main_prompt": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Primary visual scene description used for keyframe and shot generation."
+        },
+        "negative_prompt": {
+          "type": ["string", "null"],
+          "description": "Optional shot-specific negative prompt."
+        },
+        "visual_style": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Visual medium, texture, and look descriptors."
+        },
+        "subject_description": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Character(s) or primary focal subject depicted in the shot."
+        },
+        "environment_description": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Setting, architectural surroundings, and location details."
+        },
+        "lighting_atmosphere": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Time of day, light quality, color temperature, and mood."
+        },
+        "camera_framing": {
+          "type": "string",
+          "enum": [
+            "extreme_wide",
+            "wide",
+            "medium_wide",
+            "medium",
+            "medium_close_up",
+            "close_up",
+            "extreme_close_up",
+            "establishing",
+            "pov",
+            "over_the_shoulder",
+            "insert",
+            "other"
+          ],
+          "description": "Standardized shot framing type."
+        },
+        "camera_movement": {
+          "type": "string",
+          "enum": [
+            "static",
+            "slow_pan_left",
+            "slow_pan_right",
+            "tilt_up",
+            "tilt_down",
+            "dolly_in",
+            "dolly_out",
+            "tracking",
+            "handheld_gentle",
+            "ken_burns_zoom_in",
+            "ken_burns_zoom_out",
+            "orbit",
+            "other"
+          ],
+          "description": "Intended camera motion during the shot."
+        },
+        "reference_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"
+          },
+          "description": "Optional IDs linking to entries in style_guide.reference_sheets."
+        }
+      }
+    },
+    "shotGeneration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/imageGenerationConfig"
+        },
+        "video": {
+          "$ref": "#/$defs/videoGenerationConfig"
+        }
+      }
+    },
+    "imageGenerationConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": ["string", "null"],
+          "enum": ["cloudflare_workers_ai", "google_ai_studio", "local", "other", null]
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "seed": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "parameters": {
+          "$ref": "#/$defs/imageParameters"
+        },
+        "keyframe_path": {
+          "type": ["string", "null"],
+          "description": "Relative output path of the selected still keyframe."
+        }
+      }
+    },
+    "imageParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "type": ["integer", "null"],
+          "minimum": 256,
+          "maximum": 4096
+        },
+        "height": {
+          "type": ["integer", "null"],
+          "minimum": 256,
+          "maximum": 4096
+        },
+        "steps": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 100
+        },
+        "guidance_scale": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 30
+        },
+        "extra_params": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Extensible container for model-specific image generation parameters."
+        }
+      }
+    },
+    "videoGenerationConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": ["string", "null"],
+          "enum": ["image_to_video", "ken_burns_still", "static_hold", null],
+          "description": "Video realization method, including deterministic still fallback."
+        },
+        "provider": {
+          "type": ["string", "null"],
+          "enum": ["kaggle", "colab", "ffmpeg_fallback", "local", "other", null]
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "seed": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "parameters": {
+          "$ref": "#/$defs/videoParameters"
+        },
+        "clip_path": {
+          "type": ["string", "null"],
+          "description": "Relative output path of the generated or fallback video clip."
+        }
+      }
+    },
+    "videoParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resolution": {
+          "type": ["string", "null"],
+          "enum": ["480p", "720p", "1080p", null]
+        },
+        "fps": {
+          "type": ["integer", "null"],
+          "enum": [16, 24, 25, 30, null]
+        },
+        "num_frames": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "steps": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 100
+        },
+        "guidance_scale": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 30
+        },
+        "motion_prompt": {
+          "type": ["string", "null"],
+          "description": "Motion-and-camera-only prompt for image-to-video generation."
+        },
+        "extra_params": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Extensible container for model-specific video generation parameters."
+        }
+      }
+    },
+    "shotAudio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "music_cue",
+        "music_mood"
+      ],
+      "properties": {
+        "music_cue": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Musical cue label or role in this shot (e.g., intro_theme, swell, quiet_underscore, fade_out)."
+        },
+        "music_mood": {
+          "type": "string",
+          "minLength": 2,
+          "description": "Emotional and musical tone required under this shot."
+        },
+        "music_intensity": {
+          "type": "string",
+          "enum": ["silent", "low", "medium", "high"],
+          "description": "Optional relative prominence of the score during this shot."
+        },
+        "narration_sync": {
+          "$ref": "#/$defs/narrationSync",
+          "description": "Optional synchronization and audio file metadata for this shot's voice line."
+        }
+      }
+    },
+    "narrationSync": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "offset_seconds": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Delay in seconds from shot start before narration starts."
+        },
+        "expected_duration_seconds": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "actual_duration_seconds": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "audio_path": {
+          "type": ["string", "null"]
+        },
+        "duck_music": {
+          "type": "boolean"
+        }
+      }
+    },
+    "shotEditing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transition_in",
+        "transition_out"
+      ],
+      "properties": {
+        "transition_in": {
+          "type": "string",
+          "enum": ["cut", "crossfade", "dissolve", "fade_from_black", "j_cut", "l_cut"]
+        },
+        "transition_out": {
+          "type": "string",
+          "enum": ["cut", "crossfade", "dissolve", "fade_to_black", "j_cut", "l_cut"]
+        },
+        "transition_duration_seconds": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 3.0
+        },
+        "composition": {
+          "$ref": "#/$defs/compositionGuidance",
+          "description": "Optional shared and format-specific framing guidance for 9:16 and 16:9."
+        }
+      }
+    },
+    "compositionGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shared_subject_position": {
+          "type": "string",
+          "minLength": 1,
+          "description": "General anchor description helping one keyframe serve both aspect ratios (e.g., center-framed)."
+        },
+        "vertical_9_16": {
+          "$ref": "#/$defs/formatComposition"
+        },
+        "horizontal_16_9": {
+          "$ref": "#/$defs/formatComposition"
+        }
+      }
+    },
+    "formatComposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "crop_anchor": {
+          "type": "string",
+          "enum": ["center", "left", "right", "top", "bottom", "custom"]
+        },
+        "safe_area_notes": {
+          "type": "string"
+        },
+        "subtitle_placement": {
+          "type": "string",
+          "enum": ["bottom_safe", "lower_third", "center_lower"]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "shotProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uses_ai_imagery",
+        "imagery_type",
+        "is_authentic_historical_photo",
+        "disclosure_note"
+      ],
+      "properties": {
+        "uses_ai_imagery": {
+          "type": "boolean",
+          "description": "True if this shot includes AI-generated or AI-animated imagery."
+        },
+        "imagery_type": {
+          "type": "string",
+          "enum": [
+            "ai_reconstruction",
+            "ai_atmospheric",
+            "real_photograph",
+            "mixed_with_reference",
+            "title_or_blank"
+          ],
+          "description": "Explicit classification separating AI reconstructions from real photographs."
+        },
+        "is_authentic_historical_photo": {
+          "type": "boolean",
+          "description": "Must be false for all AI-generated reconstructions."
+        },
+        "disclosure_note": {
+          "type": "string",
+          "minLength": 3,
+          "description": "Clear provenance statement for this shot."
+        },
+        "source_references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceReference"
+          },
+          "description": "Optional list of source or reference records informing this shot."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "imagery_type": {
+                "enum": ["ai_reconstruction", "ai_atmospheric"]
+              }
+            },
+            "required": ["imagery_type"]
+          },
+          "then": {
+            "properties": {
+              "uses_ai_imagery": { "const": true },
+              "is_authentic_historical_photo": { "const": false }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "is_authentic_historical_photo": { "const": true }
+            },
+            "required": ["is_authentic_historical_photo"]
+          },
+          "then": {
+            "properties": {
+              "imagery_type": { "const": "real_photograph" },
+              "uses_ai_imagery": { "const": false }
+            }
+          }
+        }
+      ]
+    },
+    "sourceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type",
+        "description"
+      ],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "personal_memory",
+            "reference_sheet",
+            "author_photo",
+            "public_archive",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri_or_path": {
+          "type": ["string", "null"]
+        },
+        "consent_or_licence": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}

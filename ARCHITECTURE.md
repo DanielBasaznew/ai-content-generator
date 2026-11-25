@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** High-level architectural plan only. No pipeline scripts, JSON schemas, or `storyboard.json` have been implemented yet.
+> **Status:** Step 4 complete — the storyboard contract schema (`schema/storyboard.schema.json`) is defined, while `storyboard.json` (Step 5) and pipeline stage scripts are not yet implemented.
 
 ---
 
@@ -12,12 +12,13 @@ Instead of assembling assets manually, each production step will be isolated int
 
 ---
 
-## 2. Central Contract (`storyboard.json` & `schema/`)
+## 2. Central Contract (`storyboard.json` & `schema/storyboard.schema.json`)
 
-A single `storyboard.json` file (to be designed in upcoming steps) will serve as the contract connecting all production stages:
+A single `storyboard.json` file (to be authored in Step 5) will serve as the shared production contract connecting all pipeline stages:
 
-- **Schema Validation:** Before any stage executes, the storyboard will be validated against a JSON Schema stored in `schema/`. Catching structural mistakes early avoids wasting API quotas or GPU time.
-- **Stage Coupling:** Every downstream stage (narration, keyframes, video shots, music, and assembly) will read what it needs from `storyboard.json` rather than hardcoding prompts, timings, or asset paths inside scripts.
+- **Schema Validation (`schema/storyboard.schema.json`):** Before any stage executes, `storyboard.json` will be validated against the strict JSON Schema Draft 2020-12 contract in `schema/storyboard.schema.json`, catching missing fields, invalid types, or broken provenance flags before spending API quotas or GPU time. Companion Python validation will enforce cross-item rules that JSON Schema cannot express directly (such as unique `shot_id` values, contiguous `order` 1–10, and verifying that summed shot durations fall between 60 and 90 seconds).
+- **Single Source for Both Aspect Ratios:** Both `9:16` (vertical) and `16:9` (horizontal) exports will consume the exact same `storyboard.json` data—sharing story beats, durations, narration, music cues, and core visual prompts while reading optional format-specific composition guidance (`editing.composition.vertical_9_16` and `horizontal_16_9`) during assembly.
+- **Stage Coupling:** Every downstream pipeline stage under `pipeline/` (narration, keyframes, video shots, music, and assembly) will consume its inputs from `storyboard.json` rather than hardcoding prompts, timings, or asset paths inside scripts.
 - **Selective Regeneration:** Isolating inputs per shot allows modifying a single shot prompt or narration line and regenerating only the affected outputs without rebuilding the entire film.
 
 ---
@@ -51,6 +52,6 @@ To satisfy software engineering and reproducibility goals when the pipeline is b
 ## 5. Future Implementation Roadmap
 
 The following will be implemented sequentially in later assignment steps:
-- Define the JSON Schema (`schema/`) and author `storyboard.json`.
-- Build stage modules under `pipeline/` and automated checks under `tests/`.
+- Author `storyboard.json` against `schema/storyboard.schema.json` (Step 5).
+- Build stage modules under `pipeline/`, companion cross-field storyboard validation, and automated tests under `tests/`.
 - Add a single documented top-level command to run the end-to-end pipeline cleanly.

@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Workspace prepared (Steps 1–3 complete, prior to Step 4). No storyboard, JSON schema, pipeline code, API calls, or media assets have been generated yet.
+> **Project Status:** Step 4 complete — storyboard data contract structure and strict JSON Schema (`schema/storyboard.schema.json`) are in place. `storyboard.json` (Step 5), pipeline scripts, API calls, and media assets have not been created yet.
 
 ---
 
@@ -65,7 +65,10 @@ day-2-ai-content-generation/
 ├── COSTS.md                    # Template for tracking model usage, latency, GPU time, and costs
 ├── ETHICS.md                   # Ethical guidelines, AI disclosure policy, licensing, and consent log
 ├── runs.jsonl                  # Append-only log for future model API/inference calls (currently empty)
-├── schema/                     # Future JSON Schema for validating the storyboard (empty)
+├── docs/
+│   └── STORYBOARD_STRUCTURE.md # Detailed guide to the storyboard schema and fields
+├── schema/
+│   └── storyboard.schema.json  # Strict JSON Schema (Draft 2020-12) for validating storyboard.json
 ├── pipeline/                   # Future modular pipeline stage scripts (empty)
 ├── assets/
 │   ├── references/             # Character and style reference assets (empty)
@@ -75,10 +78,21 @@ day-2-ai-content-generation/
 ├── outputs/
 │   ├── vertical/               # Final 9:16 exports and intermediate cuts (empty)
 │   └── horizontal/             # Final 16:9 exports and intermediate cuts (empty)
-└── tests/                      # Future validation and pipeline tests (empty)
+└── tests/
+    └── test_storyboard_schema.py # Lightweight schema validation check using an in-memory fixture
 ```
 
-*(Note: `storyboard.json` will be added in a later step once the storyboard structure and schema are designed.)*
+*(Note: `storyboard.json` will be authored in Step 5 and validated against `schema/storyboard.schema.json`.)*
+
+---
+
+## Storyboard JSON Schema (Step 4)
+
+The project uses a strict **JSON Schema Draft 2020-12** contract located at [schema/storyboard.schema.json](schema/storyboard.schema.json) and documented in [docs/STORYBOARD_STRUCTURE.md](docs/STORYBOARD_STRUCTURE.md).
+
+- **Purpose:** Validate the structure, types, allowed enums, 10-shot layout, 60–90 second target duration bounds, dual-aspect-ratio (`9:16` and `16:9`) configuration, narration/subtitle fields, and AI provenance rules before any pipeline stage runs.
+- **How it will be used:** When `storyboard.json` is created in Step 5 and throughout pipeline execution, automated validation will check the storyboard against `schema/storyboard.schema.json` (supplemented by Python cross-field checks for summed shot durations, unique shot IDs, and contiguous ordering).
+- **Current status:** Only the schema, documentation, and a lightweight in-memory schema test exist so far; the actual `storyboard.json` will be created in **Step 5**.
 
 ---
 
