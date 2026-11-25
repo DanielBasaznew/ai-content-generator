@@ -92,34 +92,34 @@
       {
         "reference_id": "ref_narrator_child",
         "type": "character",
-        "description": "Generalized young Ethiopian child representing the narrator in childhood memory scenes (to be generated in Step 6).",
+        "description": "Option A fictional, generic Ethiopian child (age 7-9), warm medium-brown skin, short cropped tightly curled black hair, soft child proportions, gentle dark eyes, wearing an off-white collared cotton shirt under a muted warm ochre-mustard knit vest and dark brown casual shorts.",
         "file_path": null,
         "ai_generated": true,
-        "notes": "Keep clothing warm and simple; avoid modeling any real third party's likeness without recorded consent."
+        "notes": "See docs/CHARACTER_REFERENCE_SHEET.md. Strictly fictional generic AI character; does not recreate the author's or any real person's face, and no real-person likeness consent is claimed."
       },
       {
         "reference_id": "ref_narrator_adult",
         "type": "character",
-        "description": "Generalized Ethiopian university student / returning young adult representing the narrator later in life (to be generated in Step 6).",
+        "description": "Option A fictional, generic Ethiopian young adult (age 20-24) preserving continuity from ref_narrator_child: warm medium-brown skin, short cropped curly black hair, calm reflective dark eyes, wearing an off-white shirt under a muted slate-navy overshirt and dark casual trousers.",
         "file_path": null,
         "ai_generated": true,
-        "notes": "Consistent facial silhouette and grounded everyday attire across university and return shots."
+        "notes": "See docs/CHARACTER_REFERENCE_SHEET.md. Fictional continuity counterpart across university and return shots (Shots 5-9); no real-person likeness used."
       },
       {
         "reference_id": "ref_harar_roundabout_memory",
         "type": "monument_reconstruction",
-        "description": "Memory-based artistic reconstruction of a wide sunlit roundabout in Harar featuring a stone pedestal landmark silhouette softened by trees and perspective.",
+        "description": "Memory-based artistic reconstruction of a wide sunlit roundabout in Harar featuring a non-specific stone pedestal landmark silhouette softened by mature shade trees and warm atmospheric perspective.",
         "file_path": null,
         "ai_generated": true,
-        "notes": "Missing authentic visual reference: no verified historical photograph of the Ras Makonnen Monument is currently in assets/references/. Keep reconstruction non-specific and clearly labeled as personal memory rather than historical documentation."
+        "notes": "See docs/VISUAL_STYLE_SHEET.md. Missing authentic visual reference: no verified historical photograph of the Ras Makonnen Monument is currently in assets/references/. Keep reconstruction non-specific and clearly distinct from authentic historical photography."
       },
       {
         "reference_id": "ref_harar_streets",
         "type": "environment",
-        "description": "Warm residential streetscapes and textured walls evocative of Harar neighborhoods (to be generated in Step 6).",
+        "description": "Warm Harar residential streetscapes with textured earth-toned plastered walls, wooden doorways, shade trees, and quiet twilight skyline silhouettes.",
         "file_path": null,
         "ai_generated": true,
-        "notes": "Center-balanced composition so both 9:16 and 16:9 frames retain clear focal subjects."
+        "notes": "See docs/VISUAL_STYLE_SHEET.md. Center-weighted composition inside the middle 56% band so both 9:16 and 16:9 exports frame cleanly."
       }
     ]
   },
@@ -136,9 +136,9 @@
   "ai_disclosure": {
     "contains_ai_generated_content": true,
     "distinguishes_reconstructions_from_archival_photos": true,
-    "disclosure_statement": "All visual scenes, synthetic voice narration, and original background music in this short film are created using generative AI as an artistic representation of personal childhood memories in Harar, Ethiopia, and are not authentic historical photographs or documentary footage.",
+    "disclosure_statement": "All visual scenes, fictional characters (Option A generic AI characters, not real likenesses), synthetic voice narration, and original background music in this short film are created using generative AI as an artistic representation of personal childhood memories in Harar, Ethiopia, and are not authentic historical photographs or documentary footage.",
     "consent_verified": false,
-    "consent_record_ref": "ETHICS.md#2-consent-record (pending final voice/reference review prior to Step 6 asset generation)"
+    "consent_record_ref": "ETHICS.md#2-consent-record (Option A uses fictional AI characters with no real-person likeness consent claimed; synthetic TTS voice pending final selection)"
   },
   "shots": [
     {
@@ -324,10 +324,10 @@
         "emotional_purpose": "Connect the sight of the monument directly to childhood excitement, love, and special parent-child outings."
       },
       "visual": {
-        "main_prompt": "Warm over-the-shoulder perspective from behind a young Ethiopian child walking hand-in-hand with parents along the sunlit edge of the tree-lined Harar roundabout, the generalized monument pedestal visible gently ahead in golden sunlight, joyful anticipation.",
+        "main_prompt": "Warm over-the-shoulder perspective from behind a fictional 8-year-old Ethiopian child with short cropped black curly hair wearing an off-white collared cotton shirt under a muted warm ochre-mustard knit vest and dark brown shorts, walking hand-in-hand with non-identifiable parents seen from behind along the sunlit tree-lined Harar roundabout, the generalized monument pedestal silhouette softly visible ahead in golden sunlight, joyful anticipation.",
         "negative_prompt": "identifiable real family faces, harsh artificial lighting, modern signage, text, distorted hands",
         "visual_style": "Warm cinematic 35mm film memory aesthetic with bright hopeful warmth",
-        "subject_description": "Young child seen from behind or soft profile holding hands with mother and father while passing the roundabout",
+        "subject_description": "Fictional generic Ethiopian child (age 7-9, short cropped curly black hair, cream collared shirt, ochre knit vest) seen from behind walking hand-in-hand with generalized non-identifiable parents",
         "environment_description": "Tree-lined Harar sidewalk curving past the sunlit roundabout plaza",
         "lighting_atmosphere": "Bright warm sunshine, dappled leaf shadows, uplifting joyful glow",
         "camera_framing": "over_the_shoulder",
@@ -410,10 +410,10 @@
         "emotional_purpose": "Deepen the emotional peak of childhood joy before the story transitions to growing up and leaving home."
       },
       "visual": {
-        "main_prompt": "Warm medium close-up of the young Ethiopian child smiling softly while looking out toward the sunlit roundabout landmark through warm afternoon air, holding a small parcel of newly wrapped cloth or clothing, soft bokeh of trees and warm amber light behind.",
+        "main_prompt": "Warm medium close-up of the same fictional 8-year-old Ethiopian child (warm medium-brown skin, short cropped tightly curled black hair, soft rounded cheeks, gentle dark eyes, off-white collared shirt under a muted warm ochre-mustard knit vest) smiling softly while looking toward the sunlit roundabout landmark, holding a modest plain brown-paper parcel of newly bought clothes, soft golden bokeh of trees behind.",
         "negative_prompt": "unnatural teeth, extra fingers, text on packaging, cold blue lighting, dark shadows",
         "visual_style": "Warm cinematic 35mm film memory aesthetic with gentle shallow depth of field",
-        "subject_description": "Young child smiling gently with bright eyes of anticipation, holding a modest folded parcel",
+        "subject_description": "Fictional generic Ethiopian child (age 7-9, consistent cream collar and ochre-mustard vest) smiling gently while holding a plain wrapped clothing parcel",
         "environment_description": "Warm sunlit street backdrop near the tree-lined Harar roundabout in soft bokeh",
         "lighting_atmosphere": "Rich golden afternoon sunlight catching warm skin tones and gentle lens warmth",
         "camera_framing": "medium_close_up",
@@ -495,10 +495,10 @@
         "emotional_purpose": "Bridge childhood warmth into young adulthood and gently introduce the bittersweet departure from home."
       },
       "visual": {
-        "main_prompt": "Quiet late-afternoon departure scene on an Ethiopian highway road leading away from a distant hillside town resembling Harar, young adult seen from behind carrying a single backpack looking briefly back toward warm hills before stepping forward, shifting from warm amber to cooler evening blue.",
+        "main_prompt": "Quiet late-afternoon departure scene on an Ethiopian highway road leading away from distant hillside town shapes resembling Harar, fictional young Ethiopian adult (age 20-24, short cropped black curly hair, off-white cotton shirt under a muted slate-navy overshirt and dark trousers, worn olive-brown canvas backpack) seen from behind looking briefly back toward warm hills before stepping forward, shifting from warm amber to cooler evening blue.",
         "negative_prompt": "airport planes, dramatic storm clouds, text on road signs, distorted bag straps",
         "visual_style": "Cinematic 35mm film aesthetic transitioning from warm amber to muted transitional tones",
-        "subject_description": "Young adult traveler carrying a simple backpack along a quiet departing roadside",
+        "subject_description": "Fictional generic young Ethiopian adult (consistent cropped curly hair, slate-navy overshirt over off-white collar, olive-brown backpack) pausing on a departing roadside",
         "environment_description": "Open road extending away from warm distant town hills in late afternoon light",
         "lighting_atmosphere": "Fading late-afternoon sun meeting cooler open-sky twilight",
         "camera_framing": "medium_wide",
@@ -580,10 +580,10 @@
         "emotional_purpose": "Convey the passage of five years of university life and physical distance from Harar."
       },
       "visual": {
-        "main_prompt": "Contemplative quiet evening study scene in a modest Ethiopian university room or library window overlooking distant city lights of a larger metropolis, open notebooks on a wooden desk, young adult seated thoughtfully in cool soft lamp and twilight glow, sense of time passing away from home.",
+        "main_prompt": "Contemplative quiet evening study scene in a modest Ethiopian university room beside a window overlooking distant city lights of a larger metropolis, open blank notebooks on a wooden desk, the same fictional Ethiopian young adult (warm medium-brown skin, short cropped curly black hair, off-white shirt under muted slate-navy overshirt) seated thoughtfully in cool window twilight and one gentle warm desk lamp.",
         "negative_prompt": "readable English or Amharic text on pages, futuristic monitors, neon cyberpunk colors, cluttered hands",
         "visual_style": "Cinematic 35mm film aesthetic with subdued cool blues and soft warm desk lamp contrast",
-        "subject_description": "Young adult student seated beside a wooden desk and window at dusk",
+        "subject_description": "Fictional generic Ethiopian young adult student (consistent cropped curly hair, off-white shirt, slate-navy overshirt) seated beside a wooden desk and window at dusk",
         "environment_description": "Quiet study space overlooking distant unfamiliar city evening lights",
         "lighting_atmosphere": "Cool evening window light contrasted with one gentle warm desk lamp",
         "camera_framing": "medium",
@@ -665,10 +665,10 @@
         "emotional_purpose": "Establish the narrator's hopeful expectation right before the emotional reveal of the missing landmark."
       },
       "visual": {
-        "main_prompt": "Point-of-view walking approach along a familiar Harar avenue toward the open intersection ahead in soft muted afternoon light, returning adult steps slowly into frame from behind, trees framing the distant roundabout entrance, quiet anticipation tempered by subtle overcast calm.",
+        "main_prompt": "Point-of-view walking approach along a familiar Harar avenue toward the open intersection ahead in soft muted afternoon light, the fictional returning Ethiopian young adult (short cropped black curly hair, muted slate-navy overshirt over off-white shirt, dark trousers) stepping slowly forward from behind, trees framing the distant intersection entrance, quiet anticipation under soft overcast calm.",
         "negative_prompt": "banners, crowds cheering, dramatic storm, readable street text",
         "visual_style": "Subdued cinematic 35mm film aesthetic with softer contrast and muted earth tones",
-        "subject_description": "Returning adult walking slowly along a familiar street toward the roundabout intersection",
+        "subject_description": "Fictional generic returning Ethiopian young adult (consistent slate-navy overshirt and cropped curly hair) walking slowly toward the familiar roundabout entrance",
         "environment_description": "Approach road in Harar leading toward the wide intersection",
         "lighting_atmosphere": "Soft subdued afternoon light, gentle shadows, calm expectation",
         "camera_framing": "pov",
@@ -751,10 +751,10 @@
         "emotional_purpose": "Deliver the emotional turning point gently and honestly—expressing personal disappointment and loss without blame or political framing."
       },
       "visual": {
-        "main_prompt": "Subdued wide shot of an open roundabout intersection in Harar in muted late-afternoon light where the central monument is absent, empty open pavement at the roundabout center surrounded by quiet trees, returning adult standing still in the foreground edge looking toward the empty center.",
+        "main_prompt": "Subdued wide shot of an open roundabout intersection in Harar in muted late-afternoon light where the central monument is absent, empty open pavement at the roundabout center surrounded by quiet mature trees, the fictional returning Ethiopian young adult (muted slate-navy overshirt, dark trousers, cropped black curly hair) standing still in the foreground edge looking quietly toward the empty center.",
         "negative_prompt": "construction machinery, rubble piles, protest signs, police, dramatic smoke, any political symbols",
         "visual_style": "Subdued, desaturated cinematic 35mm film aesthetic emphasizing quiet absence",
-        "subject_description": "Open roundabout center devoid of the monument, with the returning adult standing quietly looking on",
+        "subject_description": "Empty paved roundabout center devoid of the monument, with the fictional returning Ethiopian adult standing still in the foreground edge looking on",
         "environment_description": "Wide Harar roundabout intersection with an empty central space in muted dusk light",
         "lighting_atmosphere": "Quiet overcast / muted late-afternoon stillness, cool desaturated shadows",
         "camera_framing": "wide",
@@ -836,10 +836,10 @@
         "emotional_purpose": "Articulate why the monument's loss changed how home felt—connecting physical places to personal identity."
       },
       "visual": {
-        "main_prompt": "Reflective medium close-up of the returning adult standing quietly along a warm textured Harar street wall at soft twilight, gentle expression of memory and quiet contemplation, warm evening window light subtly glowing nearby as a bridge back to memory.",
+        "main_prompt": "Reflective medium close-up of the fictional returning Ethiopian young adult (warm medium-brown skin, short cropped black curly hair, calm reflective dark eyes, off-white shirt under muted slate-navy overshirt) standing quietly beside a warm textured Harar street wall at soft twilight, gentle contemplative stillness with subtle warm window light glowing nearby as a bridge back to memory.",
         "negative_prompt": "exaggerated crying, melodramatic expression, harsh flash lighting, text",
         "visual_style": "Reflective cinematic 35mm film aesthetic blending cool dusk shadows with a subtle warm glow",
-        "subject_description": "Returning adult pausing thoughtfully beside a familiar textured hometown wall",
+        "subject_description": "Fictional generic returning Ethiopian young adult (consistent cropped curly hair, off-white collar, slate-navy overshirt) pausing thoughtfully beside a textured hometown wall",
         "environment_description": "Quiet evening Harar street with soft twilight air and gentle distant warm lights",
         "lighting_atmosphere": "Soft twilight balance between cool dusk and warm subtle golden reflections",
         "camera_framing": "medium_close_up",

@@ -37,7 +37,11 @@ This document defines the ethical guardrails, AI transparency rules, model/outpu
 
 | Person / Subject | Role in Film | Type (Voice / Likeness / Story) | Consent Obtained? | Date & Method of Record | Notes / Restrictions |
 | --- | --- | --- | --- | --- | --- |
-| *Pending story & asset design* | — | — | — | — | — |
+| Author (personal story) | First-person narrative & memories | Story (written text) | Yes (author's own project) | Project brief / Step 5 | Non-political personal memory only; no invented historical claims |
+| `ref_narrator_child` | Childhood memory protagonist (Shots 3–4) | Fictional AI likeness (Option A) | **N/A — No real person depicted** | Step 6 decision (`docs/CHARACTER_REFERENCE_SHEET.md`) | Fictional, generic Ethiopian child; explicitly **not** a portrait of the author or any real person |
+| `ref_narrator_adult` | Older continuity protagonist (Shots 5–9) | Fictional AI likeness (Option A) | **N/A — No real person depicted** | Step 6 decision (`docs/CHARACTER_REFERENCE_SHEET.md`) | Fictional, generic young adult; no real-person likeness consent claimed |
+| Parent figures (Shot 3) | Background / over-the-shoulder figures | Non-identifiable generalized figures | **N/A — No identifiable likeness** | Step 6 decision (`docs/CHARACTER_REFERENCE_SHEET.md`) | Shown only from behind; faces never depicted |
+| Narrator voice (Amharic) | Spoken narration (future TTS stage) | Planned synthetic Gemini TTS voice | Pending (no voice cloning planned) | Pending script approval & TTS selection | Must not clone or imitate any real person's voice without recorded consent |
 
 ---
 

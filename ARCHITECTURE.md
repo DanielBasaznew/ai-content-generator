@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** Step 5 in progress — `storyboard.json` (10 shots, 75.0 s) has been authored and validated against `schema/storyboard.schema.json`, while narration audio awaits review (`docs/NARRATION_REVIEW.md`) and pipeline stage scripts under `pipeline/` are not yet implemented.
+> **Status:** Step 6 reference design complete — `storyboard.json` (10 shots, 75.0 s) aligns with the Option A character sheet (`docs/CHARACTER_REFERENCE_SHEET.md`) and visual-style sheet (`docs/VISUAL_STYLE_SHEET.md`). Narration audio awaits review (`docs/NARRATION_REVIEW.md`), reference image generation awaits Cloudflare credentials/approval, and `pipeline/` scripts are not yet implemented.
 
 ---
 

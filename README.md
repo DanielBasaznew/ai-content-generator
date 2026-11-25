@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Step 5 in progress / awaiting narration review — `storyboard.json` (10 shots, 75.0 s), `docs/NARRATION_REVIEW.md`, and `docs/AUDIENCE_TEST_1.md` are prepared. Narration audio and the first radio cut (`outputs/radio_cut/`) are pending script approval, `GEMINI_API_KEY`, and `ffmpeg` installation. Steps 6–15 have not started.
+> **Project Status:** Step 6 character and visual-style reference specifications complete (`docs/CHARACTER_REFERENCE_SHEET.md`, `docs/VISUAL_STYLE_SHEET.md`) using Option A (fictional, generic AI character). Amharic narration review (`docs/NARRATION_REVIEW.md`), TTS audio/radio cut (`outputs/radio_cut/`), reference image generation (pending Cloudflare credentials), and Steps 7–15 are not yet executed.
 
 ---
 
@@ -67,9 +67,11 @@ day-2-ai-content-generation/
 ├── runs.jsonl                  # Append-only log for future model API/inference calls (currently empty)
 ├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (75.0s; Amharic + EN subtitles)
 ├── docs/
-│   ├── AUDIENCE_TEST_1.md      # Participant feedback template for the first radio cut test
-│   ├── NARRATION_REVIEW.md     # Amharic narration & English subtitle script for author review
-│   └── STORYBOARD_STRUCTURE.md # Detailed guide to the storyboard schema and fields
+│   ├── AUDIENCE_TEST_1.md          # Participant feedback template for the first radio cut test
+│   ├── CHARACTER_REFERENCE_SHEET.md # Option A fictional character design & continuity guide (Step 6)
+│   ├── NARRATION_REVIEW.md         # Amharic narration & English subtitle script for author review
+│   ├── STORYBOARD_STRUCTURE.md     # Detailed guide to the storyboard schema and fields
+│   └── VISUAL_STYLE_SHEET.md       # Color palette, lighting, aspect-ratio framing & style sheet (Step 6)
 ├── schema/
 │   └── storyboard.schema.json  # Strict JSON Schema (Draft 2020-12) for validating storyboard.json
 ├── pipeline/                   # Future modular pipeline stage scripts (empty)
