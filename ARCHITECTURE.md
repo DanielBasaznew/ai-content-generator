@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** Step 6 reference design complete — `storyboard.json` (10 shots, 75.0 s) aligns with the Option A character sheet (`docs/CHARACTER_REFERENCE_SHEET.md`) and visual-style sheet (`docs/VISUAL_STYLE_SHEET.md`). Narration audio awaits review (`docs/NARRATION_REVIEW.md`), reference image generation awaits Cloudflare credentials/approval, and `pipeline/` scripts are not yet implemented.
+> **Status:** Step 5 narration (`pipeline/narration.py`) and radio-cut assembly (`pipeline/radio_cut.py`) are implemented and verified (`80.0s` Amharic radio cut ready for Audience Test 1). Step 6 reference specs are complete (`docs/CHARACTER_REFERENCE_SHEET.md`, `docs/VISUAL_STYLE_SHEET.md`); remaining visual/music/video/assembly pipeline stages are not yet implemented.
 
 ---
 

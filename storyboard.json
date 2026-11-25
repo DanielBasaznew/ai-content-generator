@@ -5,7 +5,7 @@
     "location": "Harar, Ethiopia",
     "logline": "A personal journey back to Harar reveals that even when a beloved childhood landmark is gone, its memories remain part of who we are.",
     "central_message": "Heritage is not only about physical monuments; it is also about the memories and emotions people attach to places.",
-    "target_duration_seconds": 75.0,
+    "target_duration_seconds": 80.0,
     "fps": 24,
     "creative_boundaries": {
       "non_political": true,
@@ -71,11 +71,11 @@
     "subtitle_language": "en",
     "voice_settings": {
       "provider": "gemini",
-      "model": null,
-      "voice_id": null,
+      "model": "gemini-3.8-flash-tts",
+      "voice_id": "Charon",
       "speaking_style": "calm, warm, reflective, unhurried first-person storytelling",
       "speed": 0.95,
-      "sample_rate_hz": null
+      "sample_rate_hz": 24000
     }
   },
   "style_guide": {
@@ -137,8 +137,8 @@
     "contains_ai_generated_content": true,
     "distinguishes_reconstructions_from_archival_photos": true,
     "disclosure_statement": "All visual scenes, fictional characters (Option A generic AI characters, not real likenesses), synthetic voice narration, and original background music in this short film are created using generative AI as an artistic representation of personal childhood memories in Harar, Ethiopia, and are not authentic historical photographs or documentary footage.",
-    "consent_verified": false,
-    "consent_record_ref": "ETHICS.md#2-consent-record (Option A uses fictional AI characters with no real-person likeness consent claimed; synthetic TTS voice pending final selection)"
+    "consent_verified": true,
+    "consent_record_ref": "ETHICS.md#2-consent-record (Option A fictional AI characters and prebuilt synthetic Gemini TTS voice Charon; no real-person likeness or voice cloning used)"
   },
   "shots": [
     {
@@ -188,8 +188,8 @@
         "narration_sync": {
           "offset_seconds": 0.8,
           "expected_duration_seconds": 5.2,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 5.24,
+          "audio_path": "assets/narration/shot-01.wav",
           "duck_music": true
         }
       },
@@ -273,8 +273,8 @@
         "narration_sync": {
           "offset_seconds": 0.6,
           "expected_duration_seconds": 6.4,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 6.13,
+          "audio_path": "assets/narration/shot-02.wav",
           "duck_music": true
         }
       },
@@ -314,9 +314,9 @@
     {
       "shot_id": "shot-03",
       "order": 3,
-      "duration_seconds": 8.0,
+      "duration_seconds": 8.5,
       "start_seconds": 15.0,
-      "end_seconds": 23.0,
+      "end_seconds": 23.5,
       "story_beat": "Childhood happiness",
       "narrative": {
         "narration_text": "በልጅነቴ በዚያ ሐውልት አጠገብ ስናልፍ፣ ብዙ ጊዜ ወላጆቼ አዲስ ልብስ ሊገዙልኝ ወይም ወደ ልዩ ቦታ ሊወስዱኝ ነበር።",
@@ -359,8 +359,8 @@
         "narration_sync": {
           "offset_seconds": 0.5,
           "expected_duration_seconds": 6.8,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 7.53,
+          "audio_path": "assets/narration/shot-03.wav",
           "duck_music": true
         }
       },
@@ -400,9 +400,9 @@
     {
       "shot_id": "shot-04",
       "order": 4,
-      "duration_seconds": 7.0,
-      "start_seconds": 23.0,
-      "end_seconds": 30.0,
+      "duration_seconds": 7.5,
+      "start_seconds": 23.5,
+      "end_seconds": 31.0,
       "story_beat": "Family memories",
       "narrative": {
         "narration_text": "ከቤተሰብ ጋር የምንወጣበት የማይረሳ ጊዜ ነበር። ሐውልቱን ባየሁ ቁጥር ደስታና ጉጉት ይሰማኝ ነበር።",
@@ -444,8 +444,8 @@
         "narration_sync": {
           "offset_seconds": 0.6,
           "expected_duration_seconds": 5.8,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 6.34,
+          "audio_path": "assets/narration/shot-04.wav",
           "duck_music": true
         }
       },
@@ -485,9 +485,9 @@
     {
       "shot_id": "shot-05",
       "order": 5,
-      "duration_seconds": 7.0,
-      "start_seconds": 30.0,
-      "end_seconds": 37.0,
+      "duration_seconds": 6.5,
+      "start_seconds": 31.0,
+      "end_seconds": 37.5,
       "story_beat": "Growing up",
       "narrative": {
         "narration_text": "ዓመታት አለፉ፤ እኔም አድጌ ለዩኒቨርሲቲ ትምህርት ሐረርን ለቅቄ ወጣሁ።",
@@ -529,8 +529,8 @@
         "narration_sync": {
           "offset_seconds": 0.8,
           "expected_duration_seconds": 4.8,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 4.5,
+          "audio_path": "assets/narration/shot-05.wav",
           "duck_music": true
         }
       },
@@ -571,8 +571,8 @@
       "shot_id": "shot-06",
       "order": 6,
       "duration_seconds": 7.5,
-      "start_seconds": 37.0,
-      "end_seconds": 44.5,
+      "start_seconds": 37.5,
+      "end_seconds": 45.0,
       "story_beat": "Years away",
       "narrative": {
         "narration_text": "በአዳማና በአዲስ አበባ አምስት ዓመት ገደማ አሳለፍኩ፤ ከትውልድ ከተማዬ ርቄ ትምህርቴን ቀጠልኩ።",
@@ -614,8 +614,8 @@
         "narration_sync": {
           "offset_seconds": 0.6,
           "expected_duration_seconds": 5.8,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 6.17,
+          "audio_path": "assets/narration/shot-06.wav",
           "duck_music": true
         }
       },
@@ -655,9 +655,9 @@
     {
       "shot_id": "shot-07",
       "order": 7,
-      "duration_seconds": 7.0,
-      "start_seconds": 44.5,
-      "end_seconds": 51.5,
+      "duration_seconds": 7.5,
+      "start_seconds": 45.0,
+      "end_seconds": 52.5,
       "story_beat": "Returning home",
       "narrative": {
         "narration_text": "ከዓመታት በኋላ ወደ ሐረር ስመለስ፣ የለመድኳቸውን ቦታዎች ሁሉ እንደገና አያለሁ ብዬ አስቤ ነበር።",
@@ -700,8 +700,8 @@
         "narration_sync": {
           "offset_seconds": 0.6,
           "expected_duration_seconds": 5.5,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 6.12,
+          "audio_path": "assets/narration/shot-07.wav",
           "duck_music": true
         }
       },
@@ -741,9 +741,9 @@
     {
       "shot_id": "shot-08",
       "order": 8,
-      "duration_seconds": 8.5,
-      "start_seconds": 51.5,
-      "end_seconds": 60.0,
+      "duration_seconds": 9.0,
+      "start_seconds": 52.5,
+      "end_seconds": 61.5,
       "story_beat": "The absence",
       "narrative": {
         "narration_text": "ነገር ግን ሐውልቱ መፍረሱን ሳይ በጣም ቅር አለኝ፤ አዘንኩም። የለመድኩት የልጅነት ትዝታዬ አንድ ክፍል ጠፍቶ ነበር።",
@@ -785,8 +785,8 @@
         "narration_sync": {
           "offset_seconds": 0.6,
           "expected_duration_seconds": 6.4,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 7.78,
+          "audio_path": "assets/narration/shot-08.wav",
           "duck_music": true
         }
       },
@@ -826,9 +826,9 @@
     {
       "shot_id": "shot-09",
       "order": 9,
-      "duration_seconds": 7.5,
-      "start_seconds": 60.0,
-      "end_seconds": 67.5,
+      "duration_seconds": 10.0,
+      "start_seconds": 61.5,
+      "end_seconds": 71.5,
       "story_beat": "Reflection",
       "narrative": {
         "narration_text": "ወደ ትውልድ ከተማዬ ብመለስም፣ ሐረር ከማስታውሳት የተለየች መሰለችኝ። የለመድናቸው ቦታዎች ትዝታችንን ይዘው የማንነታችን አካል ይሆናሉ።",
@@ -871,8 +871,8 @@
         "narration_sync": {
           "offset_seconds": 0.5,
           "expected_duration_seconds": 6.3,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 8.81,
+          "audio_path": "assets/narration/shot-09.wav",
           "duck_music": true
         }
       },
@@ -912,9 +912,9 @@
     {
       "shot_id": "shot-10",
       "order": 10,
-      "duration_seconds": 7.5,
-      "start_seconds": 67.5,
-      "end_seconds": 75.0,
+      "duration_seconds": 8.5,
+      "start_seconds": 71.5,
+      "end_seconds": 80.0,
       "story_beat": "Final message",
       "narrative": {
         "narration_text": "ቅርስ ማለት በአካል የሚታይ ሐውልት ብቻ አይደለም። ከቦታዎች ጋር የምናያይዘው ትዝታና ስሜትም ጭምር ነው።",
@@ -956,8 +956,8 @@
         "narration_sync": {
           "offset_seconds": 0.6,
           "expected_duration_seconds": 5.8,
-          "actual_duration_seconds": null,
-          "audio_path": null,
+          "actual_duration_seconds": 7.23,
+          "audio_path": "assets/narration/shot-10.wav",
           "duck_music": true
         }
       },
@@ -995,5 +995,5 @@
       }
     }
   ],
-  "notes": "Step 5 initial 10-shot storyboard (75.0s across 10 shots, plus 3.0s AI disclosure end card = 78.0s final runtime). Amharic narration awaits author review in docs/NARRATION_REVIEW.md prior to TTS generation and radio cut assembly."
+  "notes": "Step 5 storyboard updated from initial 75.0s word-count estimates to 80.0s voice-timed continuous slots matching measured Gemini TTS (gemini-3.8-flash-tts, Charon) Amharic durations (+ 3.0s AI disclosure end card = 83.0s final runtime). Awaiting Audience Test 1 feedback on outputs/radio_cut/."
 }

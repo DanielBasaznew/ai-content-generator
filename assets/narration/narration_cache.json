@@ -1,0 +1,82 @@
+{
+  "shot-01": {
+    "input_hash": "01fcda31f31116bd50619295819439fd0d4ba0fbf7079902773fad7d4a2c931a",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 5.24,
+    "output_path": "assets/narration/shot-01.wav"
+  },
+  "shot-02": {
+    "input_hash": "e3d7d03f5b31cc487a1017892142b1ad10c1e9f65ea53b26e81a3d213e102438",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 6.13,
+    "output_path": "assets/narration/shot-02.wav"
+  },
+  "shot-03": {
+    "input_hash": "affd4ad97af7fe0c71edb8595e645b100d23eba4a390f95bc09b1110ced8f791",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 7.53,
+    "output_path": "assets/narration/shot-03.wav"
+  },
+  "shot-04": {
+    "input_hash": "bc78ef1e46c4a1a1ee6413abf82405d36abfd343cf911013a1b73f0c3c037c56",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 6.34,
+    "output_path": "assets/narration/shot-04.wav"
+  },
+  "shot-05": {
+    "input_hash": "abf4d41f3b2e0c816c21c9c275f5aae0fdf9516ce45647917d2ec5622ff7346e",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 4.5,
+    "output_path": "assets/narration/shot-05.wav"
+  },
+  "shot-06": {
+    "input_hash": "893b489d8bed2211d577c273b5130e4fd037f199457730091760fcad3b46da3c",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 6.17,
+    "output_path": "assets/narration/shot-06.wav"
+  },
+  "shot-07": {
+    "input_hash": "4c3ff2daabe2f16e7f82630473332674d08eba1d801b5d748a041fc9f291451f",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 6.12,
+    "output_path": "assets/narration/shot-07.wav"
+  },
+  "shot-08": {
+    "input_hash": "1198b04fcb69f4be664adc16b76ceea4953e374fc9e3d45dc49bb71e3b2eab49",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 7.78,
+    "output_path": "assets/narration/shot-08.wav"
+  },
+  "shot-09": {
+    "input_hash": "3f327350e0d8f2d71e2a060f2d13577c9bb31d159badca6d8723b357973c003c",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 8.81,
+    "output_path": "assets/narration/shot-09.wav"
+  },
+  "shot-10": {
+    "input_hash": "f97f30c14f9fc82bf497315d91e90e14a6977149bb71c21e41f5df8125596214",
+    "model": "gemini-3.8-flash-tts",
+    "voice_name": "Charon",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 7.23,
+    "output_path": "assets/narration/shot-10.wav"
+  }
+}

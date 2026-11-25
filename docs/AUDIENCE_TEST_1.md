@@ -20,14 +20,15 @@ Testing the story at the audio-only stage helps catch:
 ## 2. Instructions for Running the Session
 
 ### Pre-Test Checklist
-- Confirm the audio-only radio cut exists in `outputs/radio_cut/` and plays cleanly end to end with natural pauses (and zero music).
+- **Playable Radio Cut Ready:** `outputs/radio_cut/radio_cut_v1.mp3` (and `outputs/radio_cut/radio_cut_v1.wav`) — `80.0s`, audio-only with silence pauses and zero music.
+- **English Subtitle Read-Along (if needed):** `outputs/radio_cut/radio_cut_v1_en.srt` or the table in `docs/NARRATION_REVIEW.md`.
 - Recruit **at least 3 real listeners** matching your target audiences (Harar/Ethiopia, people with similar childhood-place memories, or international listeners via English subtitles).
-- Testing may be done **in person** or **over Slack/chat** by sharing the audio file privately.
+- Testing may be done **in person** or **over Slack/chat** by sharing `outputs/radio_cut/radio_cut_v1.mp3` privately.
 
 ### Session Protocol
-1. **Before playing:** Explain briefly that this is an early **audio-only** draft (no visuals or music yet) of a 60–90 second personal short film about a childhood memory in Harar, Ethiopia.
-2. **During playback:** Play the radio cut from `outputs/radio_cut/` straight through once without interrupting or explaining extra context. (For non-Amharic-speaking test listeners, share the English subtitles from `docs/NARRATION_REVIEW.md` while listening.)
-3. **After playback:** Ask the 6 questions below and write down each participant's real answers faithfully. Never fabricate or alter responses, and avoid defending or over-explaining the story during feedback—note where confusion or emotion naturally occurred.
+1. **Before playing:** Explain briefly that this is an early **audio-only** draft (no visuals or music yet) of an 80-second personal short film about a childhood memory in Harar, Ethiopia.
+2. **During playback:** Play `outputs/radio_cut/radio_cut_v1.mp3` (or `.wav`) straight through once without interrupting or explaining extra context. (For non-Amharic-speaking test listeners, share `outputs/radio_cut/radio_cut_v1_en.srt` or the English subtitles in `docs/NARRATION_REVIEW.md` while listening.)
+3. **After playback:** Ask the 6 questions below and write down each participant's real answers faithfully. Never fabricate or alter responses, and avoid defending or over-explaining the story during feedback—note where confusion or emotion naturally occurred. Ask Amharic listeners specifically whether any proper nouns (`ሐረር`, `የራስ መኮንን ሐውልት`, `አዳማ`, `አዲስ አበባ`) or words (such as Shot 9 `ብመለስም`) sounded unclear.
 4. **After all 3+ sessions:** Summarize patterns in Section 4, apply approved revisions to `storyboard.json` and `docs/NARRATION_REVIEW.md`, and record the user test summary in `DESIGN.md` (Section 9 -> Test 1).
 
 ---

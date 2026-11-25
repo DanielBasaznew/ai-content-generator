@@ -1,0 +1,9 @@
+{
+  "wav_path": "outputs/radio_cut/radio_cut_v1.wav",
+  "mp3_path": "outputs/radio_cut/radio_cut_v1.mp3",
+  "srt_path": "outputs/radio_cut/radio_cut_v1_en.srt",
+  "duration_seconds": 80.0,
+  "target_duration_seconds": 80.0,
+  "shot_count": 10,
+  "music_included": false
+}

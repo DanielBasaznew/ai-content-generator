@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Step 6 character and visual-style reference specifications complete (`docs/CHARACTER_REFERENCE_SHEET.md`, `docs/VISUAL_STYLE_SHEET.md`) using Option A (fictional, generic AI character). Amharic narration review (`docs/NARRATION_REVIEW.md`), TTS audio/radio cut (`outputs/radio_cut/`), reference image generation (pending Cloudflare credentials), and Steps 7–15 are not yet executed.
+> **Project Status:** Step 5 narration & radio cut complete (`outputs/radio_cut/radio_cut_v1.mp3`, `80.0s` Amharic narration via `gemini-3.8-flash-tts`) — ready for real **Audience Test 1** (`docs/AUDIENCE_TEST_1.md`). Step 6 reference image generation and Steps 7–15 are paused until Audience Test 1 feedback is collected and applied.
 
 ---
 
@@ -66,30 +66,34 @@ day-2-ai-content-generation/
 ├── FAILURES.md                 # Template for logging errors, failed outputs, and fixes
 ├── COSTS.md                    # Template for tracking model usage, latency, GPU time, and costs
 ├── ETHICS.md                   # Ethical guidelines, AI disclosure policy, licensing, and consent log
-├── runs.jsonl                  # Append-only log for future model API/inference calls (currently empty)
-├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (75.0s; Amharic + EN subtitles)
+├── runs.jsonl                  # Append-only log of model API calls (12 logged calls from Step 5 TTS/QA)
+├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (80.0s voice-timed; Amharic + EN)
 ├── docs/
 │   ├── AUDIENCE_TEST_1.md          # Participant feedback template for the first radio cut test
 │   ├── CHARACTER_REFERENCE_SHEET.md # Option A fictional character design & continuity guide (Step 6)
 │   ├── CREDENTIALS_AND_SETUP.md    # Guide to obtaining & storing API keys and setting up local tools
-│   ├── NARRATION_REVIEW.md         # Amharic narration & English subtitle script for author review
+│   ├── NARRATION_REVIEW.md         # Approved Amharic narration & English subtitle script
 │   ├── STORYBOARD_STRUCTURE.md     # Detailed guide to the storyboard schema and fields
 │   └── VISUAL_STYLE_SHEET.md       # Color palette, lighting, aspect-ratio framing & style sheet (Step 6)
 ├── schema/
 │   └── storyboard.schema.json  # Strict JSON Schema (Draft 2020-12) for validating storyboard.json
-├── pipeline/                   # Future modular pipeline stage scripts (empty)
+├── pipeline/
+│   ├── common.py               # Validation, .env loading, SHA-256 caching, runs.jsonl & WAV helpers
+│   ├── narration.py            # Cached Gemini TTS Amharic narration generator with 3 RPM pacing
+│   └── radio_cut.py            # Audio-only radio cut assembler & English SRT exporter
 ├── assets/
-│   ├── references/             # Character and style reference assets (empty)
+│   ├── references/             # Character and style reference assets (pending post-test generation)
 │   ├── keyframes/              # Generated still keyframes per shot (empty)
-│   ├── narration/              # Generated narration audio clips (empty)
+│   ├── narration/              # 10 generated Amharic WAV clips + narration_cache.json
 │   └── music/                  # Generated score candidates and chosen track (empty)
 ├── outputs/
 │   ├── horizontal/             # Final 16:9 exports and intermediate cuts (empty)
-│   ├── radio_cut/              # Future audio-only prototype cut after narration approval (empty)
+│   ├── radio_cut/              # Audio-only Step 5 radio cut (radio_cut_v1.mp3, .wav, _en.srt)
 │   └── vertical/               # Final 9:16 exports and intermediate cuts (empty)
 └── tests/
-    ├── test_storyboard_contract.py # Validates on-disk storyboard.json schema, timeline, and review sync
-    └── test_storyboard_schema.py   # Lightweight schema validation check using an in-memory fixture
+    ├── test_step5_narration_and_radio_cut.py # Pipeline unit tests & Step 5 audio/radio-cut verification
+    ├── test_storyboard_contract.py           # Validates on-disk storyboard.json schema, timeline, and review sync
+    └── test_storyboard_schema.py             # Lightweight schema validation check using an in-memory fixture
 ```
 
 ---
