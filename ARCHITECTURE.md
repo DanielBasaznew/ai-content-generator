@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** Step 5 narration (`pipeline/narration.py`) and radio-cut assembly (`pipeline/radio_cut.py`) are implemented and verified (`80.0s` Amharic radio cut ready for Audience Test 1). Step 6 reference specs are complete (`docs/CHARACTER_REFERENCE_SHEET.md`, `docs/VISUAL_STYLE_SHEET.md`); remaining visual/music/video/assembly pipeline stages are not yet implemented.
+> **Status:** Step 5 narration (`pipeline/narration.py`) and radio-cut assembly (`pipeline/radio_cut.py`) are implemented and verified (`80.0s` Amharic radio cut ready for Audience Test 1). Step 6 reference specs (`docs/CHARACTER_REFERENCE_SHEET.md`, `docs/VISUAL_STYLE_SHEET.md`) and generator code (`pipeline/references.py`) are ready and gated on Audience Test 1 completion; remaining keyframe/video/music/assembly stages are not yet implemented.
 
 ---
 

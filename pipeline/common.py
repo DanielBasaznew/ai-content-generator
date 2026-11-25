@@ -40,9 +40,13 @@ def load_storyboard(path: Path = STORYBOARD_PATH) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def save_storyboard(storyboard: dict[str, Any], path: Path = STORYBOARD_PATH) -> None:
+def save_storyboard(
+    storyboard: dict[str, Any],
+    path: Path = STORYBOARD_PATH,
+    schema_path: Path = SCHEMA_PATH,
+) -> None:
     """Validate and persist updated storyboard JSON cleanly."""
-    validate_storyboard(storyboard)
+    validate_storyboard(storyboard, schema_path=schema_path)
     path.write_text(
         json.dumps(storyboard, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",

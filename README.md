@@ -80,9 +80,10 @@ day-2-ai-content-generation/
 ├── pipeline/
 │   ├── common.py               # Validation, .env loading, SHA-256 caching, runs.jsonl & WAV helpers
 │   ├── narration.py            # Cached Gemini TTS Amharic narration generator with 3 RPM pacing
-│   └── radio_cut.py            # Audio-only radio cut assembler & English SRT exporter
+│   ├── radio_cut.py            # Audio-only radio cut assembler & English SRT exporter
+│   └── references.py           # Cloudflare FLUX Step 6 reference generator (gated on Audience Test 1)
 ├── assets/
-│   ├── references/             # Character and style reference assets (pending post-test generation)
+│   ├── references/             # Character and style reference assets (empty until Audience Test 1 passes)
 │   ├── keyframes/              # Generated still keyframes per shot (empty)
 │   ├── narration/              # 10 generated Amharic WAV clips + narration_cache.json
 │   └── music/                  # Generated score candidates and chosen track (empty)
@@ -92,6 +93,7 @@ day-2-ai-content-generation/
 │   └── vertical/               # Final 9:16 exports and intermediate cuts (empty)
 └── tests/
     ├── test_step5_narration_and_radio_cut.py # Pipeline unit tests & Step 5 audio/radio-cut verification
+    ├── test_step6_references.py              # Unit tests for Step 6 reference specs, gate & mocked FLUX
     ├── test_storyboard_contract.py           # Validates on-disk storyboard.json schema, timeline, and review sync
     └── test_storyboard_schema.py             # Lightweight schema validation check using an in-memory fixture
 ```
@@ -102,7 +104,7 @@ day-2-ai-content-generation/
 
 The project uses a strict **JSON Schema Draft 2020-12** contract located at [schema/storyboard.schema.json](schema/storyboard.schema.json) and documented in [docs/STORYBOARD_STRUCTURE.md](docs/STORYBOARD_STRUCTURE.md).
 
-- **Storyboard contract:** [storyboard.json](storyboard.json) defines the 10-shot, 75.0-second narrative arc, Amharic narration (`am`), English subtitles (`en`), visual prompts, and AI provenance records shared by both `9:16` and `16:9` outputs.
+- **Storyboard contract:** [storyboard.json](storyboard.json) defines the 10-shot, 80.0-second voice-timed narrative arc, Amharic narration (`am`), English subtitles (`en`), visual prompts, and AI provenance records shared by both `9:16` and `16:9` outputs.
 - **Validation:** [schema/storyboard.schema.json](schema/storyboard.schema.json) validates structure, types, enums, and disclosure rules, supplemented by Python checks for total duration (`60–90` s), unique `shot_id`s, contiguous `order` (`1–10`), and continuous timeline intervals.
 - **Review status:** The Amharic script in [docs/NARRATION_REVIEW.md](docs/NARRATION_REVIEW.md) is awaiting user review and approval before generating TTS audio or assembling the first radio cut for [docs/AUDIENCE_TEST_1.md](docs/AUDIENCE_TEST_1.md).
 

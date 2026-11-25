@@ -47,17 +47,21 @@ Used in **Shots 5, 6, 7, 8, and 9** so the audience experiences a clear, natural
 
 ---
 
-## 4. Reference-Sheet Generation Prompts (Ready for Step 6 Image Generation When Credentials Are Set)
+## 4. Reference-Sheet Generation Prompts & Model Config (Ready After Audience Test 1)
 
-> **Status:** Prompts below are prepared as specifications only. **Do not generate** until Cloudflare Workers AI credentials are configured and approved.
+> **Status:** Cloudflare credentials and model schema are verified and `pipeline/references.py` is implemented and unit-tested, **but live image generation is intentionally held** until Step 5 Audience Test 1 (`docs/AUDIENCE_TEST_1.md`) is completed with 3 real listeners.
+
+- **Primary Model:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0, Cloudflare Workers AI `multipart/form-data`, fixed 4-step inference)
+- **Fallback Model:** `@cf/black-forest-labs/flux-1-schnell` (Apache 2.0, `application/json`, `steps=4`)
+- **Planned Dimensions & Seeds:** `1344x768` (landscape 3-view turnaround), deterministic seeds `1001` (`ref_narrator_child`) and `1002` (`ref_narrator_adult`)
 
 ### A. `ref_narrator_child` Sheet Prompt (for FLUX)
-- **Prompt:** `Character reference sheet on a neutral warm cream studio background, fictional generic Ethiopian child age 8, warm medium-brown skin, short cropped tightly curled black hair, soft natural child facial proportions, gentle warm dark eyes, wearing a clean off-white collared cotton shirt under a muted warm ochre-mustard knit vest, dark brown casual shorts, natural subtle expression, three clean views side by side (front view, three-quarter view, back view), warm soft daylight, 35mm film grain texture, realistic documentary illustration-photography blend, no text, no labels, no borders.`
-- **Negative Prompt:** `text, labels, watermark, split border, exaggerated cartoon eyes, distorted hands, extra fingers, adult proportions, shiny plastic skin, archival sepia frame.`
+- **Prompt:** `Character reference sheet on a neutral warm cream studio background, fictional generic Ethiopian child age 8, warm medium-brown skin, short cropped tightly curled black hair, soft natural child facial proportions, gentle warm dark eyes, wearing a clean off-white collared cotton shirt under a muted warm ochre-mustard knit vest, dark brown casual shorts, natural subtle expression, three clean views side by side (front view, three-quarter view, back view), warm soft daylight, 35mm film grain texture, realistic documentary film look, no text, no labels, no borders, no archival sepia frame.`
+- **Negative Prompt (guideline / avoided in positive phrasing):** `text, labels, watermark, split border, exaggerated cartoon eyes, distorted hands, extra fingers, adult proportions, shiny plastic skin, archival sepia frame.`
 
 ### B. `ref_narrator_adult` Sheet Prompt (for FLUX)
-- **Prompt:** `Character reference sheet on a neutral warm gray studio background, fictional generic Ethiopian young adult age 22, warm medium-brown skin, short cropped tightly curled black hair, calm reflective dark eyes, subtle natural features consistent with an older version of the child character, wearing an off-white cotton shirt under a muted slate-navy overshirt and dark casual trousers, three clean views side by side (front view, three-quarter view, back view), soft overcast daylight, 35mm film grain texture, realistic cinematic look, no text, no labels.`
-- **Negative Prompt:** `text, labels, watermark, cartoon style, melodramatic expression, distorted hands, futuristic clothing, harsh flash lighting.`
+- **Prompt:** `Character reference sheet on a neutral warm gray studio background, fictional generic Ethiopian young adult age 22, warm medium-brown skin, short cropped tightly curled black hair, calm reflective dark eyes, subtle natural features consistent with an older version of the child character, wearing an off-white cotton shirt under a muted slate-navy overshirt and dark casual trousers, three clean views side by side (front view, three-quarter view, back view), soft overcast daylight, 35mm film grain texture, realistic cinematic film look, no text, no labels, no borders.`
+- **Negative Prompt (guideline / avoided in positive phrasing):** `text, labels, watermark, cartoon style, melodramatic expression, distorted hands, futuristic clothing, harsh flash lighting.`
 
 ---
 
