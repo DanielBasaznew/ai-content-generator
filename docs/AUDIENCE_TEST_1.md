@@ -19,10 +19,16 @@ Testing the story at the audio-only stage helps catch:
 
 ## 2. Instructions for Running the Session
 
+### Pre-Test Checklist
+- Confirm the audio-only radio cut exists in `outputs/radio_cut/` and plays cleanly end to end with natural pauses (and zero music).
+- Recruit **at least 3 real listeners** matching your target audiences (Harar/Ethiopia, people with similar childhood-place memories, or international listeners via English subtitles).
+- Testing may be done **in person** or **over Slack/chat** by sharing the audio file privately.
+
+### Session Protocol
 1. **Before playing:** Explain briefly that this is an early **audio-only** draft (no visuals or music yet) of a 60–90 second personal short film about a childhood memory in Harar, Ethiopia.
-2. **During playback:** Play the radio cut from `outputs/radio_cut/` straight through once without interrupting or explaining extra context. (For non-Amharic-speaking test listeners, allow them to read the English subtitles from `docs/NARRATION_REVIEW.md` while listening.)
-3. **After playback:** Ask the 6 questions below and write down the participant's real answers faithfully. Do not defend or over-explain the story during feedback—note where confusion or emotion naturally occurred.
-4. **After all 3 sessions:** Summarize patterns and record what changes will be made to `storyboard.json` and `DESIGN.md`.
+2. **During playback:** Play the radio cut from `outputs/radio_cut/` straight through once without interrupting or explaining extra context. (For non-Amharic-speaking test listeners, share the English subtitles from `docs/NARRATION_REVIEW.md` while listening.)
+3. **After playback:** Ask the 6 questions below and write down each participant's real answers faithfully. Never fabricate or alter responses, and avoid defending or over-explaining the story during feedback—note where confusion or emotion naturally occurred.
+4. **After all 3+ sessions:** Summarize patterns in Section 4, apply approved revisions to `storyboard.json` and `docs/NARRATION_REVIEW.md`, and record the user test summary in `DESIGN.md` (Section 9 -> Test 1).
 
 ---
 

@@ -65,18 +65,21 @@
 
 ---
 
-## 4. Audio Generation & First Radio Cut Instructions (Pending Approval)
+## 4. Audio Generation & First Radio Cut Readiness (Pending Your Approval)
 
-Narration audio and the first radio cut in `outputs/radio_cut/` **cannot be generated yet** because:
+Narration audio and the first radio cut in `outputs/radio_cut/` **have not been generated yet** because:
 
-1. **Script approval required:** You have not yet reviewed and approved this Amharic script.
-2. **Gemini API credentials missing:** Neither `GEMINI_API_KEY` nor `GOOGLE_API_KEY` is currently set in the environment (and `.env` does not exist).
-3. **FFmpeg missing locally:** `ffmpeg` is not currently installed on `PATH` to concatenate the 10 narration clips with silence pauses into `outputs/radio_cut/`.
+1. **Script approval required (only remaining gate):** You have not yet reviewed and approved this Amharic script or answered the 6 flagged questions above.
+2. **TTS voice confirmation:** Confirm whether you want a calm, warm male or female synthetic Gemini TTS voice (no real-person voice cloning) recorded in `ETHICS.md` and `storyboard.json`.
 
-### Planned Next Steps Once You Approve This Script
-1. Confirm any Amharic wording edits above and sync them into `storyboard.json`.
-2. Set `GEMINI_API_KEY` (via local `.env`, untracked by Git) and install `ffmpeg` (e.g., via `winget` with your approval).
-3. Generate one Amharic TTS clip per shot (`assets/narration/shot-01.wav` .. `shot-10.wav`) using Gemini TTS, logging each API call to `runs.jsonl`.
+**Verified Prerequisites Already Ready:**
+- `GEMINI_API_KEY` is configured in `.env` and verified (`models/gemini-3.8-flash-tts` and `models/gemini-3.8-flash-lite-tts` are available).
+- `imageio-ffmpeg` (`0.8.1`, bundling `ffmpeg 9.0.2-essentials_build`) is installed locally to concatenate the 10 clips with inter-shot pauses into `outputs/radio_cut/`.
+
+### Planned Next Steps Immediately After You Approve This Script
+1. Apply any Amharic wording edits you request to `docs/NARRATION_REVIEW.md` and `storyboard.json`.
+2. Implement the Gemini TTS narration and radio-cut assembly script(s) under `pipeline/`.
+3. Generate one Amharic TTS clip per shot (`assets/narration/shot-01.wav` .. `shot-10.wav`) using `gemini-3.8-flash-tts`, logging every API call, latency, and cost note to `runs.jsonl`, `COSTS.md`, and `EXPERIMENTS.md` (and any pronunciation/API issues to `FAILURES.md`).
 4. Verify Amharic pronunciation (especially proper nouns: `ሐረር`, `ራስ መኮንን`, `አዳማ`, `አዲስ አበባ`) and measured clip durations.
-5. Assemble the audio-only radio cut into `outputs/radio_cut/` with the planned inter-shot pauses (using silence only—no generated music yet, as original music belongs to Step 9).
-6. Conduct the first audience test using `docs/AUDIENCE_TEST_1.md`.
+5. Assemble the audio-only radio cut into `outputs/radio_cut/` with natural inter-shot silence pauses (no generated music yet, as original music belongs to Step 9).
+6. Run Audience Test 1 using `docs/AUDIENCE_TEST_1.md` with at least 3 real intended-audience listeners.

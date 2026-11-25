@@ -88,7 +88,8 @@ day-2-ai-content-generation/
 │   ├── radio_cut/              # Future audio-only prototype cut after narration approval (empty)
 │   └── vertical/               # Final 9:16 exports and intermediate cuts (empty)
 └── tests/
-    └── test_storyboard_schema.py # Lightweight schema validation check using an in-memory fixture
+    ├── test_storyboard_contract.py # Validates on-disk storyboard.json schema, timeline, and review sync
+    └── test_storyboard_schema.py   # Lightweight schema validation check using an in-memory fixture
 ```
 
 ---
