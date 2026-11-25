@@ -3,16 +3,17 @@
 from __future__ import annotations
 
 import argparse
-import base64
-import io
 import re
 import time
 from pathlib import Path
 from typing import Any
 
-import requests
-from PIL import Image
-
+from pipeline.cloudflare_flux import (
+    DEFAULT_FLUX_MODEL,
+    FALLBACK_FLUX_MODEL,
+    call_cloudflare_flux,
+    save_validated_png,
+)
 from pipeline.common import (
     ROOT_DIR,
     append_run_log,
@@ -25,8 +26,6 @@ from pipeline.common import (
     validate_storyboard,
 )
 
-DEFAULT_FLUX_MODEL = "@cf/black-forest-labs/flux-2-klein-4b"
-FALLBACK_FLUX_MODEL = "@cf/black-forest-labs/flux-1-schnell"
 REFERENCES_DIR = ROOT_DIR / "assets" / "references"
 CACHE_PATH = REFERENCES_DIR / "references_cache.json"
 AUDIENCE_TEST_1_PATH = ROOT_DIR / "docs" / "AUDIENCE_TEST_1.md"
@@ -129,76 +128,6 @@ def check_audience_test_1_complete(
     return len(reasons) == 0, reasons
 
 
-def _call_cloudflare_flux(
-    account_id: str,
-    api_token: str,
-    model: str,
-    prompt: str,
-    width: int,
-    height: int,
-    seed: int,
-    timeout: int = 120,
-) -> bytes:
-    """Invoke Cloudflare Workers AI FLUX endpoint with bounded retries and return PNG/image bytes."""
-    url = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run/{model}"
-    headers = {"Authorization": f"Bearer {api_token}"}
-
-    max_attempts = 4
-    last_exc: Exception | None = None
-    for attempt in range(1, max_attempts + 1):
-        try:
-            if "flux-2" in model:
-                # Cloudflare flux-2-klein-4b requires multipart/form-data (fixed 4 steps)
-                files = {
-                    "prompt": (None, prompt),
-                    "width": (None, str(width)),
-                    "height": (None, str(height)),
-                    "seed": (None, str(seed)),
-                }
-                resp = requests.post(url, headers=headers, files=files, timeout=timeout)
-            else:
-                # Fallback @cf/black-forest-labs/flux-1-schnell expects application/json
-                payload = {"prompt": prompt, "steps": 4}
-                resp = requests.post(url, headers=headers, json=payload, timeout=timeout)
-
-            if resp.status_code in (429, 500, 502, 503, 504):
-                raise RuntimeError(f"Transient HTTP {resp.status_code} from Cloudflare Workers AI")
-            resp.raise_for_status()
-
-            content_type = resp.headers.get("content-type", "")
-            if "application/json" in content_type or resp.text.lstrip().startswith("{"):
-                data = resp.json()
-                if not data.get("success", True):
-                    raise RuntimeError(f"Cloudflare API error: {data.get('errors')}")
-                b64_img = (data.get("result") or {}).get("image")
-                if not b64_img:
-                    raise RuntimeError("Cloudflare response missing result.image base64 field.")
-                return base64.b64decode(b64_img)
-            return resp.content
-        except Exception as exc:
-            last_exc = exc
-            msg = str(exc)
-            retryable = any(code in msg for code in ("429", "500", "502", "503", "504", "Timeout", "Connection"))
-            if not retryable or attempt == max_attempts:
-                raise
-            time.sleep(min(30.0, 2.0 * (2 ** (attempt - 1))))
-
-    assert last_exc is not None
-    raise last_exc
-
-
-def _save_validated_png(raw_bytes: bytes, out_path: Path) -> tuple[int, int]:
-    """Decode generated image bytes, validate non-empty dimensions, and save as PNG."""
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    with Image.open(io.BytesIO(raw_bytes)) as img:
-        rgb = img.convert("RGB")
-        width, height = rgb.size
-        if width < 256 or height < 256:
-            raise ValueError(f"Generated reference image too small: {width}x{height}")
-        rgb.save(out_path, format="PNG")
-    return width, height
-
-
 def generate_references(
     ref_ids: list[str] | None = None,
     model: str = DEFAULT_FLUX_MODEL,
@@ -272,7 +201,7 @@ def generate_references(
 
             t0 = time.perf_counter()
             try:
-                raw_bytes = _call_cloudflare_flux(
+                raw_bytes = call_cloudflare_flux(
                     account_id=account_id,
                     api_token=api_token,
                     model=model,
@@ -282,7 +211,7 @@ def generate_references(
                     seed=spec["seed"],
                 )
                 latency_s = round(time.perf_counter() - t0, 3)
-                actual_w, actual_h = _save_validated_png(raw_bytes, out_path)
+                actual_w, actual_h = save_validated_png(raw_bytes, out_path)
                 ref["file_path"] = rel_out
 
                 cache[rid] = {

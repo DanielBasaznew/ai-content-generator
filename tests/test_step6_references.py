@@ -111,7 +111,7 @@ class TestStep6ReferencesPrep(unittest.TestCase):
 
             with (
                 patch("pipeline.references.load_secret", side_effect=lambda k: f"mock_{k}"),
-                patch("pipeline.references.requests.post", return_value=mock_resp) as mock_post,
+                patch("pipeline.cloudflare_flux.requests.post", return_value=mock_resp) as mock_post,
             ):
                 res1 = generate_references(root_dir=tmp_root)
                 self.assertEqual(res1, {"model": DEFAULT_FLUX_MODEL, "generated": 4, "cached": 0})

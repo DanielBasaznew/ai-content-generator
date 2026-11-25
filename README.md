@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Steps 5 and 6 are complete — `80.0s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.mp3`), Audience Test 1 summary (`DESIGN.md` / `docs/AUDIENCE_TEST_1.md`), and all 4 verified Option A FLUX reference PNGs (`assets/references/`) are in place. Ready for **Step 7** (keyframe generation); Steps 7–15 have not started.
+> **Project Status:** Steps 5, 6, and 7 are complete — `80.0s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.mp3`), Audience Test 1 summary (`DESIGN.md` / `docs/AUDIENCE_TEST_1.md`), 4 Option A FLUX reference PNGs (`assets/references/`), and all 10 inspected `1024x1024` shot keyframes (`assets/keyframes/shot-01.png`–`shot-10.png`) are in place. Ready for **Step 8** (moving-shot video generation); Steps 8–15 have not started.
 
 ---
 
@@ -66,7 +66,7 @@ day-2-ai-content-generation/
 ├── FAILURES.md                 # Template for logging errors, failed outputs, and fixes
 ├── COSTS.md                    # Template for tracking model usage, latency, GPU time, and costs
 ├── ETHICS.md                   # Ethical guidelines, AI disclosure policy, licensing, and consent log
-├── runs.jsonl                  # Append-only log of model API calls (16 logged calls across Step 5 & Step 6)
+├── runs.jsonl                  # Append-only log of model API calls (27 logged calls across Steps 5–7)
 ├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (80.0s voice-timed; Amharic + EN)
 ├── docs/
 │   ├── AUDIENCE_TEST_1.md          # Participant feedback log & synthesis for Audience Test 1
@@ -79,12 +79,14 @@ day-2-ai-content-generation/
 │   └── storyboard.schema.json  # Strict JSON Schema (Draft 2020-12) for validating storyboard.json
 ├── pipeline/
 │   ├── common.py               # Validation, .env loading, SHA-256 caching, runs.jsonl & WAV helpers
+│   ├── cloudflare_flux.py      # Shared Cloudflare FLUX API client, <=512px reference prep, PNG check
 │   ├── narration.py            # Cached Gemini TTS Amharic narration generator with 3 RPM pacing
 │   ├── radio_cut.py            # Audio-only radio cut assembler & English SRT exporter
-│   └── references.py           # Cloudflare FLUX Step 6 reference generator
+│   ├── references.py           # Cloudflare FLUX Step 6 reference generator
+│   └── keyframes.py            # Cloudflare FLUX Step 7 keyframe generator with cropped-panel inputs
 ├── assets/
 │   ├── references/             # 4 generated Option A FLUX reference PNGs + references_cache.json
-│   ├── keyframes/              # Generated still keyframes per shot (empty — Step 7)
+│   ├── keyframes/              # 10 generated 1024x1024 FLUX keyframes (shot-01..10.png) + keyframes_cache.json
 │   ├── narration/              # 10 generated Amharic WAV clips + narration_cache.json
 │   └── music/                  # Generated score candidates and chosen track (empty — Step 9)
 ├── outputs/
@@ -94,6 +96,7 @@ day-2-ai-content-generation/
 └── tests/
     ├── test_step5_narration_and_radio_cut.py # Pipeline unit tests & Step 5 audio/radio-cut verification
     ├── test_step6_references.py              # Unit tests for Step 6 reference specs, gate & mocked FLUX
+    ├── test_step7_keyframes.py               # Unit tests for Step 7 prompts, <=512px crop prep, mocked FLUX & outputs
     ├── test_storyboard_contract.py           # Validates on-disk storyboard.json schema, timeline, and review sync
     └── test_storyboard_schema.py             # Lightweight schema validation check using an in-memory fixture
 ```

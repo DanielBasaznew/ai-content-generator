@@ -169,9 +169,20 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2001,
+          "keyframe_path": "assets/keyframes/shot-01.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_harar_streets"
+              ],
+              "character_panel": null
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -254,9 +265,20 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2002,
+          "keyframe_path": "assets/keyframes/shot-02.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_harar_roundabout_memory"
+              ],
+              "character_panel": null
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -324,8 +346,8 @@
         "emotional_purpose": "Connect the sight of the monument directly to childhood excitement, love, and special parent-child outings."
       },
       "visual": {
-        "main_prompt": "Warm over-the-shoulder perspective from behind a fictional 8-year-old Ethiopian child with short cropped black curly hair wearing an off-white collared cotton shirt under a muted warm ochre-mustard knit vest and dark brown shorts, walking hand-in-hand with non-identifiable parents seen from behind along the sunlit tree-lined Harar roundabout, the generalized monument pedestal silhouette softly visible ahead in golden sunlight, joyful anticipation.",
-        "negative_prompt": "identifiable real family faces, harsh artificial lighting, modern signage, text, distorted hands",
+        "main_prompt": "Warm medium-wide over-the-shoulder view from behind a fictional 8-year-old Ethiopian child (short cropped black curly hair, off-white collared cotton shirt under a muted warm ochre-mustard knit vest, dark brown shorts) walking cheerfully along a sunlit tree-lined Harar sidewalk beside mother and father seen cleanly from behind on either side (natural two-legged stride), with the sunlit circular roundabout and distant soft stone pedestal landmark clearly visible ahead in warm golden morning light.",
+        "negative_prompt": "identifiable real family faces, harsh artificial lighting, modern signage, text, distorted hands, extra limbs",
         "visual_style": "Warm cinematic 35mm film memory aesthetic with bright hopeful warmth",
         "subject_description": "Fictional generic Ethiopian child (age 7-9, short cropped curly black hair, cream collared shirt, ochre knit vest) seen from behind walking hand-in-hand with generalized non-identifiable parents",
         "environment_description": "Tree-lined Harar sidewalk curving past the sunlit roundabout plaza",
@@ -340,9 +362,21 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2013,
+          "keyframe_path": "assets/keyframes/shot-03.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_narrator_child",
+                "ref_harar_roundabout_memory"
+              ],
+              "character_panel": "back"
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -425,9 +459,20 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2004,
+          "keyframe_path": "assets/keyframes/shot-04.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_narrator_child"
+              ],
+              "character_panel": "three_quarter"
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -510,9 +555,20 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2005,
+          "keyframe_path": "assets/keyframes/shot-05.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_narrator_adult"
+              ],
+              "character_panel": "back"
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -595,9 +651,20 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2006,
+          "keyframe_path": "assets/keyframes/shot-06.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_narrator_adult"
+              ],
+              "character_panel": "three_quarter"
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -681,9 +748,21 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2007,
+          "keyframe_path": "assets/keyframes/shot-07.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_narrator_adult",
+                "ref_harar_streets"
+              ],
+              "character_panel": "back"
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -766,9 +845,20 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2008,
+          "keyframe_path": "assets/keyframes/shot-08.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_narrator_adult"
+              ],
+              "character_panel": "back"
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -795,10 +885,10 @@
         "transition_out": "dissolve",
         "transition_duration_seconds": 0.8,
         "composition": {
-          "shared_subject_position": "empty roundabout center centered with viewer silhouette just below",
+          "shared_subject_position": "empty roundabout center on right-center paired with standing adult silhouette in left-center foreground",
           "vertical_9_16": {
-            "crop_anchor": "center",
-            "safe_area_notes": "Show open empty roundabout center in the middle third and quiet observer above subtitles.",
+            "crop_anchor": "left",
+            "safe_area_notes": "Left-anchored 9:16 crop (x:0..576 on 1024x1024 keyframe) keeps both the standing adult back silhouette and the open empty roundabout center cleanly framed above subtitles.",
             "subtitle_placement": "bottom_safe"
           },
           "horizontal_16_9": {
@@ -852,9 +942,21 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2009,
+          "keyframe_path": "assets/keyframes/shot-09.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_narrator_adult",
+                "ref_harar_streets"
+              ],
+              "character_panel": "three_quarter"
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",
@@ -937,9 +1039,20 @@
       "generation": {
         "image": {
           "provider": "cloudflare_workers_ai",
-          "model": null,
-          "seed": null,
-          "keyframe_path": null
+          "model": "@cf/black-forest-labs/flux-2-klein-4b",
+          "seed": 2010,
+          "keyframe_path": "assets/keyframes/shot-10.png",
+          "parameters": {
+            "width": 1024,
+            "height": 1024,
+            "steps": 4,
+            "extra_params": {
+              "reference_ids": [
+                "ref_harar_streets"
+              ],
+              "character_panel": null
+            }
+          }
         },
         "video": {
           "mode": "image_to_video",

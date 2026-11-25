@@ -17,6 +17,7 @@ This file records controlled experiments across script, keyframe, video, narrati
 | `EXP-002` | 2026-11-25 | narration | Rate-limit pacing (`21s`) + `retryDelay` + SHA-256 caching | `gemini-3.8-flash-tts` (`Charon`) | Pass (`generated: 2, cached: 8`; clean rerun `0/10`) |
 | `EXP-003` | 2026-11-25 | narration / radio_cut | Adjust shot slots to measured TTS audio lengths (`75s -> 80s`) | `gemini-3.8-flash-tts` + `ffmpeg 9.0.2` | Pass (`0` slot overflows; continuous `80.000s` radio cut) |
 | `EXP-004` | 2026-11-25 | references | Generate Step 6 Option A character & environment sheets via FLUX | `@cf/black-forest-labs/flux-2-klein-4b` | Pass (`4/4` PNGs; `0/4` cached rerun; continuity verified) |
+| `EXP-005` | 2026-11-25 | keyframes | Cropped-panel FLUX.2 klein reference conditioning across all 10 shots | `@cf/black-forest-labs/flux-2-klein-4b` | Pass (`10/10` clean keyframes; `11` calls / `139.330s`; `0/10` cached rerun) |
 
 ---
 
@@ -79,3 +80,16 @@ Copy this template for each new experiment:
 - **Seed:** `1001`, `1002`, `1003`, `1004`
 - **Result:** Pass — All 4 PNGs generated (`13.572s`, `24.148s`, `13.833s`, `13.378s`; total `64.931s`), validated with Pillow, and verified via SHA-256 cache (`generated: 0, cached: 4` on rerun).
 - **Observations:** Visual inspection confirmed: (1) `ref_narrator_child.png` cleanly renders front, 3/4, and back views of an ~8-year-old Ethiopian child in cream collared shirt + ochre-mustard vest; (2) `ref_narrator_adult.png` maintains skin, cropped curly hair, and facial continuity into an ~22-year-old in slate-navy overshirt over off-white shirt; (3) `ref_harar_roundabout_memory.png` keeps a generalized non-specific pedestal silhouette centered inside the `9:16` crop band without invented plaques or archival borders; and (4) `ref_harar_streets.png` maintains warm Harar textures with zero garbled signage.
+
+### EXP-005: Step 7 Multi-Reference Keyframes via Cropped Single-Panel Conditioning
+- **Date:** 2026-11-25
+- **Stage:** keyframes
+- **Objective / Hypothesis:** Generate 10 cohesive `1024x1024` keyframes (`assets/keyframes/shot-01.png`–`shot-10.png`) conditioned on Step 6 reference sheets via `@cf/black-forest-labs/flux-2-klein-4b`, cropping the `1344x768` 3-view character turnaround sheets into single `<=512px` target panels (`back` for Shots `3, 5, 7, 8`; `three_quarter` for Shots `4, 6, 9`) so the diffusion model renders single coherent film frames rather than multi-panel collages while preserving Option A identity and dual `9:16` / `16:9` framing.
+- **Model:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0 via Cloudflare Workers AI)
+- **Parameters:** `multipart/form-data`, `steps=4`, `width=1024`, `height=1024`, `input_image_0..3` downscaled `<=512px`, deterministic seeds `2001–2010` (`shot-03` regenerated with seed `2013`).
+- **Seed:** `2001`, `2002`, `2013` (replaced `2003`), `2004`, `2005`, `2006`, `2007`, `2008`, `2009`, `2010`
+- **Result:** Pass — All 10 `1024x1024` keyframes generated (`11` total Cloudflare API calls including `shot-03` seed `2003` pilot replacement; `139.330s` total API latency; `$0.00` spend) and verified via SHA-256 cache (`generated: 0, cached: 10` on rerun).
+- **Observations:**
+  - Cropping `ref_narrator_child.png` and `ref_narrator_adult.png` to single panels eliminated turnaround-collage layouts completely and preserved exact outfit, hair, and skin continuity from childhood (`shot-03`, `shot-04`) to young adulthood (`shot-05`–`shot-09`).
+  - Visual audit of all 10 frames caught one limb-duplication artifact on `shot-03` pilot seed `2003` (`FAIL-002`, resolved via seed `2013` + simplified prompt) and showed that `shot-08` placed the adult silhouette slightly left of center (`crop_anchor` updated to `"left"` in `storyboard.json` for `9:16` framing).
+  - `shot-10` (`input_image_0 = ref_harar_streets.png`) anchored strongly to the opening Harar residential lane in warm sunset amber, forming a calm visual bookend with `shot-01` rather than an elevated rooftop panorama; hands (`shot-04`), study setting (`shot-06`), empty plaza (`shot-08`), and heritage reflections (`shot-02`, `shot-09`) rendered cleanly without political symbols or archival photo frames.

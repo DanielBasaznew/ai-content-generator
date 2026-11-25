@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** Step 5 narration/radio cut and Step 6 character & visual-style reference PNGs (`pipeline/references.py`, `assets/references/*.png`) are complete and verified. Remaining keyframe (Step 7), video (Step 8), music (Step 9), and FFmpeg assembly stages are not yet implemented.
+> **Status:** Step 5 narration/radio cut, Step 6 reference PNGs (`pipeline/references.py`, `assets/references/*.png`), and Step 7 shot keyframes (`pipeline/keyframes.py`, `pipeline/cloudflare_flux.py`, `assets/keyframes/shot-01.png`–`shot-10.png`) are complete and verified. Remaining video (Step 8), music (Step 9), and FFmpeg assembly stages are not yet implemented.
 
 ---
 

@@ -13,7 +13,7 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 | Provider / Tool | Planned Usage | Current Access / Quota Status | Notes |
 | --- | --- | --- | --- |
 | Google AI Studio / Gemini API | Script, storyboard, translation, TTS narration | Verified; **3 RPM** free-tier limit observed on `gemini-3.8-flash-tts` | `11` TTS calls (`10` OK + `1` 429) + `1` QA call (`gemini-2.5-flash`) logged in `runs.jsonl`; `$0.00` spend |
-| Cloudflare Workers AI | FLUX image generation (references & keyframes) | Verified; `4` Step 6 reference PNGs generated via `@cf/black-forest-labs/flux-2-klein-4b` | `multipart/form-data` schema confirmed; `64.931s` total across 4 images; `$0.00` spend |
+| Cloudflare Workers AI | FLUX image generation (references & keyframes) | Verified; `4` Step 6 reference PNGs + `11` Step 7 keyframe calls via `@cf/black-forest-labs/flux-2-klein-4b` | `multipart/form-data` schema confirmed; `204.261s` total across `15` calls (`64.931s` Step 6 + `139.330s` Step 7); `$0.00` spend |
 | Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | API auth verified (`Kaggle CLI 2.2.5`, dataset query OK) | Credentials configured in `.env`; confirm phone verification in Kaggle UI for weekly GPU quota |
 | FFmpeg (Local) | Video & audio assembly, exports | Installed via `imageio-ffmpeg 0.8.1` (`ffmpeg 9.0.2`) | Available to Python scripts; optional global `ffmpeg`/`ffprobe` on PATH can be added via `winget` |
 
@@ -27,11 +27,11 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 | Narration | Gemini TTS (`gemini-3.8-flash-tts`) | 11 | 67.424 | 0 | $0.00 | Pending (2,071 tokens; 10 clips = 64.85s audio) |
 | Narration QA Check | Gemini (`gemini-2.5-flash`) | 1 | 7.261 | 0 | $0.00 | Pending (3,276 tokens) |
 | References (Step 6) | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 4 | 64.931 | 0 | $0.00 | Pending (4 PNGs: two 1344x768, two 1024x1024) |
-| Keyframes | FLUX (Cloudflare Workers AI) | 0 | 0 | 0 | $0.00 | Pending |
+| Keyframes | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 11 | 139.330 | 0 | $0.00 | Pending (`10` active `1024x1024` PNGs + `1` replaced pilot `shot-03`) |
 | Moving Shots | Wan 2.2 (Kaggle) | 0 | 0 | 0 | $0.00 | Pending |
 | Original Music | ACE-Step (Kaggle) | 0 | 0 | 0 | $0.00 | Pending |
 | Assembly & Export (Radio Cut) | FFmpeg 9.0.2 (`imageio-ffmpeg`) | 1 | < 1.0 | 0 | $0.00 | $0.00 |
-| **Total** | — | **17** | **139.616+ (API)** | **0** | **$0.00** | **Pending** |
+| **Total** | — | **28** | **278.946+ (API)** | **0** | **$0.00** | **Pending** |
 
 ---
 
@@ -54,6 +54,15 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 - **Actual Spend:** `$0.00` (Cloudflare Workers AI free daily allowance)
 - **Estimated List-Price Equivalent:** Pending
 - **Quota Observations:** All 4 images completed without throttling; re-run verified 4/4 SHA-256 cache hits.
+
+### Session 2026-11-25 — Step 7 Storyboard Keyframe Generation
+- **Calls Executed:** 11 Cloudflare Workers AI image calls (`shot-01` through `shot-10`, plus initial pilot `shot-03` seed `2003` replaced by seed `2013`)
+- **Models Used:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0, `multipart/form-data`, fixed 4 steps, `1024x1024`)
+- **Measured Total Latency:** `139.330s` (`11.201s`, `13.036s`, `12.466s` pilot + `16.453s` regen, `14.093s`, `12.118s`, `8.606s`, `10.432s`, `14.011s`, `17.652s`, `9.262s`)
+- **GPU Time Consumed:** `0` local/Kaggle minutes (hosted Cloudflare Workers AI)
+- **Actual Spend:** `$0.00` (Cloudflare Workers AI free daily allowance)
+- **Estimated List-Price Equivalent:** Pending
+- **Quota Observations:** All 11 calls succeeded with zero throttling; re-run of `python -m pipeline.keyframes` verified 10/10 SHA-256 cache hits (`generated: 0, cached: 10`).
 
 ```markdown
 ### Session YYYY-MM-DD — <Stage or Milestone>
