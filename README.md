@@ -140,3 +140,17 @@ This single command:
 4. Generates and burns in aspect-safe English subtitles (`.ass`).
 5. Appends the AI disclosure end card (`3.0s`).
 6. Outputs the final deliverables to `outputs/vertical/` and `outputs/horizontal/`.
+
+---
+
+## Interactive Web Showcase & Reviewer Portal
+
+A full Next.js interactive web showcase application is included in [`web/`](web/), featuring an interactive cinema theater with dual-aspect toggles, the **"Memory vs. Reality"** heritage slider, an interactive 10-shot storyboard matrix, a visual architecture flowchart, and an assessment evidence map.
+
+```bash
+# Launch the interactive showcase locally:
+cd web
+npm run dev
+# Open http://localhost:3000 in your browser
+```
+*(Pre-configured for 1-click deployment on Vercel via [`vercel.json`](vercel.json)).*
