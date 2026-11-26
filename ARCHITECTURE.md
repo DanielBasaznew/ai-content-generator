@@ -9,33 +9,43 @@
 ```mermaid
 flowchart TD
     Contract["📄 storyboard.json<br/>(Draft 2020-12 JSON Schema)"]
+    Cache{"SHA-256 Cache Check<br/>(Input Hash Matching)"}
 
-    subgraph Generation_Stages ["Isolated Generation Stages (assets/)"]
-        TTS["🎙️ Stage 1: Narration<br/>Gemini 2.5 Flash TTS<br/>am-ET-Standard-B (Amharic)"]
+    Contract --> Cache
+
+    subgraph Generation_Stages ["Generation Stages (on Cache Miss)"]
+        TTS["🎙️ Stage 1: Narration<br/>Gemini 2.5 Flash TTS<br/>am-ET-Standard-B"]
         IMG["🖼️ Stage 2: Keyframes<br/>FLUX.1-schnell<br/>1024x1024 Photorealistic"]
         VID["🎬 Stage 3: Video Motion<br/>Wan 2.2 I2V (Kaggle T4)<br/>720p 73 frames (3.04s)"]
-        MUS["🎵 Stage 4: Soundtrack<br/>ACE-Step 1.5<br/>Krar/Masenqo Pentatonic (72 BPM)"]
+        MUS["🎵 Stage 4: Soundtrack<br/>ACE-Step 1.5<br/>Krar/Masenqo (72 BPM)"]
     end
 
-    Contract -->|"Amharic Script"| TTS
-    Contract -->|"Shot Prompts & Seeds"| IMG
-    IMG -->|"Source Keyframes"| VID
-    Contract -->|"Mood & Timing"| MUS
+    Cache -->|"❌ Cache Miss (New/Edited Prompt)"| TTS
+    Cache -->|"❌ Cache Miss"| IMG
+    IMG --> VID
+    Cache -->|"❌ Cache Miss"| MUS
+
+    subgraph Asset_Store ["Verified Asset Storage (assets/)"]
+        AssetsDisk[("💾 Disk Assets Cache<br/>WAV, PNG, MP4")]
+    end
+
+    Cache ==>|"✅ Cache Hit (Unchanged Shots)"| AssetsDisk
+    TTS --> AssetsDisk
+    VID --> AssetsDisk
+    MUS --> AssetsDisk
 
     subgraph Assembly_Engine ["Deterministic Assembly Engine (pipeline/assembly.py)"]
-        Cache{"SHA-256 Cache<br/>Hash Check"}
-        Slowdown["Temporal Extension<br/>1.35x slow + zoompan tail push"]
+        Slowdown["Video Processing<br/>1.35x slow + zoompan tail push"]
         Duck["Sidechain Ducking<br/>-12 dB music attenuation"]
-        EBU["Audio Mastering<br/>EBU R128 (-14 LUFS, -1.0 dBTP)"]
-        Aspect["Dual-Aspect Engine<br/>16:9 Wings vs. 9:16 Crop"]
+        EBU["Audio Mastering<br/>EBU R128 (-14.0 LUFS, -1.0 dBTP)"]
         Subs["ASS Subtitle Engine<br/>_balance_two_lines()"]
+        Aspect["Dual-Aspect Rendering<br/>16:9 Wings vs. 9:16 Crop"]
     end
 
-    TTS --> Cache
-    VID --> Cache
-    MUS --> Cache
-    Cache -->|"Cache Miss"| Slowdown
-    Cache -->|"Cache Miss"| Duck
+    AssetsDisk -->|"Video Clips"| Slowdown
+    AssetsDisk -->|"Narration + Music"| Duck
+    Contract -->|"English Subtitle Text"| Subs
+    
     Duck --> EBU
     Slowdown --> Aspect
     EBU --> Aspect
