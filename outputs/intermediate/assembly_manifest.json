@@ -1,0 +1,47 @@
+{
+  "assembled": 0,
+  "cached": 2,
+  "vertical_output": "outputs/vertical/harar_monument_vertical_9x16.mp4",
+  "horizontal_output": "outputs/horizontal/harar_monument_horizontal_16x9.mp4",
+  "audio_mix": {
+    "mix_wav": "C:\\Users\\DELL\\Documents\\10 Academy\\Week 0\\day-2-ai-content-generation\\outputs\\intermediate\\master_mix_83s.wav"
+  },
+  "exports": {
+    "vertical": {
+      "path": "C:\\Users\\DELL\\Documents\\10 Academy\\Week 0\\day-2-ai-content-generation\\outputs\\vertical\\harar_monument_vertical_9x16.mp4",
+      "duration_seconds": 83.0,
+      "size_bytes": 47362361,
+      "video_codec": "h264",
+      "width": 1080,
+      "height": 1920,
+      "fps": "24/1",
+      "pix_fmt": "yuv420p",
+      "audio_codec": "aac",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "integrated_lufs": -14.0,
+      "loudness_range_lu": 5.8,
+      "true_peak_dbtp": -1.0,
+      "mean_volume_db": -18.0,
+      "render_seconds": 205.56
+    },
+    "horizontal": {
+      "path": "C:\\Users\\DELL\\Documents\\10 Academy\\Week 0\\day-2-ai-content-generation\\outputs\\horizontal\\harar_monument_horizontal_16x9.mp4",
+      "duration_seconds": 83.0,
+      "size_bytes": 39120492,
+      "video_codec": "h264",
+      "width": 1920,
+      "height": 1080,
+      "fps": "24/1",
+      "pix_fmt": "yuv420p",
+      "audio_codec": "aac",
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "integrated_lufs": -14.0,
+      "loudness_range_lu": 5.8,
+      "true_peak_dbtp": -1.0,
+      "mean_volume_db": -18.0,
+      "render_seconds": 254.32
+    }
+  }
+}
