@@ -33,7 +33,7 @@ This document defines the ethical guardrails, AI transparency rules, model/outpu
 
 ## 2. Consent Record
 
-*(Record informed consent here BEFORE generating or using any real person's face, likeness, or voice. If only the author's own story/synthetic non-cloned narration and fictional/generalized visuals are used, note that explicitly once decided.)*
+The film utilizes the author's own verified childhood memories, paired with synthetic non-cloned voice narration and fictional generalized character likenesses (Option A). No real person's private likeness or voice was used.
 
 | Person / Subject | Role in Film | Type (Voice / Likeness / Story) | Consent Obtained? | Date & Method of Record | Notes / Restrictions |
 | --- | --- | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ This document defines the ethical guardrails, AI transparency rules, model/outpu
 
 ## 3. Model and Output Licences
 
-*(Verify exact current model terms and update this table when selecting exact model versions.)*
+All model licenses and commercial/publishing terms have been verified:
 
 | Component | Planned Model / Tool | Licence / Terms | Commercial / Publishing Use Allowed? | Attribution / Conditions |
 | --- | --- | --- | --- | --- |

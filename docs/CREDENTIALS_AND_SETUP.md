@@ -54,7 +54,7 @@ Used for running **Wan 2.2** (video) and **ACE-Step** (original music) on Kaggle
 3. Under **Settings -> API**, click **Create New Token** (downloads `kaggle.json` containing `"username"` and `"key"`).
 4. Choose **either** storage method:
    - **Option 1 (Recommended in this project):** Put `KAGGLE_USERNAME=...` and `KAGGLE_KEY=...` into your local `.env` file.
-   - **Option 2 (Standard Kaggle CLI path):** Place `kaggle.json` at `C:\Users\<YourWindowsUsername>\.kaggle\kaggle.json` (outside this Git repository).
+   - **Option 2 (Standard Kaggle CLI path):** Place `kaggle.json` at `%USERPROFILE%\.kaggle\kaggle.json` (outside this Git repository).
    - *(Note: You can also run Wan 2.2 and ACE-Step directly inside Kaggle's browser notebook UI without using the CLI.)*
 
 ---

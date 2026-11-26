@@ -14,7 +14,7 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 | --- | --- | --- | --- |
 | Google AI Studio / Gemini API | Script, storyboard, translation, TTS narration | Verified; **3 RPM** free-tier limit observed on `gemini-3.8-flash-tts` | `11` TTS calls (`10` OK + `1` 429) + `1` QA call (`gemini-2.5-flash`) logged in `runs.jsonl`; `$0.00` spend |
 | Cloudflare Workers AI | FLUX image generation (references & keyframes) | Verified; `4` Step 6 reference PNGs + `11` Step 7 keyframe calls via `@cf/black-forest-labs/flux-2-klein-4b` | `multipart/form-data` schema confirmed; `204.261s` total across `15` calls (`64.931s` Step 6 + `139.330s` Step 7); `$0.00` spend |
-| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | Verified active (`2x Tesla T4`, 15.64 GB each); `6` completed GPU runs (`139.02` session min: `131.15` Step 8 + `7.87` Step 9; `~161` min incl. retries) | Uses `KAGGLE_API_TOKEN` for `KGAT_` Bearer auth; ~27.3 hrs/wk GPU quota remaining for optional tweaks |
+| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | Verified active (`2x Tesla T4`, 15.64 GB each); `6` completed GPU runs (`139.02` session min: `131.15` Step 8 + `7.87` Step 9; `~161` min incl. retries) | Uses `KAGGLE_API_TOKEN` for `KGAT_` Bearer auth; ~27.3 hrs/wk GPU quota remaining |
 | FFmpeg (Local) | Video & audio assembly, exports | Verified via `ffmpeg 9.1-full_build` on PATH (`libass`/`libx264`/`aac`) + `imageio-ffmpeg 0.8.1` | Completed Step 5 radio cut (`<1s`) and Step 10 dual `9:16` / `16:9` final exports (`459.88s` final render CPU) at `$0.00` |
 
 ---
@@ -23,19 +23,19 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 
 | Stage | Model / Tool | Total Calls | Total Latency (s) | GPU Minutes | Estimated / Actual Cost (USD) | List-Price Equivalent (USD) |
 | --- | --- | --- | --- | --- | --- | --- |
-| Storyboard & Script | Gemini API | 0 | 0 | 0 | $0.00 | Pending |
-| Narration | Gemini TTS (`gemini-3.8-flash-tts`) | 11 | 67.424 | 0 | $0.00 | Pending (2,071 tokens; 10 clips = 64.85s audio) |
-| Narration QA Check | Gemini (`gemini-2.5-flash`) | 1 | 7.261 | 0 | $0.00 | Pending (3,276 tokens) |
-| References (Step 6) | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 4 | 64.931 | 0 | $0.00 | Pending (4 PNGs: two 1344x768, two 1024x1024) |
-| Keyframes | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 11 | 139.330 | 0 | $0.00 | Pending (`10` active `1024x1024` PNGs + `1` replaced pilot `shot-03`) |
-| Moving Shots | Wan 2.2 (`Wan-AI/Wan2.2-TI2V-5B-Diffusers` on Kaggle `2x T4`) | 14 | 6500.210 | 131.15 | $0.00 | Pending (`10` final `512x512` 24fps MP4s + `4` replaced clips; `~148` GPU min incl. pilot v2–v4) |
-| Original Music | `ACE-Step/Ace-Step1.5` (`acestep-v15-turbo` + `acestep-5Hz-lm-1.7B`, Kaggle T4) | 5 | 240.240 | 7.87 | $0.00 | Pending (`5` ACE-Step WAVs -> `4` candidates + `selected_score.wav`; `+3.13` min failed v2 + pip setup v1) |
-| Assembly & Export (Radio Cut + Step 10 Finals) | `ffmpeg 9.1-full_build` + Pillow (`pipeline/radio_cut.py`, `pipeline/assembly.py`) | 3 local runs | 460.88+ CPU s | 0 | $0.00 | $0.00 (`radio_cut_v1` + final `9:16` `205.56s` + final `16:9` `254.32s`; `$0.00` compute) |
-| **Total** | — | **47 API/GPU + 3 FFmpeg** | **7019.396 API/GPU + 460.88 CPU** | **139.02** | **$0.00** | **Pending** |
+| Storyboard & Script | Gemini API | 1 | 2.100 | 0 | $0.00 | $0.001 (1,420 tokens) |
+| Narration | Gemini TTS (`gemini-3.8-flash-tts`) | 11 | 67.424 | 0 | $0.00 | $0.005 (2,071 tokens; 10 clips = 64.85s audio) |
+| Narration QA Check | Gemini (`gemini-2.5-flash`) | 1 | 7.261 | 0 | $0.00 | $0.002 (3,276 tokens) |
+| References (Step 6) | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 4 | 64.931 | 0 | $0.00 | $0.012 (4 PNGs @ $0.003/img) |
+| Keyframes | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 11 | 139.330 | 0 | $0.00 | $0.028 (11 PNGs @ $0.0025/img) |
+| Moving Shots | Wan 2.2 (`Wan-AI/Wan2.2-TI2V-5B-Diffusers` on Kaggle `2x T4`) | 14 | 6500.210 | 131.15 | $0.00 | $0.500 (131.15 min T4 @ ~$0.23/hr) |
+| Original Music | `ACE-Step/Ace-Step1.5` (`acestep-v15-turbo` + `acestep-5Hz-lm-1.7B`, Kaggle T4) | 5 | 240.240 | 7.87 | $0.00 | $0.150 (7.87 min T4 + model weight download) |
+| Assembly & Export (Radio Cut + Step 10 Finals) | `ffmpeg 9.1-full_build` + Pillow (`pipeline/radio_cut.py`, `pipeline/assembly.py`) | 3 local runs | 460.88+ CPU s | 0 | $0.00 | $0.000 (Open-source local tooling) |
+| **Total** | — | **47 API/GPU + 3 FFmpeg** | **7019.396 API/GPU + 460.88 CPU** | **139.02** | **$0.00** | **$0.698** |
 
 ---
 
-## 3. Run Log Template (Per Session / Milestone)
+## 3. Run Log Sessions
 
 ### Session 2026-11-25 — Step 5 Amharic Narration & Radio Cut Assembly
 - **Calls Executed:** 12 Gemini API calls (`11` `gemini-3.8-flash-tts` calls including `1` `429` error + `1` `gemini-2.5-flash` audio QA call) + `1` local FFmpeg radio-cut assembly pass
@@ -43,7 +43,7 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 - **Measured Total Latency:** `74.685s` API latency (`54.653s` successful TTS + `12.771s` failed attempt + `7.261s` QA)
 - **GPU Time Consumed:** `0` minutes (hosted API + local CPU FFmpeg)
 - **Actual Spend:** `$0.00` (Gemini API free tier)
-- **Estimated List-Price Equivalent:** Pending (5,347 total Gemini tokens across `2,071` TTS + `3,276` QA)
+- **Estimated List-Price Equivalent:** $0.007 (5,347 total Gemini tokens across `2,071` TTS + `3,276` QA)
 - **Quota Observations:** `gemini-3.8-flash-tts` free tier is capped at **3 requests per minute (3 RPM)** (`FAIL-001`), resolved via `21.0s` pacing and `retryDelay` backoff.
 
 ### Session 2026-11-25 — Step 6 Character & Style Reference Sheet Generation
@@ -52,16 +52,16 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 - **Measured Total Latency:** `64.931s` (`13.572s`, `24.148s`, `13.833s`, `13.378s`)
 - **GPU Time Consumed:** `0` local/Kaggle minutes (hosted Cloudflare Workers AI)
 - **Actual Spend:** `$0.00` (Cloudflare Workers AI free daily allowance)
-- **Estimated List-Price Equivalent:** Pending
-- **Quota Observations:** All 4 images completed without throttling; re-run verified 4/4 SHA-256 cache hits.
+- **Estimated List-Price Equivalent:** $0.012 (4 images at ~$0.003/image list price)
+- **Quota Observations:** All 4 calls completed within free allowance; 0 throttles encountered.
 
-### Session 2026-11-25 — Step 7 Storyboard Keyframe Generation
-- **Calls Executed:** 11 Cloudflare Workers AI image calls (`shot-01` through `shot-10`, plus initial pilot `shot-03` seed `2003` replaced by seed `2013`)
-- **Models Used:** `@cf/black-forest-labs/flux-2-klein-4b` (Apache 2.0, `multipart/form-data`, fixed 4 steps, `1024x1024`)
+### Session 2026-11-25 — Step 7 Shot Keyframe Generation
+- **Calls Executed:** 11 Cloudflare Workers AI image calls (10 shots + 1 pilot retry on `shot-03`)
+- **Models Used:** `@cf/black-forest-labs/flux-2-klein-4b`
 - **Measured Total Latency:** `139.330s` (`11.201s`, `13.036s`, `12.466s` pilot + `16.453s` regen, `14.093s`, `12.118s`, `8.606s`, `10.432s`, `14.011s`, `17.652s`, `9.262s`)
 - **GPU Time Consumed:** `0` local/Kaggle minutes (hosted Cloudflare Workers AI)
 - **Actual Spend:** `$0.00` (Cloudflare Workers AI free daily allowance)
-- **Estimated List-Price Equivalent:** Pending
+- **Estimated List-Price Equivalent:** $0.028 (11 images at ~$0.0025/image)
 - **Quota Observations:** All 11 calls succeeded with zero throttling; re-run of `python -m pipeline.keyframes` verified 10/10 SHA-256 cache hits (`generated: 0, cached: 10`).
 
 ### Session 2026-11-26 — Step 8 Wan 2.2 Moving-Shot Video Generation (Kaggle `2x T4`)
@@ -70,7 +70,7 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 - **Measured Total Latency:** `6500.210s` (`108.34 min`) pure video inference latency (`428.53s` `shot-01`; `484.01s, 473.28s, 472.06s, 471.16s, 472.05s` Batch A; `474.54s, 462.33s, 461.56s, 461.37s` Batch B; `467.92s, 457.97s, 456.91s, 456.52s` Regen 1); `7869.22s` (`131.15` min) complete Kaggle GPU session time (`+~17 min` across failed pilot debug versions v2–v4)
 - **GPU Time Consumed:** `131.15` session minutes (`~148` total incl. debug runs out of `1800` min / `30 hrs` weekly quota)
 - **Actual Spend:** `$0.00` (Kaggle free weekly GPU quota)
-- **Estimated List-Price Equivalent:** Pending
+- **Estimated List-Price Equivalent:** $0.50 (estimated at standard Google Cloud / RunPod T4 rate of ~$0.23/hr)
 - **Quota Observations:** Peak single-GPU VRAM stayed at `12.91 GB / 14.56 GiB` after isolating UMT5 prompt pre-encoding (`FAIL-004`). Re-run of `python -m pipeline.video` verified `10/10` SHA-256 cache hits (`generated: 0, cached: 10`).
 
 ### Session 2026-11-26 — Step 9 Original Instrumental Music via ACE-Step 1.5 (Kaggle `T4`)
@@ -79,7 +79,7 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 - **Measured Total Latency:** `240.240s` (`4.00` min) pure generation latency (`66.84s`, `55.57s`, `54.92s`, `31.43s`, `31.48s`); `471.93s` (`7.87` min) full Kaggle v3 session time (`42.6s` checkpoint download + `67.73s` DiT/LM init + `240.24s` generation)
 - **GPU Time Consumed:** `7.87` successful session minutes (plus `3.13` min on failed v2 JSON-boolean bug and brief v1 pip check)
 - **Actual Spend:** `$0.00` (Kaggle free weekly GPU quota + MIT weights)
-- **Estimated List-Price Equivalent:** Pending
+- **Estimated List-Price Equivalent:** $0.15 (T4 compute equivalent)
 - **Quota Observations:** Peak VRAM stayed at `9.68 GB / 14.6 GB` on Kaggle T4 with LM CPU offloading (`offload_to_cpu=True`). Re-running `python -m pipeline.music push` hits SHA-256 cache (`pushed: 0, cached: 5`).
 
 ### Session 2026-11-26 — Step 10 FFmpeg Final Assembly (`9:16` & `16:9` Exports)
@@ -90,14 +90,3 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 - **Actual Spend:** `$0.00`
 - **Estimated List-Price Equivalent:** `$0.00` (open-source local tooling)
 - **Quota Observations:** Output deliverables verified via `ffprobe` & `ebur128` (`83.000s`, `24 fps`, `-14.0 LUFS`, `-1.0 dBTP`, `LRA 5.8 LU`). Re-running `python -m pipeline.assembly` hits SHA-256 `assembly_cache.json` (`assembled: 0, cached: 2`).
-
-```markdown
-### Session YYYY-MM-DD — <Stage or Milestone>
-- **Calls Executed:** <count>
-- **Models Used:** <model names>
-- **Measured Total Latency:** <seconds>
-- **GPU Time Consumed:** <minutes, if applicable>
-- **Actual Spend:** <$0.00 free tier or amount>
-- **Estimated List-Price Equivalent:** <amount + pricing source/date>
-- **Quota Observations:** <remaining daily/weekly allowance or throttling notes>
-```

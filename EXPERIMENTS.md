@@ -55,7 +55,7 @@ Copy this template for each new experiment:
 - **Parameters:** `voice_name="Charon"`, `language_code="am"`, `response_modalities=["AUDIO"]`, no English prompt prefix; output PCM converted to 24 kHz 16-bit mono WAV.
 - **Seed:** N/A (TTS)
 - **Result:** Pass — `assets/narration/shot-01.wav` (`5.240s`, latency `4.486s`, `166` tokens, peak `28087/32767`, RMS `4735.5`). Multimodal QA check via `gemini-2.5-flash` transcribed the Amharic accurately and confirmed a calm, reflective, moderate-speed tone with zero mispronounced words.
-- **Observations:** Measured speech length (`5.240s`) matched our initial `5.2s` estimate almost identically; omitting an English style prefix avoided instruction leakage while `Charon` naturally delivered calm documentary pacing.
+- **Observations:** Measured speech length (`5.240s`) matched my initial `5.2s` estimate almost identically; omitting an English style prefix avoided instruction leakage while `Charon` naturally delivered calm documentary pacing.
 
 ### EXP-002: Free-Tier Rate-Limit Pacing (3 RPM) and Input-Hash Caching
 - **Date:** 2026-11-25
@@ -165,4 +165,4 @@ Copy this template for each new experiment:
 - **Seed:** N/A (deterministic)
 - **Result:** Pass — Final rebuild (`205.56s` `9:16` [`47,362,361` bytes] and `254.32s` `16:9` [`39,120,492` bytes]) verified via full playback inspection and `ffprobe`: exact `83.000s`, `24 fps`, `-14.0 LUFS`, `-1.0 dBTP`, `LRA 5.8 LU`, clean two-line subtitles, and crisp end card (`80–83s`).
 - **Observations:**
-  - Direct inspection of our initial full export caught orphaned single words in multi-clause SRT lines (`FAIL-009`) and split hyphen / dangling pipe wrapping + radial ring stepping on the `end_card_*.png` provenance line (`FAIL-010`). Polishing both with punctuation-aware chunking and explicit multi-line provenance (`48`-step gradient) fixed all issues cleanly before final verification.
+  - Direct inspection of my initial full export caught orphaned single words in multi-clause SRT lines (`FAIL-009`) and split hyphen / dangling pipe wrapping + radial ring stepping on the `end_card_*.png` provenance line (`FAIL-010`). Polishing both with punctuation-aware chunking and explicit multi-line provenance (`48`-step gradient) fixed all issues cleanly before final verification.

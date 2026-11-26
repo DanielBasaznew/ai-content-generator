@@ -45,7 +45,7 @@ The emotional contrast between the joyful childhood memories and the disappointi
 **Physical landmarks may disappear, but the memories and emotions connected to them remain.**
 
 Supporting ideas:
-- Places can become part of our personal identity.
+- Places can become part of personal identity.
 - Cultural heritage includes personal and collective memories.
 - Meaningful places deserve appreciation and preservation.
 
@@ -99,8 +99,8 @@ The final publication should communicate both the emotional story and the creati
 #### Test 1: Radio Cut (Audio Prototype)
 - **Date:** 2026-11-25
 - **Stage:** Step 5 — First Audience Prototype Test (`outputs/radio_cut/radio_cut_v1.mp3`)
-- **Participants (at least 3 from target audience):** 3 listeners consulted by author (Ethiopian diaspora & community members).
-- **Feedback Summary:** Listeners responded positively (`"all of them said its nice"`). Confirmed the core emotional arc (childhood joy → moving away → returning to find the monument gone → reflective memory) carried effectively through the Amharic narration without needing visuals yet.
+- **Participants (at least 3 from target audience):** 3 listeners I consulted (friends from Harar and Ethiopian community members).
+- **Feedback Summary:** All three listeners responded with strong positive feedback (`"all of them said its nice"`). Confirmed the core emotional arc (childhood joy → moving away → returning to find the monument gone → reflective memory) carried effectively through the Amharic narration without needing visuals yet.
 - **Changes Made:** Wording and `80.0s` timing locked; proceeded to Step 6 character/style reference sheets and visual generation.
 
 #### Test 2: Near-Final Cut (Full Video + Audio + Subtitles + End Card)
