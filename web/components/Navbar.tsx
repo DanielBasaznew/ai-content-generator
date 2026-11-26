@@ -63,11 +63,6 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
               >
                 <Icon className={`w-4 h-4 ${isActive ? "text-sky-400" : "text-slate-400"}`} />
                 <span>{item.label}</span>
-                {item.id === "memory-lens" && (
-                  <span className="ml-auto text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded-full font-semibold">
-                    New
-                  </span>
-                )}
               </button>
             );
           })}
