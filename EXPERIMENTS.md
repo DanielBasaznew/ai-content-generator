@@ -18,6 +18,8 @@ This file records controlled experiments across script, keyframe, video, narrati
 | `EXP-003` | 2026-11-25 | narration / radio_cut | Adjust shot slots to measured TTS audio lengths (`75s -> 80s`) | `gemini-3.8-flash-tts` + `ffmpeg 9.0.2` | Pass (`0` slot overflows; continuous `80.000s` radio cut) |
 | `EXP-004` | 2026-11-25 | references | Generate Step 6 Option A character & environment sheets via FLUX | `@cf/black-forest-labs/flux-2-klein-4b` | Pass (`4/4` PNGs; `0/4` cached rerun; continuity verified) |
 | `EXP-005` | 2026-11-25 | keyframes | Cropped-panel FLUX.2 klein reference conditioning across all 10 shots | `@cf/black-forest-labs/flux-2-klein-4b` | Pass (`10/10` clean keyframes; `11` calls / `139.330s`; `0/10` cached rerun) |
+| `EXP-006` | 2026-11-26 | video | Isolate UMT5 prompt encoding & `fp16` `Wan2.2-TI2V-5B` on Kaggle T4 (`shot-01`) | `Wan-AI/Wan2.2-TI2V-5B-Diffusers` | Pass (`428.53s` inf, `12.91 GB` peak VRAM, smooth motion `delta=25.81`) |
+| `EXP-007` | 2026-11-26 | video | Batch all 10 shots + visual audit & targeted regen of `shot-03/04/09/10` | `Wan-AI/Wan2.2-TI2V-5B-Diffusers` | Pass (`10/10` clean clips; `4` rejected & fixed; `0/10` cached rerun) |
 
 ---
 
@@ -93,3 +95,23 @@ Copy this template for each new experiment:
   - Cropping `ref_narrator_child.png` and `ref_narrator_adult.png` to single panels eliminated turnaround-collage layouts completely and preserved exact outfit, hair, and skin continuity from childhood (`shot-03`, `shot-04`) to young adulthood (`shot-05`–`shot-09`).
   - Visual audit of all 10 frames caught one limb-duplication artifact on `shot-03` pilot seed `2003` (`FAIL-002`, resolved via seed `2013` + simplified prompt) and showed that `shot-08` placed the adult silhouette slightly left of center (`crop_anchor` updated to `"left"` in `storyboard.json` for `9:16` framing).
   - `shot-10` (`input_image_0 = ref_harar_streets.png`) anchored strongly to the opening Harar residential lane in warm sunset amber, forming a calm visual bookend with `shot-01` rather than an elevated rooftop panorama; hands (`shot-04`), study setting (`shot-06`), empty plaza (`shot-08`), and heritage reflections (`shot-02`, `shot-09`) rendered cleanly without political symbols or archival photo frames.
+
+### EXP-006: Fitting `Wan2.2-TI2V-5B-Diffusers` on Kaggle Tesla T4 (`14.56 GiB`) via UMT5 Pre-Encoding
+- **Date:** 2026-11-26
+- **Stage:** video
+- **Objective / Hypothesis:** Avoid the `14.54 GiB` CUDA OOM caused by UMT5-XXL (`~11.4 GB`) overlapping with `AutoencoderKLWan` (`float32`) under standard `enable_model_cpu_offload()` by pre-encoding prompts on GPU into CPU tensors first, freeing `UMT5EncoderModel`, attaching a minimal `nn.Parameter` dtype stub (`_DummyTextEncoder`), and running `WanTransformer3DModel` (`float16`, `512x512` `1:1`, `73` frames @ `24 fps`, `25` steps) with VAE tiling/slicing.
+- **Model:** `Wan-AI/Wan2.2-TI2V-5B-Diffusers` (Apache 2.0) on Kaggle `Tesla T4` (`cuda:0`)
+- **Parameters:** `512x512` (`1:1` preserving Step 7 `1024x1024` master framing for both `9:16` and `16:9`), `fps=24`, `num_frames=73`, `steps=25`, `guidance_scale=5.0`, `seed=3001`, `dtype=torch.float16`, `vae_dtype=torch.float32`, `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True`.
+- **Seed:** `3001`
+- **Result:** Pass — `wan22-pilot-shot01` v5 completed in `777.67s` (`85.13s` prompt encode, `259.96s` load, `428.53s` inference), peaking cleanly at **`12.91 GB / 14.56 GiB`** VRAM with zero NaNs (`mean=0.4913`, `std=0.2475`, `start->end` pixel delta `25.812`).
+- **Observations:** Running `float16` transformer + `float32` tiled `AutoencoderKLWan` produced clean, non-flickering Harar lane dolly motion without black frames or warped brickwork while leaving `1.65 GiB` VRAM safety headroom on T4.
+
+### EXP-007: Batched Wan 2.2 Generation & Targeted Regeneration of `shot-03, 04, 09, 10`
+- **Date:** 2026-11-26
+- **Stage:** video
+- **Objective / Hypothesis:** Generate remaining Shots `02–10` across two batched Kaggle sessions (`wan22-step8-batch-a` for `02–06`, `wan22-step8-batch-b` for `07–10`), visually audit every clip, and use SHA-256 selective regeneration (`wan22-step8-regen-1`) on any rejected shot with tightened glare/anatomy prompts and updated seeds (`3013, 3014, 3019, 3020`).
+- **Model:** `Wan-AI/Wan2.2-TI2V-5B-Diffusers` (Apache 2.0 via Kaggle `2x Tesla T4`)
+- **Parameters:** `512x512` (`480p` tier), `24 fps`, `73` frames (`3.04s`), `25` steps, `guidance_scale=5.0`, motion-and-camera-only prompts (`pipeline/video.py`).
+- **Seed:** `3001`, `3002`, `3013` (replaced `3003`), `3014` (replaced `3004`), `3005`, `3006`, `3007`, `3008`, `3019` (replaced `3009`), `3020` (replaced `3010`)
+- **Result:** Pass — Batch A (`44.91m`) and Batch B (`36.57m`) produced 5 clean shots immediately (`02, 05, 06, 07, 08`); visual audit flagged `03, 04, 09, 10` (`FAIL-005`). Updating only those 4 prompts/seeds caused `push_video_batch` to skip all 6 clean cached shots (`cached: 6, pushed: 4`), and `wan22-step8-regen-1` (`36.05m`) resolved all 4 defects cleanly (`10/10` cached on rerun).
+- **Observations:** Avoiding terms like `"golden bokeh shimmering"` and `"sunset deepening"` eliminated lens-flare washout (`shot-04`), pink halo spots (`shot-09`), and red-orange sky blobs (`shot-03`, `shot-10`). Batching UMT5 prompt pre-encoding saved ~6 minutes of duplicate model setup across Shots `02–10`.

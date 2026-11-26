@@ -53,6 +53,6 @@ This document defines the ethical guardrails, AI transparency rules, model/outpu
 | --- | --- | --- | --- | --- |
 | Script & Narration | Google Gemini API (`gemini-3.8-flash-tts`, `gemini-2.5-flash`) | Google API Terms / Generative AI Prohibited Use Policy | Academic / non-commercial assignment use verified (check commercial terms before paid distribution) | Follow Google Generative AI Prohibited Use & Terms; disclose AI narration |
 | References & Keyframes | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`, fallback `flux-1-schnell`) via Cloudflare Workers AI | **Apache 2.0** (both `flux-2-klein-4b` and `flux-1-schnell`; `flux-2-klein-9b` avoided due to non-commercial licence) | Yes (Apache 2.0) + Cloudflare Workers AI terms | Preserve Apache 2.0 / Cloudflare attribution and AI disclosure; never claim archival authenticity |
-| Video Shots | Wan 2.2 (on Kaggle) | Pending verification (check exact weights/model card) | Pending verification | Verify exact Wan 2.2 variant licence |
+| Video Shots | `Wan-AI/Wan2.2-TI2V-5B-Diffusers` (Kaggle `2x T4`) | **Apache 2.0** | Yes (Apache 2.0 + Kaggle terms) | Preserve Apache 2.0 attribution and AI-reconstruction disclosure end card |
 | Original Music | ACE-Step (on Kaggle) | Pending verification (check exact release licence) | Pending verification | Verify exact ACE-Step version licence |
 | Video/Audio Assembly | FFmpeg | LGPL / GPL (local CLI tool) | Yes (output files) | Standard media export |

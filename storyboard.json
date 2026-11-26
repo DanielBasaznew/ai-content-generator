@@ -187,9 +187,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3001,
+          "clip_path": "assets/clips/shot-01.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Gentle slow forward dolly camera moving into the sunlit quiet Harar residential lane, subtle dust motes drifting softly in warm morning light rays, delicate leaf movement in gentle breeze, smooth natural continuous cinema motion.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, people suddenly appearing, camera whip, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -283,9 +299,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3002,
+          "clip_path": "assets/clips/shot-02.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Smooth slow cinematic pan right across the sunlit Harar roundabout, green shade tree leaves swaying gently in warm daylight breeze, soft golden atmospheric haze drifting smoothly, distant stone pedestal monument remaining calm and steady.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, readable text appearing, sudden zooming, camera tilt, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -381,9 +413,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3013,
+          "clip_path": "assets/clips/shot-03.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Slow steady forward camera glide from behind at walking pace, the child in the center and two parents walking calmly forward along the tree-lined sidewalk while keeping clean separation and natural two-legged stride, gentle morning foliage breeze overhead, stable lighting without flares.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, three legs, merged limbs, extra limbs, orange flare blob, popping objects, crowded passersby, turning faces toward camera, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -477,9 +525,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3014,
+          "clip_path": "assets/clips/shot-04.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Very gentle subtle forward dolly push-in, the smiling child keeps eyes clearly open and warm expression steady with soft natural breathing while holding the brown paper parcel calmly in both hands, clean balanced natural daylight without lens flare.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, lens flare, hazy washout, overexposed glow, squinting, closed distorted eyes, extra fingers, deforming parcel, fast head turn, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -573,9 +637,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3005,
+          "clip_path": "assets/clips/shot-05.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Smooth slow pan left with subtle drifting evening breeze rustling hillside grasses and fabric lightly, the young adult seen from behind pausing quietly looking toward distant Harar hills in soft late-afternoon warmth.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, car rushing across frame, rapid turning, floating artifacts, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -669,9 +749,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3006,
+          "clip_path": "assets/clips/shot-06.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Slow gentle backward dolly pull-out inside the quiet university study room, distant evening city lights twinkling softly beyond the window pane, subtle warm desk lamp glow, the seated student blinking softly and breathing calmly beside blank open notebooks.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, text appearing on paper, glowing screen distortion, flickering room walls, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -767,9 +863,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3007,
+          "clip_path": "assets/clips/shot-07.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Steady slow forward point-of-view walking dolly along the familiar Harar avenue toward the intersection ahead, the returning young adult taking calm gentle forward steps from behind, soft overcast tree foliage swaying lightly.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, stumbling gait, sudden running, crooked buildings, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -863,9 +975,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3008,
+          "clip_path": "assets/clips/shot-08.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Fixed locked-off static tripod camera with completely still framing, only soft quiet breeze gently moving distant tree leaves while the empty open roundabout center and the returning adult silhouette on the left foreground stand completely still in muted late-afternoon calm.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, camera pan, camera zoom, monument appearing, construction trucks, protesters, crowds, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -961,9 +1089,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3019,
+          "clip_path": "assets/clips/shot-09.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Very slow gentle pan left while the returning young adult maintains calm natural posture and soft eye blink beside the warm textured Harar street wall, even twilight exposure with steady background architecture without light flares.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, pink halo, bright spot artifact, lens flare, warping facial features, exaggerated expression shifts, fast head movement, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
@@ -1057,9 +1201,25 @@
         "video": {
           "mode": "image_to_video",
           "provider": "kaggle",
-          "model": null,
-          "seed": null,
-          "clip_path": null
+          "model": "Wan-AI/Wan2.2-TI2V-5B-Diffusers",
+          "seed": 3020,
+          "clip_path": "assets/clips/shot-10.mp4",
+          "parameters": {
+            "resolution": "480p",
+            "fps": 24,
+            "num_frames": 73,
+            "steps": 25,
+            "guidance_scale": 5.0,
+            "motion_prompt": "Gentle slow steady backward zoom-out down the quiet sunlit Harar lane, soft evening breeze moving green tree leaves lightly while plaster walls and warm sky hold steady tone without bright glare or glowing mist.",
+            "extra_params": {
+              "width": 512,
+              "height": 512,
+              "dtype": "float16",
+              "vae_dtype": "float32",
+              "offload_mode": "model_cpu_offload",
+              "negative_prompt": "static frozen image, sudden jump cut, erratic camera shake, warping buildings, flickering textures, distorted faces, extra limbs, three legs, extra fingers, morphing clothes, blurry, overlaid text, watermark, subtitles, orange cloud blob, red fog, glowing halo, lens flare, melting walls, abrupt darkness, rapid pan, text, watermark, subtitles, split screen, border, black-and-white archival photo frame, distorted faces, extra fingers, overly saturated neon colors, futuristic buildings, political banners, construction equipment"
+            }
+          }
         }
       },
       "audio": {
