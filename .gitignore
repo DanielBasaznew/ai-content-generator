@@ -17,3 +17,8 @@ venv/
 # OS / editor noise
 .DS_Store
 Thumbs.db
+
+# Web showcase artifacts
+web/node_modules/
+web/.next/
+web/out/
