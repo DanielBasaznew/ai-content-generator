@@ -12,7 +12,7 @@ I was born and raised in Harar, Ethiopia. About 2.5 km from my childhood home st
 
 As a child, passing the monument often meant my parents were taking me somewhere special, buying me new clothes, or taking us on a memorable family outing. Seeing it became closely tied to happiness and excitement.
 
-Later, I left Harar for university and spent approximately five years in Adama and Addis Ababa. When I returned to Harar, I discovered that the monument had been demolished. Seeing it gone brought a deep sense of sadness and disappointment—even though I was back in my hometown, Harar felt different from the place I remembered.
+Later, I left Harar for university and spent approximately five years in Adama and Addis Ababa. When I returned to Harar in 2026, I discovered that the monument had been demolished in 2020 while I was away. Seeing it gone brought a deep sense of sadness and disappointment—even though I was back in my hometown, Harar felt different from the place I remembered.
 
 **Central Message:** Heritage is not only about physical monuments; it is also about the memories and emotions people attach to places.
 

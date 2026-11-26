@@ -19,7 +19,7 @@
 
 Growing up in Harar, roughly 2.5 km from the historic walled city of Jugol, the bronze equestrian statue of Ras Makonnen stood as a vibrant landmark at the central roundabout. For me as a child, passing the monument was intrinsically linked to anticipation and happiness—accompanying my parents into town, buying new holiday clothes, or heading to community gatherings. 
 
-After leaving Harar for over five years to pursue higher education in Adama and Addis Ababa, returning home revealed a sudden void: the monument had been demolished in 2020. The pedestal was vacant, surrounded only by ordinary asphalt traffic. This absence created a profound emotional rift: while physically standing in my hometown, the Harar of my childhood lived only in memory.
+After leaving Harar for over five years to pursue higher education in Adama and Addis Ababa, returning home in 2026 revealed a sudden void: the monument had been demolished in 2020 while I was away. The pedestal was vacant, surrounded only by ordinary asphalt traffic. This absence created a profound emotional rift: while physically standing in my hometown, the Harar of my childhood lived only in memory.
 
 **Central Message:**  
 *Physical landmarks may disappear, but cultural heritage and emotional meaning endure within the memories people carry.*

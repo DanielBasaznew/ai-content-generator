@@ -19,7 +19,7 @@ export default function MemorySlider() {
         </div>
         <h1 className="text-3xl font-extrabold text-white">The Memory vs. The Reality</h1>
         <p className="text-sm text-slate-300 mt-2 max-w-2xl">
-          Explore the emotional core of the film: drag the slider to contrast the childhood memory of the Ras Makonnen bronze equestrian statue against the vacant roundabout in modern Harar following its 2020 demolition.
+          Explore the emotional core of the film: drag the slider to contrast the childhood memory of the Ras Makonnen bronze equestrian statue against the vacant roundabout discovered upon returning to Harar in 2026 (the monument having been demolished in 2020 while away).
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export default function MemorySlider() {
               className="w-full h-full object-cover"
             />
             <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-700 text-xs font-bold text-slate-200">
-              The Reality (Post-2020): Empty Roundabout (Shot 09)
+              The Reality (2026 Return): Empty Roundabout (Shot 09)
             </div>
           </div>
 

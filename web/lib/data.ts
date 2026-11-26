@@ -28,7 +28,7 @@ export const FILM_METADATA = {
   total_cost: "$0.00 (Free Tiers & Kaggle Quota)",
   target_loudness: "-14.0 LUFS (EBU R128 Compliant)",
   central_message: "Physical landmarks may disappear, but the memories and cultural heritage connected to them remain.",
-  summary: "Growing up in Harar, Ethiopia, passing the Ras Makonnen bronze equestrian statue was tied to childhood joy and family trips. Returning years later, the author finds the monument gone—demolished in 2020. This film explores memory, heritage loss, and emotional resilience.",
+  summary: "Growing up in Harar, Ethiopia, passing the Ras Makonnen bronze equestrian statue was tied to childhood joy and family trips. Returning home in 2026 after university, I found the monument gone—having been demolished in 2020 while I was away. This film explores memory, heritage loss, and emotional resilience.",
   videos: {
     vertical: "/outputs/vertical/harar_monument_vertical_9x16.mp4",
     horizontal: "/outputs/horizontal/harar_monument_horizontal_16x9.mp4"
