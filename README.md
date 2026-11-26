@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Steps 5, 6, 7, and 8 are complete — `80.0s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.mp3`), Audience Test 1 summary (`DESIGN.md` / `docs/AUDIENCE_TEST_1.md`), 4 Option A FLUX reference PNGs (`assets/references/`), 10 shot keyframes (`assets/keyframes/`), and all 10 inspected Wan 2.2 `512x512` 24fps moving video clips (`assets/clips/shot-01.mp4`–`shot-10.mp4`) are in place. Ready for **Step 9** (original music generation); Steps 9–15 have not started.
+> **Project Status:** Steps 1–14 are complete — `80.0s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.mp3`), Audience Test 1 summary (`DESIGN.md` / `docs/AUDIENCE_TEST_1.md`), 4 Option A FLUX reference PNGs (`assets/references/`), 10 shot keyframes (`assets/keyframes/`), 10 inspected Wan 2.2 moving video clips (`assets/clips/`), the selected `83.000s` instrumental ACE-Step 1.5 score (`assets/music/selected_score.wav`), both final assembled `83.000s` MP4 exports (`outputs/vertical/harar_monument_vertical_9x16.mp4` and `outputs/horizontal/harar_monument_horizontal_16x9.mp4`, `-14.0 LUFS`), Audience Test 2 (`DESIGN.md` / `docs/AUDIENCE_TEST_2.md`), and the comprehensive written report ([`REPORT.md`](REPORT.md)) are complete and verified on disk. Ready for **Step 15** (publishing, video walkthrough, and submission).
 
 ---
 
@@ -66,7 +66,7 @@ day-2-ai-content-generation/
 ├── FAILURES.md                 # Template for logging errors, failed outputs, and fixes
 ├── COSTS.md                    # Template for tracking model usage, latency, GPU time, and costs
 ├── ETHICS.md                   # Ethical guidelines, AI disclosure policy, licensing, and consent log
-├── runs.jsonl                  # Append-only log of model API calls (41 logged calls across Steps 5–8)
+├── runs.jsonl                  # Append-only log of model API calls (46 logged calls across Steps 5–9)
 ├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (80.0s voice-timed; Amharic + EN)
 ├── docs/
 │   ├── AUDIENCE_TEST_1.md          # Participant feedback log & synthesis for Audience Test 1
@@ -84,22 +84,27 @@ day-2-ai-content-generation/
 │   ├── radio_cut.py            # Audio-only radio cut assembler & English SRT exporter
 │   ├── references.py           # Cloudflare FLUX Step 6 reference generator
 │   ├── keyframes.py            # Cloudflare FLUX Step 7 keyframe generator with cropped-panel inputs
-│   └── video.py                # Kaggle Wan 2.2 TI2V-5B Step 8 batched video generator with SHA-256 caching
+│   ├── video.py                # Kaggle Wan 2.2 TI2V-5B Step 8 batched video generator with SHA-256 caching
+│   ├── music.py                # Kaggle ACE-Step 1.5 Step 9 instrumental score generator, audition & selector
+│   └── assembly.py             # FFmpeg Step 10 deterministic dual-aspect (9:16 & 16:9) final assembler
 ├── assets/
 │   ├── references/             # 4 generated Option A FLUX reference PNGs + references_cache.json
 │   ├── keyframes/              # 10 generated 1024x1024 FLUX keyframes (shot-01..10.png) + keyframes_cache.json
 │   ├── clips/                  # 10 generated 512x512 24fps Wan 2.2 MP4 clips (shot-01..10.mp4) + clips_cache.json
 │   ├── narration/              # 10 generated Amharic WAV clips + narration_cache.json
-│   └── music/                  # Generated score candidates and chosen track (empty — Step 9)
+│   └── music/                  # 4 ACE-Step candidate WAVs, ducked audition MP3s & selected_score.wav (83.0s)
 ├── outputs/
-│   ├── horizontal/             # Final 16:9 exports and intermediate cuts (empty)
+│   ├── horizontal/             # Final 16:9 deliverable (harar_monument_horizontal_16x9.mp4)
+│   ├── intermediate/           # Separated assembly intermediates (ASS subtitles, end cards, master_mix_83s.wav, cache)
 │   ├── radio_cut/              # Audio-only Step 5 radio cut (radio_cut_v1.mp3, .wav, _en.srt)
-│   └── vertical/               # Final 9:16 exports and intermediate cuts (empty)
+│   └── vertical/               # Final 9:16 deliverable (harar_monument_vertical_9x16.mp4)
 └── tests/
     ├── test_step5_narration_and_radio_cut.py # Pipeline unit tests & Step 5 audio/radio-cut verification
     ├── test_step6_references.py              # Unit tests for Step 6 reference specs, gate & mocked FLUX
     ├── test_step7_keyframes.py               # Unit tests for Step 7 prompts, <=512px crop prep, mocked FLUX & outputs
     ├── test_step8_video.py                   # Unit tests for Step 8 motion prompts, Kaggle auth/batching & MP4 verification
+    ├── test_step9_music.py                   # Unit tests for Step 9 ACE-Step specs, audition mix & 83s score verification
+    ├── test_step10_assembly.py               # Unit tests & deliverable probes for Step 10 9:16 & 16:9 exports
     ├── test_storyboard_contract.py           # Validates on-disk storyboard.json schema, timeline, and review sync
     └── test_storyboard_schema.py             # Lightweight schema validation check using an in-memory fixture
 ```
@@ -112,21 +117,26 @@ The project uses a strict **JSON Schema Draft 2020-12** contract located at [sch
 
 - **Storyboard contract:** [storyboard.json](storyboard.json) defines the 10-shot, 80.0-second voice-timed narrative arc, Amharic narration (`am`), English subtitles (`en`), visual prompts, and AI provenance records shared by both `9:16` and `16:9` outputs.
 - **Validation:** [schema/storyboard.schema.json](schema/storyboard.schema.json) validates structure, types, enums, and disclosure rules, supplemented by Python checks for total duration (`60–90` s), unique `shot_id`s, contiguous `order` (`1–10`), and continuous timeline intervals.
-- **Review status:** The Amharic script in [docs/NARRATION_REVIEW.md](docs/NARRATION_REVIEW.md) is awaiting user review and approval before generating TTS audio or assembling the first radio cut for [docs/AUDIENCE_TEST_1.md](docs/AUDIENCE_TEST_1.md).
+- **Review status:** Both Audience Test 1 (radio cut) and Audience Test 2 (near-final cut with video, score, and subtitles) were reviewed and documented in [DESIGN.md](DESIGN.md), [docs/AUDIENCE_TEST_1.md](docs/AUDIENCE_TEST_1.md), and [docs/AUDIENCE_TEST_2.md](docs/AUDIENCE_TEST_2.md).
 
 ---
 
-## Planned Production Stages & How the Project Will Run
+## Running the Pipeline & Reproducing Deliverables
 
-Once implemented in upcoming steps, the pipeline will connect the following stages through a validated `storyboard.json` contract:
+The entire multi-stage assembly is executable with a single command from the project root:
 
-1. **Storyboard design** — Define shots, durations, prompts, narration, and music cues.
-2. **Keyframe generation** — Generate consistent reference sheets and shot keyframes.
-3. **Video generation** — Animate keyframes into moving shots (with a deterministic pan/zoom fallback if needed).
-4. **Original music generation** — Generate and select an original instrumental score.
-5. **Narration generation** — Synthesize spoken narration lines and timing.
-6. **FFmpeg assembly** — Sync video, narration, ducked music, loudness normalization, subtitles, and end card.
-7. **Export and quality checks** — Export both `9:16` and `16:9` versions and validate reproducibility.
+```bash
+# Validate storyboard schema and assemble both final exports (using SHA-256 caching):
+python -m pipeline.assembly
 
-**Target execution workflow (not yet implemented):**
-After environment setup, credential configuration, and pipeline implementation in later steps, a single reproducible entry-point command will validate the storyboard schema, run only uncached or modified stages, log every model call to `runs.jsonl`, and output both final aspect ratios into `outputs/`.
+# To force re-render all transitions, subtitles, audio ducking, and end cards:
+python -m pipeline.assembly --force
+```
+
+This single command:
+1. Validates `storyboard.json` against `schema/storyboard.schema.json`.
+2. Inspects and processes the 10 video clips with motion smoothing and aspect ratio adaptation (9:16 vertical crop, 16:9 ambient motion wings).
+3. Assembles the Amharic speech track, performs sidechain compression ducking on `assets/music/selected_score.wav`, and applies two-pass EBU R128 loudness normalization (`-14.0 LUFS`, `-1.0 dBTP`).
+4. Generates and burns in aspect-safe English subtitles (`.ass`).
+5. Appends the AI disclosure end card (`3.0s`).
+6. Outputs the final deliverables to `outputs/vertical/` and `outputs/horizontal/`.
