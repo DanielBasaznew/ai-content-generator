@@ -2,7 +2,7 @@
 
 An AI-generated heritage short film and reproducible multi-model production pipeline set in **Harar, Ethiopia**.
 
-> **Project Status:** Steps 5, 6, 7, 8, and 9 are complete — `80.0s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.mp3`), Audience Test 1 summary (`DESIGN.md` / `docs/AUDIENCE_TEST_1.md`), 4 Option A FLUX reference PNGs (`assets/references/`), 10 shot keyframes (`assets/keyframes/`), 10 inspected Wan 2.2 `512x512` 24fps moving video clips (`assets/clips/`), and the selected `83.000s` instrumental ACE-Step 1.5 score (`assets/music/selected_score.wav` from `4` auditioned candidates) are in place. Ready for **Step 10** (FFmpeg final assembly); Steps 10–15 have not started.
+> **Project Status:** Steps 5, 6, 7, and 8 are complete — `80.0s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.mp3`), Audience Test 1 summary (`DESIGN.md` / `docs/AUDIENCE_TEST_1.md`), 4 Option A FLUX reference PNGs (`assets/references/`), 10 shot keyframes (`assets/keyframes/`), and all 10 inspected Wan 2.2 `512x512` 24fps moving video clips (`assets/clips/shot-01.mp4`–`shot-10.mp4`) are in place. Ready for **Step 9** (original music generation); Steps 9–15 have not started.
 
 ---
 
@@ -66,7 +66,7 @@ day-2-ai-content-generation/
 ├── FAILURES.md                 # Template for logging errors, failed outputs, and fixes
 ├── COSTS.md                    # Template for tracking model usage, latency, GPU time, and costs
 ├── ETHICS.md                   # Ethical guidelines, AI disclosure policy, licensing, and consent log
-├── runs.jsonl                  # Append-only log of model API calls (46 logged calls across Steps 5–9)
+├── runs.jsonl                  # Append-only log of model API calls (41 logged calls across Steps 5–8)
 ├── storyboard.json             # Single-source-of-truth 10-shot storyboard contract (80.0s voice-timed; Amharic + EN)
 ├── docs/
 │   ├── AUDIENCE_TEST_1.md          # Participant feedback log & synthesis for Audience Test 1
@@ -84,14 +84,13 @@ day-2-ai-content-generation/
 │   ├── radio_cut.py            # Audio-only radio cut assembler & English SRT exporter
 │   ├── references.py           # Cloudflare FLUX Step 6 reference generator
 │   ├── keyframes.py            # Cloudflare FLUX Step 7 keyframe generator with cropped-panel inputs
-│   ├── video.py                # Kaggle Wan 2.2 TI2V-5B Step 8 batched video generator with SHA-256 caching
-│   └── music.py                # Kaggle ACE-Step 1.5 Step 9 instrumental score generator, audition & selector
+│   └── video.py                # Kaggle Wan 2.2 TI2V-5B Step 8 batched video generator with SHA-256 caching
 ├── assets/
 │   ├── references/             # 4 generated Option A FLUX reference PNGs + references_cache.json
 │   ├── keyframes/              # 10 generated 1024x1024 FLUX keyframes (shot-01..10.png) + keyframes_cache.json
 │   ├── clips/                  # 10 generated 512x512 24fps Wan 2.2 MP4 clips (shot-01..10.mp4) + clips_cache.json
 │   ├── narration/              # 10 generated Amharic WAV clips + narration_cache.json
-│   └── music/                  # 4 ACE-Step candidate WAVs, ducked audition MP3s & selected_score.wav (83.0s)
+│   └── music/                  # Generated score candidates and chosen track (empty — Step 9)
 ├── outputs/
 │   ├── horizontal/             # Final 16:9 exports and intermediate cuts (empty)
 │   ├── radio_cut/              # Audio-only Step 5 radio cut (radio_cut_v1.mp3, .wav, _en.srt)
@@ -101,7 +100,6 @@ day-2-ai-content-generation/
     ├── test_step6_references.py              # Unit tests for Step 6 reference specs, gate & mocked FLUX
     ├── test_step7_keyframes.py               # Unit tests for Step 7 prompts, <=512px crop prep, mocked FLUX & outputs
     ├── test_step8_video.py                   # Unit tests for Step 8 motion prompts, Kaggle auth/batching & MP4 verification
-    ├── test_step9_music.py                   # Unit tests for Step 9 ACE-Step specs, audition mix & 83s score verification
     ├── test_storyboard_contract.py           # Validates on-disk storyboard.json schema, timeline, and review sync
     └── test_storyboard_schema.py             # Lightweight schema validation check using an in-memory fixture
 ```

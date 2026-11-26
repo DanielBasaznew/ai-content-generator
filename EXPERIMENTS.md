@@ -20,8 +20,6 @@ This file records controlled experiments across script, keyframe, video, narrati
 | `EXP-005` | 2026-11-25 | keyframes | Cropped-panel FLUX.2 klein reference conditioning across all 10 shots | `@cf/black-forest-labs/flux-2-klein-4b` | Pass (`10/10` clean keyframes; `11` calls / `139.330s`; `0/10` cached rerun) |
 | `EXP-006` | 2026-11-26 | video | Isolate UMT5 prompt encoding & `fp16` `Wan2.2-TI2V-5B` on Kaggle T4 (`shot-01`) | `Wan-AI/Wan2.2-TI2V-5B-Diffusers` | Pass (`428.53s` inf, `12.91 GB` peak VRAM, smooth motion `delta=25.81`) |
 | `EXP-007` | 2026-11-26 | video | Batch all 10 shots + visual audit & targeted regen of `shot-03/04/09/10` | `Wan-AI/Wan2.2-TI2V-5B-Diffusers` | Pass (`10/10` clean clips; `4` rejected & fixed; `0/10` cached rerun) |
-| `EXP-008` | 2026-11-26 | music | Compare 3 single `84s` cues vs 2-movement `44s+44s` crossfaded arc on Kaggle T4 | `ACE-Step/Ace-Step1.5` | Pass (`5` WAVs generated in `240.24s` inf / `7.87m` T4; `0/5` cached rerun) |
-| `EXP-009` | 2026-11-26 | music | Sidechain-ducked audition beneath Amharic radio cut & `83.0s` score selection | `ACE-Step 1.5` + `ffmpeg 9.0.2` | Pass (Selected `cand_03_chamber_piano_pad`; `83.0s`, `-14.5 LUFS`) |
 
 ---
 
@@ -117,27 +115,3 @@ Copy this template for each new experiment:
 - **Seed:** `3001`, `3002`, `3013` (replaced `3003`), `3014` (replaced `3004`), `3005`, `3006`, `3007`, `3008`, `3019` (replaced `3009`), `3020` (replaced `3010`)
 - **Result:** Pass — Batch A (`44.91m`) and Batch B (`36.57m`) produced 5 clean shots immediately (`02, 05, 06, 07, 08`); visual audit flagged `03, 04, 09, 10` (`FAIL-005`). Updating only those 4 prompts/seeds caused `push_video_batch` to skip all 6 clean cached shots (`cached: 6, pushed: 4`), and `wan22-step8-regen-1` (`36.05m`) resolved all 4 defects cleanly (`10/10` cached on rerun).
 - **Observations:** Avoiding terms like `"golden bokeh shimmering"` and `"sunset deepening"` eliminated lens-flare washout (`shot-04`), pink halo spots (`shot-09`), and red-orange sky blobs (`shot-03`, `shot-10`). Batching UMT5 prompt pre-encoding saved ~6 minutes of duplicate model setup across Shots `02–10`.
-
-### EXP-008: Original Instrumental Score Candidate Generation via ACE-Step 1.5 (Kaggle `T4`)
-- **Date:** 2026-11-26
-- **Stage:** music
-- **Objective / Hypothesis:** Test whether `ACE-Step/Ace-Step1.5` (`acestep-v15-turbo` DiT + `acestep-5Hz-lm-1.7B` thinking LM with `offload_to_cpu=True`) can generate clean, purely instrumental documentary underscores (`84.0s` continuous tracks `cand_01`–`03` vs two-movement `44s+44s` crossfaded `C Major -> A Minor` arc `cand_04`) on Kaggle T4 without vocals or exceeding VRAM.
-- **Model:** `ACE-Step/Ace-Step1.5` (`acestep-v15-turbo` `fp16` + `acestep-5Hz-lm-1.7B`, MIT license)
-- **Parameters:** `inference_steps=8`, `shift=3.0`, `thinking=True`, `lyrics="[Instrumental]"`, `instrumental=True`, `enable_normalization=True`, `normalization_db=-1.0`, `48000 Hz` stereo WAV; seeds `4001` (`cand_01`, `72 BPM` D Minor), `4002` (`cand_02`, `78 BPM` F Major), `4003` (`cand_03`, `66 BPM` A Minor), `4004+4005` (`cand_04_part_a` C Major + `cand_04_part_b` A Minor joined via `4.0s` `acrossfade`).
-- **Seed:** `4001`, `4002`, `4003`, `4004`, `4005`
-- **Result:** Pass — `danielbasaznew/acestep-step9-candidates` v3 completed all `5` generation jobs cleanly (`471.93s` / `7.87` min total session; `42.6s` checkpoint download; `67.73s` init; `240.24s` pure generation latency; peak VRAM `9.68 GB / 14.6 GB`). Local FFmpeg joined `cand_04_part_a` + `cand_04_part_b` into `cand_04_two_part_arc.wav` (`84.000s`).
-- **Observations:**
-  - `acestep-5Hz-lm-1.7B` with `offload_to_cpu=True` fit comfortably under 10 GB VRAM on T4 even for `84s` sequences (`~2.6s` DiT diffusion + `~47s` 5Hz audio-code generation per 84s cue).
-  - Prompt diversity confirmed that `cand_01` (`-17.5 LUFS`, `LRA 21.2 LU`) and `cand_03` (`-21.1 LUFS`, `LRA 9.2 LU`) remained strictly instrumental, whereas `cand_02` (`-18.5 LUFS`) injected an unwanted kick drum pulse and `cand_04_part_b` (`-20.3 LUFS`) generated wordless humming vocals (`FAIL-007`).
-
-### EXP-009: Sidechain-Ducked Audition Beneath Amharic Narration & 83.0s Score Preparation
-- **Date:** 2026-11-26
-- **Stage:** music
-- **Objective / Hypothesis:** Audition every candidate mixed beneath the `80.000s` Amharic radio cut (`outputs/radio_cut/radio_cut_v1.wav`) using FFmpeg sidechain ducking (`threshold=0.02, ratio=6, attack=300ms, release=1500ms`) across the full `83.000s` runtime (`80.0s` story + `3.0s` disclosure end card), expecting sparse felt piano/strings with quiet midrange (`~66–72 BPM`) to preserve the clearest Amharic speech intelligibility and seamless emotional transitions.
-- **Model:** `ACE-Step/Ace-Step1.5` outputs + FFmpeg `9.0.2`
-- **Parameters:** `atrim=0:83.000`, `afade=t=in:st=0:d=0.8`, `afade=t=out:st=80.0:d=3.0`, `loudnorm=I=-16:TP=-1:LRA=11` for prepared `assets/music/selected_score.wav` (`48000 Hz`, stereo 16-bit PCM).
-- **Seed:** `4003` (selected winner `cand_03_chamber_piano_pad`)
-- **Result:** Pass — Selected `cand_03_chamber_piano_pad` (`assets/music/selected_score.wav`: `83.000s`, `-14.5 LUFS`, `mean -17.2 dB`, `max -1.0 dB`, `LRA 6.0 LU`) and recorded full metadata in `storyboard.json["music_plan"]`.
-- **Observations:**
-  - `cand_03_chamber_piano_pad` provided the cleanest vocal headroom (`-24.1 dB` raw mean volume, steady `9.2 LU` loudness range), zero drums or vocals, and a natural instrumental lift around `45s` where airy sustained strings enter right as the story pivots to leaving Harar and discovering the missing monument.
-  - `cand_01_felt_piano_strings` was a strong runner-up in warmth, but exhibited a wide `21.2 LU` loudness range with a noticeable piano drop around `27–32s` and thicker low-mid pad density beneath the baritone voice; `cand_02` and `cand_04` were disqualified by unwanted drums and background humming (`FAIL-007`).
