@@ -14,8 +14,8 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 | --- | --- | --- | --- |
 | Google AI Studio / Gemini API | Script, storyboard, translation, TTS narration | Verified; **3 RPM** free-tier limit observed on `gemini-3.8-flash-tts` | `11` TTS calls (`10` OK + `1` 429) + `1` QA call (`gemini-2.5-flash`) logged in `runs.jsonl`; `$0.00` spend |
 | Cloudflare Workers AI | FLUX image generation (references & keyframes) | Verified; `4` Step 6 reference PNGs + `11` Step 7 keyframe calls via `@cf/black-forest-labs/flux-2-klein-4b` | `multipart/form-data` schema confirmed; `204.261s` total across `15` calls (`64.931s` Step 6 + `139.330s` Step 7); `$0.00` spend |
-| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | Verified active (`2x Tesla T4`, 15.64 GB each); `5` completed GPU runs (`131.15` session min; `~148` min incl. pilot retries) | Uses `KAGGLE_API_TOKEN` for `KGAT_` Bearer auth; ~27.5 hrs/wk GPU quota remaining for Step 9 |
-| FFmpeg (Local) | Video & audio assembly, exports | Installed via `imageio-ffmpeg 0.8.1` (`ffmpeg 9.0.2`) | Available to Python scripts; optional global `ffmpeg`/`ffprobe` on PATH can be added via `winget` |
+| Kaggle (GPU Notebooks) | Wan 2.2 video generation & ACE-Step music | Verified active (`2x Tesla T4`, 15.64 GB each); `6` completed GPU runs (`139.02` session min: `131.15` Step 8 + `7.87` Step 9; `~161` min incl. retries) | Uses `KAGGLE_API_TOKEN` for `KGAT_` Bearer auth; ~27.3 hrs/wk GPU quota remaining for optional tweaks |
+| FFmpeg (Local) | Video & audio assembly, exports | Verified via `ffmpeg 9.1-full_build` on PATH (`libass`/`libx264`/`aac`) + `imageio-ffmpeg 0.8.1` | Completed Step 5 radio cut (`<1s`) and Step 10 dual `9:16` / `16:9` final exports (`459.88s` final render CPU) at `$0.00` |
 
 ---
 
@@ -29,9 +29,9 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 | References (Step 6) | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 4 | 64.931 | 0 | $0.00 | Pending (4 PNGs: two 1344x768, two 1024x1024) |
 | Keyframes | FLUX (`@cf/black-forest-labs/flux-2-klein-4b`) | 11 | 139.330 | 0 | $0.00 | Pending (`10` active `1024x1024` PNGs + `1` replaced pilot `shot-03`) |
 | Moving Shots | Wan 2.2 (`Wan-AI/Wan2.2-TI2V-5B-Diffusers` on Kaggle `2x T4`) | 14 | 6500.210 | 131.15 | $0.00 | Pending (`10` final `512x512` 24fps MP4s + `4` replaced clips; `~148` GPU min incl. pilot v2–v4) |
-| Original Music | ACE-Step (Kaggle) | 0 | 0 | 0 | $0.00 | Pending |
-| Assembly & Export (Radio Cut) | FFmpeg 9.0.2 (`imageio-ffmpeg`) | 1 | < 1.0 | 0 | $0.00 | $0.00 |
-| **Total** | — | **42** | **6779.156+ (API/GPU)** | **131.15** | **$0.00** | **Pending** |
+| Original Music | `ACE-Step/Ace-Step1.5` (`acestep-v15-turbo` + `acestep-5Hz-lm-1.7B`, Kaggle T4) | 5 | 240.240 | 7.87 | $0.00 | Pending (`5` ACE-Step WAVs -> `4` candidates + `selected_score.wav`; `+3.13` min failed v2 + pip setup v1) |
+| Assembly & Export (Radio Cut + Step 10 Finals) | `ffmpeg 9.1-full_build` + Pillow (`pipeline/radio_cut.py`, `pipeline/assembly.py`) | 3 local runs | 460.88+ CPU s | 0 | $0.00 | $0.00 (`radio_cut_v1` + final `9:16` `205.56s` + final `16:9` `254.32s`; `$0.00` compute) |
+| **Total** | — | **47 API/GPU + 3 FFmpeg** | **7019.396 API/GPU + 460.88 CPU** | **139.02** | **$0.00** | **Pending** |
 
 ---
 
@@ -72,6 +72,24 @@ This file tracks model usage, free-tier quotas, latency, GPU minutes, and estima
 - **Actual Spend:** `$0.00` (Kaggle free weekly GPU quota)
 - **Estimated List-Price Equivalent:** Pending
 - **Quota Observations:** Peak single-GPU VRAM stayed at `12.91 GB / 14.56 GiB` after isolating UMT5 prompt pre-encoding (`FAIL-004`). Re-run of `python -m pipeline.video` verified `10/10` SHA-256 cache hits (`generated: 0, cached: 10`).
+
+### Session 2026-11-26 — Step 9 Original Instrumental Music via ACE-Step 1.5 (Kaggle `T4`)
+- **Calls Executed:** `5` `ACE-Step/Ace-Step1.5` generation jobs inside kernel `danielbasaznew/acestep-step9-candidates` v3 (`cand_01_felt_piano_strings`, `cand_02_acoustic_plucked_theme`, `cand_03_chamber_piano_pad`, `cand_04_part_a`, `cand_04_part_b`), followed by local FFmpeg crossfade, sidechain audition mixing (`4` MP3s), and `83.000s` score preparation
+- **Models Used:** `ACE-Step/Ace-Step1.5` (`acestep-v15-turbo` `float16` DiT + `acestep-5Hz-lm-1.7B` PyTorch LM with `offload_to_cpu=True`, `8` steps, `shift=3.0`)
+- **Measured Total Latency:** `240.240s` (`4.00` min) pure generation latency (`66.84s`, `55.57s`, `54.92s`, `31.43s`, `31.48s`); `471.93s` (`7.87` min) full Kaggle v3 session time (`42.6s` checkpoint download + `67.73s` DiT/LM init + `240.24s` generation)
+- **GPU Time Consumed:** `7.87` successful session minutes (plus `3.13` min on failed v2 JSON-boolean bug and brief v1 pip check)
+- **Actual Spend:** `$0.00` (Kaggle free weekly GPU quota + MIT weights)
+- **Estimated List-Price Equivalent:** Pending
+- **Quota Observations:** Peak VRAM stayed at `9.68 GB / 14.6 GB` on Kaggle T4 with LM CPU offloading (`offload_to_cpu=True`). Re-running `python -m pipeline.music push` hits SHA-256 cache (`pushed: 0, cached: 5`).
+
+### Session 2026-11-26 — Step 10 FFmpeg Final Assembly (`9:16` & `16:9` Exports)
+- **Calls Executed:** `1` local FFmpeg voice+ducked-music two-pass mastering run (`master_mix_83s.wav`), `2` full dual-aspect export renders (`outputs/vertical/harar_monument_vertical_9x16.mp4` & `outputs/horizontal/harar_monument_horizontal_16x9.mp4`), plus `1` initial pre-polish full pass (`232.68s` + `201.99s`) and `1` single-shot benchmark (`12.02s`)
+- **Models / Tools Used:** Local `ffmpeg 9.1-full_build` (`libx264`, `aac`, `ass`/`libass`, `sidechaincompress`, `loudnorm`) + Python `Pillow` (`render_end_card_png`)
+- **Measured Total Latency:** `459.88s` (`7.66` min) final clean export CPU time (`205.56s` `9:16` vertical `47.36 MB`, `254.32s` `16:9` horizontal `39.12 MB`)
+- **GPU Time Consumed:** `0` Kaggle GPU minutes (100% deterministic local CPU FFmpeg assembly)
+- **Actual Spend:** `$0.00`
+- **Estimated List-Price Equivalent:** `$0.00` (open-source local tooling)
+- **Quota Observations:** Output deliverables verified via `ffprobe` & `ebur128` (`83.000s`, `24 fps`, `-14.0 LUFS`, `-1.0 dBTP`, `LRA 5.8 LU`). Re-running `python -m pipeline.assembly` hits SHA-256 `assembly_cache.json` (`assembled: 0, cached: 2`).
 
 ```markdown
 ### Session YYYY-MM-DD — <Stage or Milestone>

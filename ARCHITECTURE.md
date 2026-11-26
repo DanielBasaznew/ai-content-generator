@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** Step 5 narration/radio cut, Step 6 reference PNGs (`pipeline/references.py`, `assets/references/*.png`), Step 7 shot keyframes (`pipeline/keyframes.py`, `pipeline/cloudflare_flux.py`, `assets/keyframes/shot-01.png`–`shot-10.png`), and Step 8 moving video clips (`pipeline/video.py`, `assets/clips/shot-01.mp4`–`shot-10.mp4`) are complete and verified. Remaining music (Step 9) and FFmpeg assembly stages are not yet implemented.
+> **Status:** Step 5 narration/radio cut, Step 6 reference PNGs (`pipeline/references.py`), Step 7 shot keyframes (`pipeline/keyframes.py`), Step 8 moving video clips (`pipeline/video.py`), Step 9 original instrumental music (`pipeline/music.py`), and Step 10 deterministic dual-aspect FFmpeg assembly (`pipeline/assembly.py` -> `outputs/vertical/harar_monument_vertical_9x16.mp4` & `outputs/horizontal/harar_monument_horizontal_16x9.mp4`) are complete and verified. Remaining Steps 11–15 (Audience Test 2, top-level single-command runner, final docs/report/walkthrough) have not started.
 
 ---
 
