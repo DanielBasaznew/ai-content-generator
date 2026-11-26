@@ -1,0 +1,70 @@
+[
+  {
+    "candidate_id": "cand_01_felt_piano_strings",
+    "title": "Felt Piano & Warm Chamber Cello",
+    "bpm": 72,
+    "keyscale": "D Minor",
+    "raw_wav": "assets/music/candidates/cand_01_felt_piano_strings.wav",
+    "audition_mp3": "assets/music/auditions/audition_cand_01_felt_piano_strings.mp3",
+    "raw_stats": {
+      "duration_seconds": 84.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "mean_volume_db": -23.1,
+      "max_volume_db": -1.0,
+      "integrated_lufs": -17.5,
+      "loudness_range_lu": 21.2
+    }
+  },
+  {
+    "candidate_id": "cand_02_acoustic_plucked_theme",
+    "title": "Ethiopian-Inspired Acoustic Plucked Strings & Piano",
+    "bpm": 78,
+    "keyscale": "F Major",
+    "raw_wav": "assets/music/candidates/cand_02_acoustic_plucked_theme.wav",
+    "audition_mp3": "assets/music/auditions/audition_cand_02_acoustic_plucked_theme.mp3",
+    "raw_stats": {
+      "duration_seconds": 84.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "mean_volume_db": -21.1,
+      "max_volume_db": -1.0,
+      "integrated_lufs": -18.5,
+      "loudness_range_lu": 6.9
+    }
+  },
+  {
+    "candidate_id": "cand_03_chamber_piano_pad",
+    "title": "Sparse Felt Piano & Airy String Pad",
+    "bpm": 66,
+    "keyscale": "A Minor",
+    "raw_wav": "assets/music/candidates/cand_03_chamber_piano_pad.wav",
+    "audition_mp3": "assets/music/auditions/audition_cand_03_chamber_piano_pad.mp3",
+    "raw_stats": {
+      "duration_seconds": 84.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "mean_volume_db": -24.1,
+      "max_volume_db": -1.0,
+      "integrated_lufs": -21.1,
+      "loudness_range_lu": 9.2
+    }
+  },
+  {
+    "candidate_id": "cand_04_two_part_arc",
+    "title": "Two-Movement Crossfaded Arc (Warmth -> Reflection)",
+    "bpm": 74,
+    "keyscale": "C Major -> A Minor",
+    "raw_wav": "assets/music/candidates/cand_04_two_part_arc.wav",
+    "audition_mp3": "assets/music/auditions/audition_cand_04_two_part_arc.mp3",
+    "raw_stats": {
+      "duration_seconds": 84.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "mean_volume_db": -23.6,
+      "max_volume_db": -1.0,
+      "integrated_lufs": -20.3,
+      "loudness_range_lu": 12.2
+    }
+  }
+]

@@ -19,6 +19,9 @@ This file records technical blockers, failed API or GPU runs, unsatisfactory gen
 | `FAIL-003` | 2026-11-26 | video / `kaggle 2.2.5` CLI | `401 Unauthorized` on `kernels_list` & `PermissionError` on `.kaggle` in sandbox | Mapped `KGAT_` token to `KAGGLE_API_TOKEN` (Bearer auth) and set writable `KAGGLE_CONFIG_DIR` lazily | Resolved |
 | `FAIL-004` | 2026-11-26 | video / `Wan2.2-TI2V-5B-Diffusers` (Kaggle T4) | `NameError: ftfy`, `14.54 GiB` UMT5/VAE CUDA OOM, and `_DummyTextEncoder` `StopIteration` in pilot v2–v4 | Installed `ftfy`, pre-encoded prompts before loading transformer/VAE, and added 2-byte `nn.Parameter` stub | Resolved |
 | `FAIL-005` | 2026-11-26 | video / `Wan2.2-TI2V-5B-Diffusers` | Batch A/B audit caught orange sky blobs (`03, 10`), glare washout (`04`), and pink dot (`09`) | Removed flare/glow cues, strengthened negative prompts, bumped seeds `3013, 3014, 3019, 3020`, re-ran selective batch | Resolved |
+| `FAIL-006` | 2026-11-26 | music / `ACE-Step 1.5` (Kaggle T4) | Kernel v1 failed Python `<3.13` `diffusers` dependency pin; v2 threw `NameError: name 'true' is not defined` in rendered `JOBS` | Installed with `--ignore-requires-python` + pinned `diffusers<0.39`; wrapped `JOBS` in `json.loads(repr(jobs_json))` | Resolved |
+| `FAIL-007` | 2026-11-26 | music / `ACE-Step 1.5` audio audit | Listening audit found unintended kick pulse in `cand_02` and background vocal humming in `cand_04_part_b` (`~50–78s`) | Rejected `cand_02` and `cand_04` during formal audition; selected strictly instrumental `cand_03_chamber_piano_pad` | Resolved |
+| `FAIL-008` | 2026-11-26 | music / `pipeline/music.py` (`ebur128`) | Initial `audition` printed `-70.0 LUFS` because `re.search` matched first frame (`t: 0.099`) instead of `Summary:` | Switched `_analyze_wav_metrics` to `re.findall(...)[-1]` and re-ran `audition` + `select` | Resolved |
 
 ---
 
@@ -90,4 +93,34 @@ Copy this template whenever something breaks:
 - **Root Cause:** Words like `"golden bokeh shimmering"` and `"sunset light softly deepens"` amplified bright backlit highlights into diffusing orange/pink flare blobs over 73 temporal frames, while complex multi-person shadow prompts destabilized `shot-03`.
 - **What Was Tried:** Audited extracted `start`/`mid`/`end` frames (`512x512`) and rendered MP4s side by side for all 10 shots.
 - **Resolution / Workaround:** Removed glow/bokeh/shimmer cues from those 4 motion prompts, added explicit flare/artifact negative cues (`lens flare`, `orange cloud blob`, `pink halo`, `three legs`), updated seeds to `3013, 3014, 3019, 3020` in `storyboard.json`, and ran `wan22-step8-regen-1` (`EXP-007`). Visual inspection confirmed all 4 regenerated clips are clean and consistent. *(Also encountered one transient `ConnectTimeoutError` polling `api.kaggle.com:443`, resolved on immediate retry.)*
+- **Status:** Resolved
+
+### FAIL-006: Kaggle ACE-Step 1.5 Python 3.13 Install Conflict & Worker `JOBS` JSON Boolean Crash (`acestep-step9-candidates` v1–v2)
+- **Date:** 2026-11-26
+- **Stage / Component:** music (`pipeline/music.py`)
+- **Tool / Model:** `ACE-Step/ACE-Step-1.5` (`acestep-v15-turbo` + `acestep-5Hz-lm-1.7B`) on Kaggle Python `3.13.16`
+- **Error / Symptom:** Kernel v1 failed `pip install` due to upstream `requires-python <3.13` and `diffusers`/`transformers` pins against Kaggle's Python `3.13.16` image; v2 initialized both models cleanly (`~188s`) but crashed at `JOBS = ...` with `NameError: name 'true' is not defined`.
+- **Root Cause:** Editable install needed `--no-deps --ignore-requires-python` to keep Kaggle's CUDA `torch 2.11.0+cu130` intact, and `_build_acestep_worker_script` interpolated raw `json.dumps(jobs)` (`true`) into Python source where `compile()` treats `true` as an identifier rather than a syntax error.
+- **What Was Tried:** Audited v1/v2 kernel logs (`acestep-step9-candidates.log`), verified model initialization at `9.68 GB` VRAM with `offload_to_cpu=True`, and updated `tests/test_step9_music.py` to execute-parse the generated `JOBS` assignment.
+- **Resolution / Workaround:** Switched v3 worker assignment to `JOBS = json.loads({repr(jobs_json)})`, added `gc.collect()` / `torch.cuda.empty_cache()` cleanup, and re-ran `danielbasaznew/acestep-step9-candidates` v3 (`ALL MUSIC JOBS COMPLETED: 5` in `471.93s`). *(Note: Kaggle UI stderr still flags `pip`'s non-fatal dependency conflict notice for preinstalled unused `gradio` packages, while exit code is `0`.)*
+- **Status:** Resolved
+
+### FAIL-007: Instrumental Constraint Violations & Tone Mismatch Discovered in Music Auditions (`cand_02`, `cand_04`)
+- **Date:** 2026-11-26
+- **Stage / Component:** music (`assets/music/candidates/`, `assets/music/auditions/`)
+- **Tool / Model:** `ACE-Step/Ace-Step1.5`
+- **Error / Symptom:** Listening to raw WAVs and ducked audition MP3s revealed two disqualified tracks despite `[Instrumental]` and negative text cues: `cand_02_acoustic_plucked_theme` (`F Major`, `78 BPM`) generated a steady kick drum pulse (`"no drums"` ignored) and an overly upbeat groove that undermined shots 7–9; `cand_04_part_b` (`A Minor`, `74 BPM`) generated unintended wordless female/choir humming (`"oohs/aahs"`) between `~50s` and `~78s` that clashed with the Amharic narration midrange.
+- **Root Cause:** Text-conditioned diffusion occasionally hallucinates rhythmic kick patterns on acoustic plucked grooves (`cand_02`) or wordless choir pads in soft minor-key transitions (`cand_04_part_b`), and only direct human/agent audio listening catches vocal-like artifacts reliably.
+- **What Was Tried:** Audited all 4 raw WAVs and all 4 ducked `audition_*.mp3` mixes end-to-end beneath `radio_cut_v1.wav`.
+- **Resolution / Workaround:** Rejected `cand_02` and `cand_04` with documented reasons in `storyboard.json` and selected `cand_03_chamber_piano_pad` (`66 BPM`, `A Minor`), which remained 100% piano-and-strings pure without vocals or drums (`EXP-009`).
+- **Status:** Resolved
+
+### FAIL-008: First-Frame `-70.0 LUFS` Match in `ebur128` Loudness Measurement (`pipeline/music.py`)
+- **Date:** 2026-11-26
+- **Stage / Component:** music (`pipeline/music.py`)
+- **Tool / Model:** FFmpeg `9.0.2` (`volumedetect,ebur128`)
+- **Error / Symptom:** Initial `audition` output reported `integrated_lufs: -70.0` and `loudness_range_lu: 0.0` despite `mean_volume_db` around `-23.1 dB`.
+- **Root Cause:** `re.search(r"\bI:\s*([-\d.]+)\s*LUFS", stderr)` matched FFmpeg's very first per-frame line (`t: 0.099 ... I: -70.0 LUFS`) rather than the trailing `Summary:` block.
+- **What Was Tried:** Inspected `_analyze_wav_metrics()` in `pipeline/music.py` immediately after reviewing `audition` JSON metrics.
+- **Resolution / Workaround:** Updated `_analyze_wav_metrics()` to use `re.findall(...)[-1]` and re-ran `audition` + `select` (`selected_score.wav` measured true `-14.5 LUFS`, `LRA 6.0 LU`).
 - **Status:** Resolved

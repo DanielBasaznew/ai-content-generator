@@ -125,13 +125,27 @@
   },
   "music_plan": {
     "provider": "kaggle_ace_step",
-    "model": null,
+    "model": "ACE-Step/Ace-Step1.5 (acestep-v15-turbo + acestep-5Hz-lm-1.7B)",
     "instrumental_only": true,
-    "tempo_bpm": null,
-    "musical_key": null,
-    "overall_prompt": "Gentle, reflective instrumental film score blending warm acoustic plucked strings, soft felt piano, and subtle atmospheric warmth; uplifting nostalgia opening, quiet distance in the middle, tender melancholy on return, and peaceful resolution. No vocals.",
-    "seed": null,
-    "audio_path": null
+    "tempo_bpm": 66,
+    "musical_key": "A Minor",
+    "overall_prompt": "Minimalist understated cinematic underscore, sparse delicate upright piano motifs over warm airy string pad swells, unhurried emotional restraint designed beneath calm voiceover, gentle melancholy softening into hopeful peaceful closure, pure instrumental, no drums, no singing",
+    "seed": 4003,
+    "audio_path": "assets/music/selected_score.wav",
+    "extra_params": {
+      "selected_candidate_id": "cand_03_chamber_piano_pad",
+      "source_candidate_wav": "assets/music/candidates/cand_03_chamber_piano_pad.wav",
+      "prepared_duration_seconds": 83.0,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "integrated_lufs": -14.5,
+      "max_volume_db": -1.0,
+      "fade_in_seconds": 0.8,
+      "fade_out_seconds": 3.0,
+      "inference_steps": 8,
+      "shift": 3.0,
+      "audition_rationale": "Selected cand_03_chamber_piano_pad (66 BPM, A Minor): purest strictly instrumental restraint with zero vocals or percussion, widest midrange clarity beneath the Amharic narration, cohesive piano-and-airy-strings swelling cleanly after 45s into the memory/closure shots, and gentle decay through the 80-83s end card. Preferred over cand_01 (brief 27-32s piano drop and heavier low-mid sustain), cand_02 (unintended drum thump and overly bright groove), and cand_04 (unintended wordless humming vocals in Part B around 50-78s)."
+    }
   },
   "ai_disclosure": {
     "contains_ai_generated_content": true,

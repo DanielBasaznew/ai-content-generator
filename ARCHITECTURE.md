@@ -1,6 +1,6 @@
 # Planned System Architecture
 
-> **Status:** Step 5 narration/radio cut, Step 6 reference PNGs (`pipeline/references.py`, `assets/references/*.png`), Step 7 shot keyframes (`pipeline/keyframes.py`, `pipeline/cloudflare_flux.py`, `assets/keyframes/shot-01.png`–`shot-10.png`), and Step 8 moving video clips (`pipeline/video.py`, `assets/clips/shot-01.mp4`–`shot-10.mp4`) are complete and verified. Remaining music (Step 9) and FFmpeg assembly stages are not yet implemented.
+> **Status:** Step 5 narration/radio cut, Step 6 reference PNGs (`pipeline/references.py`, `assets/references/*.png`), Step 7 shot keyframes (`pipeline/keyframes.py`, `pipeline/cloudflare_flux.py`, `assets/keyframes/shot-01.png`–`shot-10.png`), Step 8 moving video clips (`pipeline/video.py`, `assets/clips/shot-01.mp4`–`shot-10.mp4`), and Step 9 original instrumental music (`pipeline/music.py`, `assets/music/selected_score.wav` at `83.000s` from `cand_03_chamber_piano_pad`) are complete and verified. Remaining FFmpeg assembly stages (Step 10+) are not yet implemented.
 
 ---
 
