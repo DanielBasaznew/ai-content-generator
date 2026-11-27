@@ -14,18 +14,18 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<string>("film");
 
   return (
-    <div className="flex min-h-screen bg-[#090d16] text-slate-100">
-      {/* Sidebar Navigation */}
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#080d1a] text-slate-100 selection:bg-amber-500/30 selection:text-white overflow-x-hidden">
+      {/* Responsive Navigation: Top bar on mobile + Sticky sidebar on desktop */}
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Main Content Area */}
-      <main className="flex-1 p-6 md:p-8 lg:p-10 overflow-y-auto max-h-screen">
+      <main className="flex-1 w-full min-w-0 p-3.5 sm:p-6 md:p-8 lg:p-10 overflow-y-auto max-h-screen">
         <div className="animate-in fade-in duration-200">
-          {activeTab === "film" && <FilmPlayer />}
+          {activeTab === "film" && <FilmPlayer onNavigate={setActiveTab} />}
+          {activeTab === "pipeline" && <PipelineVisualizer />}
           {activeTab === "reviewers" && <ReviewerRubric />}
           {activeTab === "memory-lens" && <MemorySlider />}
           {activeTab === "storyboard" && <StoryboardGrid />}
-          {activeTab === "pipeline" && <PipelineVisualizer />}
           {activeTab === "telemetry" && <TelemetryView />}
           {activeTab === "documents" && <DocumentsView />}
         </div>

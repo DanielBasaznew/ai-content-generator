@@ -16,7 +16,7 @@
     "output_path": "assets/keyframes/shot-04.png"
   },
   "shot-01": {
-    "input_hash": "d1628f423b14d0824d2e6c83b0d2960d83c66c618a216187b5221f3960184481",
+    "input_hash": "054aca1afd431733d1fd84d8a918e36bf99639165a20b1f377804bfcf4e9f15e",
     "model": "@cf/black-forest-labs/flux-2-klein-4b",
     "seed": 2001,
     "width": 1024,

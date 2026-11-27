@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "notes": "Steps 5-10 complete. Step 10 final deliverables assembled via pipeline/assembly.py: outputs/vertical/harar_monument_vertical_9x16.mp4 (1080x1920, 83.000s, -14.0 LUFS) and outputs/horizontal/harar_monument_horizontal_16x9.mp4 (1920x1080, 83.000s, -14.0 LUFS), with intermediate artifacts isolated under outputs/intermediate/assembly_manifest.json.",
+  "notes": "Step 5 storyboard updated from initial 75.0s word-count estimates to 80.0s voice-timed continuous slots matching measured Gemini TTS (gemini-3.8-flash-tts, Charon) Amharic durations (+ 3.0s AI disclosure end card = 83.0s final runtime). Awaiting Audience Test 1 feedback on outputs/radio_cut/.",
   "project": {
     "title": "The Monument That Lives in My Memory",
     "location": "Harar, Ethiopia",
@@ -174,7 +174,7 @@
         "visual_style": "Warm cinematic 35mm film memory aesthetic with soft natural grain and golden-hour warmth",
         "subject_description": "Quiet sunlit residential lane and childhood neighborhood surroundings in Harar",
         "environment_description": "Harar residential street with traditional plastered walls, warm stone textures, and morning trees",
-        "lighting_atmosphere": "Soft golden morning light with gentle haze and nostalgic warmth",
+        "lighting_atmosphere": "Soft dawn golden light with gentle haze and nostalgic warmth",
         "camera_framing": "establishing",
         "camera_movement": "dolly_in",
         "reference_ids": [
@@ -1282,6 +1282,5 @@
         ]
       }
     }
-  ],
-  "notes": "Step 5 storyboard updated from initial 75.0s word-count estimates to 80.0s voice-timed continuous slots matching measured Gemini TTS (gemini-3.8-flash-tts, Charon) Amharic durations (+ 3.0s AI disclosure end card = 83.0s final runtime). Awaiting Audience Test 1 feedback on outputs/radio_cut/."
+  ]
 }

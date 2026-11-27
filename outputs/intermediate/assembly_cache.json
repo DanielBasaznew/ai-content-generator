@@ -1,6 +1,6 @@
 {
   "vertical": {
-    "input_hash": "c3d6089e65e455a44e4275333e0ea49071f8eeebb47861990d8ed4494f4654bc",
+    "input_hash": "bfaffd4bed32e41c34ab4f085d8a4a871e2b041257c7907ab7f2df1ea9836cd9",
     "output_path": "outputs/vertical/harar_monument_vertical_9x16.mp4",
     "probe": {
       "path": "C:\\Users\\DELL\\Documents\\10 Academy\\Week 0\\day-2-ai-content-generation\\outputs\\vertical\\harar_monument_vertical_9x16.mp4",
@@ -18,11 +18,11 @@
       "loudness_range_lu": 5.8,
       "true_peak_dbtp": -1.0,
       "mean_volume_db": -18.0,
-      "render_seconds": 205.56
+      "render_seconds": 234.51
     }
   },
   "horizontal": {
-    "input_hash": "c3d6089e65e455a44e4275333e0ea49071f8eeebb47861990d8ed4494f4654bc",
+    "input_hash": "bfaffd4bed32e41c34ab4f085d8a4a871e2b041257c7907ab7f2df1ea9836cd9",
     "output_path": "outputs/horizontal/harar_monument_horizontal_16x9.mp4",
     "probe": {
       "path": "C:\\Users\\DELL\\Documents\\10 Academy\\Week 0\\day-2-ai-content-generation\\outputs\\horizontal\\harar_monument_horizontal_16x9.mp4",
@@ -40,7 +40,7 @@
       "loudness_range_lu": 5.8,
       "true_peak_dbtp": -1.0,
       "mean_volume_db": -18.0,
-      "render_seconds": 254.32
+      "render_seconds": 241.76
     }
   }
 }
