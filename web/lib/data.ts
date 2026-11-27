@@ -168,6 +168,186 @@ export const SHOTS: ShotData[] = [
   }
 ];
 
+export interface RawClipData {
+  shot_id: string;
+  order: number;
+  clip_path: string;
+  keyframe_path: string;
+  resolution: string;
+  num_frames: number;
+  fps: number;
+  seed: number;
+  gpu_inference_min: number;
+  peak_vram_gb: number;
+  title: string;
+  prompt: string;
+  camera: string;
+  story_beat: string;
+}
+
+export const RAW_CLIPS: RawClipData[] = [
+  {
+    shot_id: "shot-01",
+    order: 1,
+    clip_path: "/assets/clips/shot-01.mp4",
+    keyframe_path: "/assets/keyframes/shot-01.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3001,
+    gpu_inference_min: 7.14,
+    peak_vram_gb: 12.91,
+    title: "Ancient Jugol Stone Wall",
+    prompt: "Cinematic establishing shot of the ancient Harar Jugol stone wall at sunrise, warm golden light spilling over textured walls.",
+    camera: "Slow tilt-down • Wide shot",
+    story_beat: "Introduction to Harar"
+  },
+  {
+    shot_id: "shot-02",
+    order: 2,
+    clip_path: "/assets/clips/shot-02.mp4",
+    keyframe_path: "/assets/keyframes/shot-02.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3002,
+    gpu_inference_min: 8.07,
+    peak_vram_gb: 12.91,
+    title: "Morning Streets & Horse Carts",
+    prompt: "Vibrant morning scene outside the historic Harar city gate, horse cart moving along gravel street, school children in retro uniforms.",
+    camera: "Lateral tracking right • Medium wide",
+    story_beat: "Morning Awakening"
+  },
+  {
+    shot_id: "shot-03",
+    order: 3,
+    clip_path: "/assets/clips/shot-03.mp4",
+    keyframe_path: "/assets/keyframes/shot-03.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3013,
+    gpu_inference_min: 7.80,
+    peak_vram_gb: 12.91,
+    title: "Child's Wonder at the Monument",
+    prompt: "Low angle view of 8-year-old Ethiopian boy looking upward with eyes filled with wonder at the silhouette of Ras Makonnen statue.",
+    camera: "Low-angle gentle tilt-up • Medium close-up",
+    story_beat: "Monument Discovery"
+  },
+  {
+    shot_id: "shot-04",
+    order: 4,
+    clip_path: "/assets/clips/shot-04.mp4",
+    keyframe_path: "/assets/keyframes/shot-04.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3014,
+    gpu_inference_min: 7.63,
+    peak_vram_gb: 12.91,
+    title: "Majestic Bronze Equestrian Statue",
+    prompt: "Majestic bronze equestrian statue of Ras Makonnen on stone pedestal at bustling roundabout in Harar, horse rearing with dignified strength.",
+    camera: "Slow circular arc • Medium shot",
+    story_beat: "Symbol of the City"
+  },
+  {
+    shot_id: "shot-05",
+    order: 5,
+    clip_path: "/assets/clips/shot-05.mp4",
+    keyframe_path: "/assets/keyframes/shot-05.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3005,
+    gpu_inference_min: 7.85,
+    peak_vram_gb: 12.91,
+    title: "Family Celebration by the Monument",
+    prompt: "Warm nostalgic scene of Ethiopian family in traditional attire smiling together by the roadside near the roundabout, golden afternoon sun.",
+    camera: "Gentle push-in • Medium shot",
+    story_beat: "Holiday Celebration"
+  },
+  {
+    shot_id: "shot-06",
+    order: 6,
+    clip_path: "/assets/clips/shot-06.mp4",
+    keyframe_path: "/assets/keyframes/shot-06.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3006,
+    gpu_inference_min: 7.87,
+    peak_vram_gb: 12.91,
+    title: "Leaving for University (Departure)",
+    prompt: "Reflective close-up of young Ethiopian adult looking through bus window, landscape moving in reflection, departure for higher education.",
+    camera: "Static with window reflection • Close-up",
+    story_beat: "Departure for Studies"
+  },
+  {
+    shot_id: "shot-07",
+    order: 7,
+    clip_path: "/assets/clips/shot-07.mp4",
+    keyframe_path: "/assets/keyframes/shot-07.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3007,
+    gpu_inference_min: 7.91,
+    peak_vram_gb: 12.91,
+    title: "Passing Years in University",
+    prompt: "Atmospheric montage of modern university buildings in Addis Ababa, passing of five collegiate years away from hometown.",
+    camera: "Time-lapse style crowd push • Wide shot",
+    story_beat: "Years in University"
+  },
+  {
+    shot_id: "shot-08",
+    order: 8,
+    clip_path: "/assets/clips/shot-08.mp4",
+    keyframe_path: "/assets/keyframes/shot-08.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3008,
+    gpu_inference_min: 7.71,
+    peak_vram_gb: 12.91,
+    title: "Returning Home to Harar (2026)",
+    prompt: "Young Ethiopian adult in modern jacket walking back toward the familiar roundabout in Harar, overcast contemplative afternoon sky.",
+    camera: "Eye-level forward tracking • Medium shot",
+    story_beat: "Return to Harar"
+  },
+  {
+    shot_id: "shot-09",
+    order: 9,
+    clip_path: "/assets/clips/shot-09.mp4",
+    keyframe_path: "/assets/keyframes/shot-09.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3019,
+    gpu_inference_min: 7.62,
+    peak_vram_gb: 12.91,
+    title: "The Empty Pedestal (The Reality)",
+    prompt: "Poignant wide view of roundabout where monument once stood, an empty bare stone pedestal under grey sky, cars and Bajaj driving past.",
+    camera: "Slow panoramic tilt from plinth to sky • Wide shot",
+    story_beat: "The Empty Pedestal"
+  },
+  {
+    shot_id: "shot-10",
+    order: 10,
+    clip_path: "/assets/clips/shot-10.mp4",
+    keyframe_path: "/assets/keyframes/shot-10.png",
+    resolution: "512x512 (480p)",
+    num_frames: 73,
+    fps: 24,
+    seed: 3020,
+    gpu_inference_min: 7.61,
+    peak_vram_gb: 12.91,
+    title: "Twilight Reflection & Enduring Memory",
+    prompt: "Poetic twilight view of historic Jugol wall under deep indigo sky with warm lantern glow in windows, enduring cultural spirit.",
+    camera: "Slow pull-back to twilight sky • Wide shot",
+    story_beat: "Enduring Memory"
+  }
+];
+
 export const RUBRIC_CRITERIA = [
   {
     id: "engineering",
