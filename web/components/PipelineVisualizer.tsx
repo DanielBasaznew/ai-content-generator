@@ -2,26 +2,14 @@
 
 import React, { useState } from "react";
 import { 
-  Cpu, 
-  ArrowRight, 
-  Database, 
-  Video, 
-  Music, 
-  Volume2, 
-  Film, 
-  ShieldCheck, 
-  Terminal, 
-  Layers,
-  Zap,
-  Play,
-  RotateCcw,
-  GitBranch,
-  Activity,
-  Download,
-  Maximize2,
-  ExternalLink,
+  Play, 
+  RotateCcw, 
+  ExternalLink, 
+  FileCode, 
   Image as ImageIcon,
-  FileCode
+  Volume2,
+  Film,
+  Terminal
 } from "lucide-react";
 
 interface PipelineNode {
@@ -29,7 +17,6 @@ interface PipelineNode {
   number: string;
   title: string;
   badge: string;
-  badgeColor: string;
   summary: string;
   tech: string;
   inputs: string;
@@ -51,17 +38,16 @@ export default function PipelineVisualizer() {
       number: "01",
       title: "Contract & Schema Gate (storyboard.json)",
       badge: "Draft 2020-12",
-      badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/40",
       summary: "storyboard.json serves as the strict, single source of truth connecting all Phase 1 and Phase 2 stages.",
-      tech: "jsonschema • Draft 2020-12 validation",
+      tech: "jsonschema · Draft 2020-12",
       inputs: "storyboard.json + schema/storyboard.schema.json",
-      outputs: "Validated runtime contract (10 shots, 80.0s timeline)",
+      outputs: "Validated runtime state (10 shots, 80.0s)",
       command: "python make_film.py",
-      latency: "0.02s validation",
+      latency: "0.02s check",
       keyDetails: [
-        "Enforces contiguous shot order 1–10 and unique shot_id strings.",
-        "Validates that summed shot durations total 80.0s (within 60–90s rubric window).",
-        "Governs full Amharic narration, full English subtitles, prompts, seeds, and AI disclosure."
+        "Enforces contiguous shot order 1–10 and unique shot_id identifiers.",
+        "Guarantees total shot timeline equals 80.0s (within 60–90s rubric window).",
+        "Governs Amharic voice lines, English subtitles, prompts, seeds, and AI end card disclosures."
       ]
     },
     cache: {
@@ -69,17 +55,16 @@ export default function PipelineVisualizer() {
       number: "02",
       title: "SHA-256 Input-Hash Cache Gate",
       badge: "0.15s Replay",
-      badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
-      summary: "Evaluates cryptographic SHA-256 signatures per shot before triggering AI models. Cache Hits bypass inference straight into assets/; Cache Misses re-run only the edited shot.",
-      tech: "hashlib.sha256 • Per-shot cache manifests",
-      inputs: "Prompt strings, model names, seeds, dimensions, audio references",
-      outputs: "assets/keyframes/keyframes_cache.json, clips_cache.json, assembly_cache.json",
-      command: "Integrated into all pipeline/*.py stages",
-      latency: "0.15s instant replay on cache hit",
+      summary: "Hashes prompts, models, seeds, and parameters per shot before model inference. Cache hits skip API/GPU inference straight from assets/.",
+      tech: "hashlib.sha256 · Per-stage manifests",
+      inputs: "Prompt strings, seeds, model IDs, dimensions",
+      outputs: "keyframes_cache.json, clips_cache.json, assembly_cache.json",
+      command: "Integrated across pipeline/*.py",
+      latency: "0.15s cached rebuild",
       keyDetails: [
-        "Cache Hit Route: Skips Gemini TTS, FLUX.1, and ACE-Step completely — reads directly from Verified Disk Store (assets/).",
-        "Cache Miss Route: Isolates and generates ONLY the modified shot (proven in Walkthrough Step 3).",
-        "Saved over 450 seconds of compute time during subtitle, audio, and end-card tuning."
+        "Cache Hit Route: Bypasses AI APIs and Kaggle GPUs, loading existing assets straight from assets/.",
+        "Cache Miss Route: Re-runs inference for only the edited shot (Rubric Step 3 proof).",
+        "Saved over 450 seconds of compute time across audio, subtitle, and end-card edits."
       ]
     },
     tts: {
@@ -87,17 +72,16 @@ export default function PipelineVisualizer() {
       number: "03A",
       title: "Amharic Narration (Gemini 3.8 Flash TTS)",
       badge: "gemini-3.8-flash-tts",
-      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/40",
-      summary: "Synthesizes native Amharic narration (voice Charon) with natural pauses, calibrated to Daniel's personal timeline.",
-      tech: "gemini-3.8-flash-tts • Voice Charon (3 RPM limit)",
-      inputs: "Amharic script lines per shot in storyboard.json",
-      outputs: "assets/narration/shot-*.wav (24 kHz PCM, 64.85s spoken audio)",
+      summary: "Synthesizes native Amharic narration (voice Charon) with natural cadence aligned to the childhood narrative.",
+      tech: "gemini-3.8-flash-tts · Voice Charon",
+      inputs: "Amharic narration lines in storyboard.json",
+      outputs: "assets/narration/shot-*.wav (64.85s spoken audio)",
       command: "python -m pipeline.narration",
-      latency: "21.0s pacing (rate-limit safe)",
+      latency: "21.0s RPM pacing",
       keyDetails: [
-        "Selected over alternatives for natural Amharic delivery, verified via Gemini QA (EXP-001).",
-        "21.0s pacing & retryDelay backoff eliminated HTTP 429 quota failures (FAIL-001).",
-        "10 audio stems totaled 64.85s spoken audio padded into the 80.0s timeline."
+        "Audited via Gemini QA check (EXP-001) to catch mispronounced phrasing.",
+        "21.0s pacing + retryDelay backoff eliminated HTTP 429 quota limits (FAIL-001).",
+        "10 stems timed directly into the 80.0s film timeline."
       ]
     },
     keyframes: {
@@ -105,17 +89,16 @@ export default function PipelineVisualizer() {
       number: "03B",
       title: "Photorealistic Keyframes (FLUX.2 Klein 4B)",
       badge: "flux-2-klein-4b",
-      badgeColor: "bg-sky-500/20 text-sky-300 border-sky-500/40",
-      summary: "Generates 1024×1024 character, street, and monument keyframes conditioned on Step 6 reference sheets.",
-      tech: "Cloudflare Workers AI • @cf/black-forest-labs/flux-2-klein-4b",
-      inputs: "Shot prompts, camera framing hints, 4 Harar reference PNGs",
+      summary: "Generates 1024×1024 Harar street, character, and monument keyframes conditioned on Step 6 reference sheets.",
+      tech: "Cloudflare Workers AI · @cf/black-forest-labs/flux-2-klein-4b",
+      inputs: "Shot prompts, framing hints, 4 reference PNGs",
       outputs: "assets/keyframes/shot-*.png (1024×1024)",
       command: "python -m pipeline.keyframes",
-      latency: "139.33s across 11 calls ($0.00)",
+      latency: "139.33s across 11 calls",
       keyDetails: [
-        "Consistent Harar Jugol limestone textures, retro clothing, and equestrian bronze monument geometry.",
-        "Deterministic seeds (2001–2010) preserve visual reproducibility across rebuilds.",
-        "Feeds directly into Phase 2 Kaggle 2× T4 GPU video generation."
+        "Preserves Jugol stone wall textures, 1990s clothing, and bronze statue structure.",
+        "Deterministic seeds (2001–2010) ensure visual consistency.",
+        "Feeds directly into Phase 2 Kaggle 2× T4 image-to-video generation."
       ]
     },
     video: {
@@ -123,35 +106,33 @@ export default function PipelineVisualizer() {
       number: "03C",
       title: "Video Motion Clips (Kaggle Wan 2.2 TI2V-5B)",
       badge: "Wan 2.2 TI2V-5B",
-      badgeColor: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
-      summary: "Upgrades the 10 Phase-1 still keyframes into real moving 73-frame MP4 clips on Kaggle's free 2× Nvidia T4 GPU.",
-      tech: "Wan-AI/Wan2.2-TI2V-5B-Diffusers • Kaggle 2× T4 (15.64 GB)",
+      summary: "Animates the 10 Phase-1 still keyframes into 73-frame MP4 clips on Kaggle 2× Nvidia T4 GPUs.",
+      tech: "Wan-AI/Wan2.2-TI2V-5B-Diffusers · 2× T4 GPU",
       inputs: "assets/keyframes/shot-*.png + seeds 3001–3020",
-      outputs: "assets/clips/shot-*.mp4 (512×512, 73 frames @ 24fps)",
+      outputs: "assets/clips/shot-*.mp4 (512×512, 73f @ 24fps)",
       command: "python -m pipeline.video",
-      latency: "131.15 GPU session min ($0.00)",
+      latency: "131.15 GPU session min",
       keyDetails: [
-        "CPU UMT5 text-encoding offload solved 16 GB VRAM OOM crashes on Kaggle (FAIL-004, Peak VRAM: 12.91 GB).",
-        "Produces 10 raw clips of 3.04s each, inspectable under the 'Kaggle - Wan 2.2' tab.",
-        "Cached in assets/clips/ via SHA-256 hash and fed cleanly into Assembly Engine."
+        "CPU UMT5 pre-encoding cleared 15.64 GB VRAM OOM errors on Kaggle (FAIL-004, 12.91 GB peak).",
+        "All 10 raw clips are inspectable inside the Kaggle · Wan 2.2 tab.",
+        "Cached in assets/clips/ and temporally extended during assembly."
       ]
     },
     music: {
       id: "music",
       number: "03D",
-      title: "Original Ethiopian Instrument Score",
+      title: "Original Score (ACE-Step 1.5)",
       badge: "ACE-Step 1.5",
-      badgeColor: "bg-rose-500/20 text-rose-300 border-rose-500/40",
-      summary: "Original melancholic background score featuring Ethiopian pentatonic krar and masenqo strings at 72 BPM.",
-      tech: "ACE-Step 1.5 • 72 BPM Pentatonic",
-      inputs: "Emotional cue descriptions (joy → nostalgia → absence)",
+      summary: "Auditioned four acoustic instrumental candidates on Kaggle T4 GPU; selected 83.0s master underscore.",
+      tech: "ACE-Step/Ace-Step1.5 · Kaggle T4",
+      inputs: "Musical mood cues in storyboard.json",
       outputs: "assets/music/harar_memory_score.wav (83.0s)",
       command: "python -m pipeline.music",
-      latency: "45s generation on GPU",
+      latency: "7.87 GPU session min",
       keyDetails: [
-        "Authentic acoustic timbre without distracting synthesized vocal artifacts.",
-        "Calibrated with a smooth 2.5s fade-out across the AI disclosure end card.",
-        "Automatically attenuated by -12 dB whenever narration speaks."
+        "Acoustic krar-inspired underscore avoids synthetic vocal artifacts.",
+        "Mixed with 2.5s tail fade across the final 3.0s end card.",
+        "Sidechain-ducked by -12 dB underneath narration."
       ]
     },
     subtitles: {
@@ -159,17 +140,16 @@ export default function PipelineVisualizer() {
       number: "03E",
       title: "ASS Subtitle Engine (_balance_two_lines)",
       badge: "Deterministic Code",
-      badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40",
-      summary: "Transforms full English subtitle lines from storyboard.json into aspect-tuned ASS caption files without orphan single words.",
-      tech: "pipeline/assembly.py • _balance_two_lines()",
-      inputs: "storyboard.json → narrative.english_subtitle_text",
-      outputs: "outputs/intermediate/subtitles_vertical.ass & horizontal.ass",
+      summary: "Wraps full English sentences into symmetric two-line ASS captions with zero single-word orphans.",
+      tech: "pipeline/assembly.py · _balance_two_lines()",
+      inputs: "storyboard.json → english_subtitle_text",
+      outputs: "subtitles_vertical.ass & subtitles_horizontal.ass",
       command: "python make_film.py",
       latency: "< 0.05s generation",
       keyDetails: [
-        "Solves single-word orphan line breaks by computing optimal midpoint word wraps (FAIL-009).",
-        "Maintains crisp full-sentence pacing matched to the Amharic audio timings.",
-        "Burned directly onto both 9:16 and 16:9 masters."
+        "Eliminates awkward trailing single words via midpoint word wrapping (FAIL-009).",
+        "Preserves complete readable sentences for both 9:16 mobile and 16:9 widescreen.",
+        "Burned deterministically with libass during final encoding."
       ]
     },
     assembly: {
@@ -177,36 +157,34 @@ export default function PipelineVisualizer() {
       number: "04",
       title: "Deterministic FFmpeg Assembly Engine",
       badge: "Broadcast EBU R128",
-      badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
-      summary: "Combines Phase 1 stems, ASS subtitles, Pillow 48-step AI end card, and Phase 2 Wan 2.2 clips into final masters.",
-      tech: "FFmpeg 6.0+ • Pillow 48-Step Gradient Card",
-      inputs: "Verified Disk Store (assets/) + Raw Clips + Subtitles",
+      summary: "Combines Phase 1 stems, ASS subtitles, Pillow end card, and Phase 2 clips with zero manual editing.",
+      tech: "FFmpeg 9.1 · Pillow 48-Step Gradient",
+      inputs: "Verified Disk Store (assets/) + Subtitles",
       outputs: "outputs/vertical/*.mp4 & outputs/horizontal/*.mp4",
       command: "python make_film.py",
-      latency: "15s – 35s CPU encoding (0.15s cached)",
+      latency: "0.15s cached · 460s full encode",
       keyDetails: [
-        "Temporal Bridging: 1.35× slowdown + dynamic zoompan forward push (0% → 7%).",
-        "Sidechain Ducking: Music attenuates -12 dB under narration (6:1 ratio, 300ms attack).",
-        "Loudness: Two-pass loudnorm locked to -14.0 LUFS Integrated / -1.0 dBTP True Peak.",
-        "Dual-Aspect: 16:9 uses 36σ Gaussian blurred wings; 9:16 uses anchor-aware crop."
+        "Temporal Math: 1.35× slow motion + 0%→7% zoompan push across tail frames.",
+        "Sidechain Ducking: -12 dB music dip when voice speaks (6:1 ratio, 300ms attack).",
+        "Loudness: Two-pass EBU R128 loudnorm at -14.0 LUFS / -1.0 dBTP.",
+        "Dual-Aspect: 16:9 uses 36σ Gaussian motion wings; 9:16 uses anchor crop."
       ]
     },
     deliverables: {
       id: "deliverables",
       number: "05",
-      title: "Dual Broadcast Deliverables & Showcase",
-      badge: "Master Verified",
-      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/40",
-      summary: "Ready-to-publish vertical mobile and horizontal cinema MP4 masters plus this interactive Next.js Vercel showcase.",
-      tech: "H.264 High@L4.1 • AAC Stereo 192kbps",
+      title: "Dual Broadcast Deliverables",
+      badge: "Verified Masters",
+      summary: "Final verified MP4 deliverables ready for vertical mobile distribution and horizontal archival screening.",
+      tech: "H.264 High@L4.1 · AAC 192 kbps",
       inputs: "Assembled video + mastered audio + 3.0s AI disclosure",
-      outputs: "harar_monument_vertical_9x16.mp4 (47 MB) & horizontal_16x9.mp4 (39 MB)",
+      outputs: "9:16 (47 MB) & 16:9 (39 MB)",
       command: "make verify",
-      latency: "Instant CDN streaming",
+      latency: "CDN ready",
       keyDetails: [
-        "📱 Vertical 9:16: 1080×1920 | 83.0s | -14.0 LUFS | Full burned captions.",
-        "🖥️ Horizontal 16:9: 1920×1080 | 83.0s | -14.0 LUFS | Ambient motion wings.",
-        "Includes 46 logged calls in runs.jsonl and 42 passing unit tests."
+        "Vertical 9:16: 1080×1920 | 83.0s | -14.0 LUFS | Full burned captions.",
+        "Horizontal 16:9: 1920×1080 | 83.0s | -14.0 LUFS | Ambient motion wings.",
+        "Tracked with 47 API/GPU runs + 3 FFmpeg builds and 42 unit tests."
       ]
     }
   };
@@ -219,7 +197,7 @@ export default function PipelineVisualizer() {
     setTimeout(() => {
       setSimStep("done");
       setSimulating(false);
-    }, 2400);
+    }, 2200);
   };
 
   const resetSimulation = () => {
@@ -228,140 +206,123 @@ export default function PipelineVisualizer() {
   };
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
-      {/* Header */}
+    <div className="space-y-6 sm:space-y-8 max-w-6xl mx-auto">
       <div>
-        <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-widest mb-1.5">
-          <Cpu className="w-4 h-4" />
-          <span>System Architecture &amp; Live Dataflow</span>
+        <div className="text-[11px] font-mono uppercase tracking-widest text-[#d4a359] mb-1.5">
+          System Architecture
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-          How the Whole Automated Pipeline Works
+        <h1 className="text-2xl sm:text-3xl font-semibold text-zinc-100 tracking-tight">
+          Pipeline Architecture &amp; Dataflow
         </h1>
-        <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-3xl leading-relaxed">
-          Read left to right: <strong>Phase 1</strong> governs <code className="text-amber-300 font-mono">storyboard.json</code> validation, SHA-256 cache routing (showing both Cache Hits bypassing AI into <code className="text-emerald-300 font-mono">assets/</code> and Cache Misses), the full subtitle track, and FFmpeg assembly. <strong>Phase 2</strong> upgrades still keyframes to moving video via Wan 2.2 on Kaggle GPU.
+        <p className="text-xs sm:text-sm text-zinc-400 mt-2 max-w-3xl leading-relaxed">
+          Governed left-to-right by <code className="text-zinc-200 font-mono">storyboard.json</code>. Phase 1 validates the contract, routes SHA-256 cache hits/misses, and encodes both aspect masters; Phase 2 renders motion on Kaggle 2× T4 GPUs.
         </p>
       </div>
 
-      {/* View Selector Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-slate-900/90 border border-slate-800">
+      {/* View Switcher */}
+      <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-lg bg-zinc-950 border border-zinc-800 w-fit">
         <button
           onClick={() => setActiveDiagramView("pipeline")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
+          className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition ${
             activeDiagramView === "pipeline"
-              ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-              : "text-slate-400 hover:text-white"
+              ? "bg-zinc-800 text-zinc-100"
+              : "text-zinc-500 hover:text-zinc-300"
           }`}
         >
-          <GitBranch className="w-4 h-4" />
-          <span>1. Full Architecture Diagram (SVG + Moving Flows)</span>
+          1. System Diagram
         </button>
 
         <button
           onClick={() => setActiveDiagramView("caching")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
+          className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition ${
             activeDiagramView === "caching"
-              ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-              : "text-slate-400 hover:text-white"
+              ? "bg-zinc-800 text-zinc-100"
+              : "text-zinc-500 hover:text-zinc-300"
           }`}
         >
-          <Zap className="w-4 h-4" />
-          <span>2. Selective Regeneration Demo (Rubric Step 3)</span>
+          2. Selective Regeneration Demo
         </button>
 
         <button
           onClick={() => setActiveDiagramView("signals")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
+          className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition ${
             activeDiagramView === "signals"
-              ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-              : "text-slate-400 hover:text-white"
+              ? "bg-zinc-800 text-zinc-100"
+              : "text-zinc-500 hover:text-zinc-300"
           }`}
         >
-          <Activity className="w-4 h-4" />
-          <span>3. Audio &amp; Visual Signal Processing</span>
+          3. Audio &amp; Aspect Specs
         </button>
       </div>
 
-      {/* =========================================================================
-          VIEW 1: COMPLETE VECTOR ARCHITECTURE DIAGRAM (MOVING FLOWS + ATTACHMENTS)
-          ========================================================================= */}
+      {/* VIEW 1: VECTOR PIPELINE DIAGRAM */}
       {activeDiagramView === "pipeline" && (
         <div className="space-y-4">
-          <div className="glass-panel rounded-2xl p-3 sm:p-5 border border-slate-800 bg-[#070b14] shadow-2xl">
-            {/* Scrollable SVG wrapper so mobile users can smoothly swipe across the full crisp architecture */}
-            <div className="overflow-x-auto pb-2 rounded-xl border border-slate-800/80 bg-[#070b14]">
+          <div className="glass-panel rounded-xl p-3 sm:p-5 bg-[#090a0d]">
+            <div className="overflow-x-auto pb-2 rounded-lg border border-zinc-800/80 bg-[#090a0d]">
               <div className="min-w-[920px] w-full">
-                {/* Inline Embedded Animated SVG so moving flows run at 60fps on every device */}
                 <a
                   href="/assets/pipeline_diagram.svg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block group relative cursor-zoom-in"
-                  title="Click to open vector SVG diagram at full screen"
+                  className="block relative cursor-zoom-in"
+                  title="Open vector SVG full screen"
                 >
                   <object
                     type="image/svg+xml"
                     data="/assets/pipeline_diagram.svg"
-                    className="w-full aspect-[1600/1050] pointer-events-none block rounded-lg"
-                    aria-label="Full Animated System Pipeline Diagram"
+                    className="w-full aspect-[1600/1050] pointer-events-none block rounded"
+                    aria-label="System Architecture Pipeline Diagram"
                   >
                     <img
                       src="/assets/pipeline_diagram.png"
-                      alt="End-to-End Automated AI Film Pipeline Architecture"
-                      className="w-full h-auto block rounded-lg"
+                      alt="System Architecture Pipeline Diagram"
+                      className="w-full h-auto block rounded"
                     />
                   </object>
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition bg-black/85 backdrop-blur-md px-3 py-1.5 rounded-lg border border-amber-500/40 text-xs font-semibold text-amber-300 flex items-center gap-1.5 shadow-lg">
-                    <Maximize2 className="w-3.5 h-3.5" />
-                    <span>Open Full-Size Interactive SVG</span>
-                  </div>
                 </a>
               </div>
             </div>
 
-            {/* Bottom Action Bar directly matching best-practice architecture attachments */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-4 pt-3 border-t border-slate-800/80 px-1 text-xs">
-              <div className="flex items-center gap-2 text-slate-400">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                <span>
-                  Click the diagram to open full size (swipe horizontally on small screens). Animated dashed paths show live dataflow.
-                </span>
-              </div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-3.5 pt-3 border-t border-zinc-800/80 px-1 text-xs">
+              <span className="text-zinc-500">
+                Click diagram to inspect full scale (scroll horizontally on phone). Animated dashes trace active data direction.
+              </span>
 
               <div className="flex flex-wrap items-center gap-2 shrink-0">
                 <a
                   href="/assets/pipeline_diagram.svg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-sky-300 hover:text-white hover:border-sky-400 transition font-medium"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition"
                 >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  <span>Open Full SVG</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+                  <span>Full SVG</span>
                 </a>
                 <a
                   href="/assets/pipeline_diagram.svg"
                   download="harar_monument_pipeline_diagram.svg"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-emerald-300 hover:text-white hover:border-emerald-400 transition font-medium"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition"
                 >
-                  <FileCode className="w-3.5 h-3.5" />
-                  <span>Download SVG</span>
+                  <FileCode className="w-3.5 h-3.5 text-zinc-400" />
+                  <span>SVG</span>
                 </a>
                 <a
                   href="/assets/pipeline_diagram.png"
                   download="harar_monument_pipeline_diagram.png"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500 hover:text-slate-950 transition font-bold"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-100 text-zinc-950 font-semibold hover:bg-white transition"
                 >
                   <ImageIcon className="w-3.5 h-3.5" />
-                  <span>Download PNG</span>
+                  <span>PNG</span>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Clickable Interactive Stage Selector Pills to Inspect Any Module Below */}
-          <div className="glass-panel rounded-2xl p-4 sm:p-5 border border-slate-800">
-            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
-              Select a Pipeline Component to Inspect Technical Specs &amp; CLI Commands:
+          {/* Stage Selector */}
+          <div className="glass-panel rounded-xl p-4 sm:p-5">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 mb-3">
+              Select Component to Inspect Parameters
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
               {Object.values(nodes).map((node) => {
@@ -370,18 +331,16 @@ export default function PipelineVisualizer() {
                   <button
                     key={node.id}
                     onClick={() => setSelectedNodeId(node.id)}
-                    className={`p-2.5 rounded-xl border text-left transition ${
+                    className={`p-2.5 rounded-lg border text-left transition ${
                       isSelected
-                        ? "bg-amber-500/20 border-amber-400 text-white shadow-md shadow-amber-500/10"
-                        : "bg-slate-900/70 border-slate-800 text-slate-300 hover:border-slate-700 hover:text-white"
+                        ? "bg-zinc-800/90 border-zinc-600 text-zinc-100"
+                        : "bg-zinc-950/60 border-zinc-800/80 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200"
                     }`}
                   >
-                    <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
-                      <span className={isSelected ? "text-amber-300 font-bold" : "text-slate-500"}>
-                        {node.number}
-                      </span>
+                    <div className={`text-[10px] font-mono mb-0.5 ${isSelected ? "text-[#d4a359]" : "text-zinc-600"}`}>
+                      {node.number}
                     </div>
-                    <div className="text-xs font-bold truncate">{node.title.split("(")[0].trim()}</div>
+                    <div className="text-xs font-medium truncate">{node.title.split("(")[0].trim()}</div>
                   </button>
                 );
               })}
@@ -390,239 +349,178 @@ export default function PipelineVisualizer() {
         </div>
       )}
 
-      {/* =========================================================================
-          VIEW 2: SELECTIVE REGENERATION & CACHING FLOW (WALKTHROUGH DEMO)
-          ========================================================================= */}
+      {/* VIEW 2: SELECTIVE REGENERATION DEMO */}
       {activeDiagramView === "caching" && (
-        <div className="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-800 bg-gradient-to-b from-slate-950 to-[#0a0f1d] animate-in fade-in duration-150">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 mb-5 border-b border-slate-800">
+        <div className="glass-panel rounded-xl p-5 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 mb-5 border-b border-zinc-800">
             <div>
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <Zap className="w-4 h-4 text-emerald-400" />
-                <span>Selective Regeneration Flowchart (Rubric 30-Point Requirement)</span>
+              <h2 className="text-sm font-semibold text-zinc-100">
+                Selective Invalidation Trace (Walkthrough Proof)
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Modifying one shot invalidates ONLY that shot's SHA-256 hash; all unchanged shots bypass AI inference and load straight from assets/ in 0.15s.
+              <p className="text-xs text-zinc-400 mt-0.5">
+                Editing one shot invalidates only its SHA-256 hash while all remaining shots replay directly from assets/ in 0.15s.
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={triggerLiveSimulation}
                 disabled={simulating}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-lg ${
-                  simulating
-                    ? "bg-amber-500/40 text-amber-200 cursor-wait"
-                    : "bg-emerald-500 text-slate-950 hover:bg-emerald-400 shadow-emerald-500/20"
-                }`}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-zinc-100 text-zinc-950 text-xs font-semibold hover:bg-white transition disabled:opacity-50"
               >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                <span>{simulating ? "Evaluating Hashes..." : "Simulate Edit Shot 01"}</span>
+                <Play className="w-3 h-3 fill-current" />
+                <span>{simulating ? "Hashing..." : "Simulate Edit Shot 01"}</span>
               </button>
               {simStep !== "idle" && (
                 <button
                   onClick={resetSimulation}
-                  className="p-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
+                  className="p-1.5 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white"
                   title="Reset"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-            <div className="p-4 rounded-xl bg-red-950/20 border border-red-500/40">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold text-red-400">Shot 01: Hash MISMATCH ❌</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-300">Edited Prompt</span>
+            <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-medium text-zinc-100">Shot 01 · Hash Mismatch</span>
+                <span className="text-[10px] font-mono text-[#d4a359]">Re-generated</span>
               </div>
-              <p className="text-xs text-slate-300">
-                Only Shot 01 misses cache and calls <code className="text-amber-300">FLUX.1</code> / <code className="text-amber-300">Gemini TTS</code>. Re-writes <code className="text-sky-300">assets/keyframes/shot-01.png</code> and feeds into Assemble.
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Triggers single model invocation for the modified prompt, writing an updated asset without touching Shots 02–10.
               </p>
-              <div className="mt-2 text-[11px] font-mono text-red-400">→ Generated Fresh: 1</div>
             </div>
 
-            <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/40">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold text-emerald-400">Shots 02–10: Hash MATCH ✅</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">0.15s Replay</span>
+            <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-medium text-zinc-100">Shots 02–10 · Hash Match</span>
+                <span className="text-[10px] font-mono text-zinc-400">0.15s Cache Hit</span>
               </div>
-              <p className="text-xs text-slate-300">
-                Bypass AI models completely along the green Cache Hit corridor, pulling verified WAV/PNG/MP4 assets directly from <code className="text-emerald-300">assets/</code> into Assemble.
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Bypasses all API and GPU stages, reading existing verified stems straight from disk into assembly.
               </p>
-              <div className="mt-2 text-[11px] font-mono text-emerald-400">→ Retrieved from Cache: 9</div>
             </div>
           </div>
 
-          <div className="rounded-xl bg-black/90 p-4 border border-slate-800 font-mono text-xs">
-            <div className="flex items-center justify-between text-slate-500 pb-2 mb-2 border-b border-slate-900">
+          <div className="rounded-lg bg-black p-4 border border-zinc-800 font-mono text-xs">
+            <div className="flex items-center justify-between text-zinc-500 pb-2 mb-2 border-b border-zinc-900">
               <span className="flex items-center gap-2">
-                <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-                Live Terminal Log Evidence: python -m pipeline.keyframes &amp;&amp; python make_film.py
+                <Terminal className="w-3.5 h-3.5" />
+                python -m pipeline.keyframes &amp;&amp; python make_film.py
               </span>
-              <span className="text-[11px] text-emerald-400">Exit Code: 0</span>
+              <span className="text-[10px]">exit 0</span>
             </div>
 
             {simStep === "idle" && (
-              <p className="text-slate-500 italic py-2">
-                # Click "Simulate Edit Shot 01" above to trace the single-shot invalidation log...
-              </p>
+              <p className="text-zinc-600 py-1">Click &quot;Simulate Edit Shot 01&quot; above to inspect the console output.</p>
             )}
-
             {simStep === "running" && (
-              <div className="space-y-1 text-slate-300 py-1">
-                <p className="text-purple-400">[Stage 1/3] Validating storyboard.json schema contract... ✓ 100% valid</p>
-                <p className="text-amber-400">[Stage 2/3] Evaluating SHA-256 input hashes for 10 shots...</p>
-                <p className="text-red-300">  • Shot 01: Hash mismatch → Calling FLUX.1-schnell API...</p>
-                <p className="text-emerald-400">  • Shots 02–10: Hash matched [0.15s instant bypass from assets/]</p>
+              <div className="space-y-1 text-zinc-300">
+                <p className="text-zinc-400">[Stage 1/3] Validating storyboard.json Draft 2020-12 schema... OK</p>
+                <p className="text-[#d4a359]">[Stage 2/3] Shot 01 hash mismatch → regenerating FLUX keyframe...</p>
+                <p className="text-zinc-500">[Stage 2/3] Shots 02–10 hash match → skipped [0.15s]</p>
               </div>
             )}
-
             {simStep === "done" && (
-              <div className="space-y-1 text-slate-300 py-1">
-                <p className="text-sky-400">{"{'model': '@cf/black-forest-labs/flux-2-klein-4b', 'generated': 1, 'cached': 9}"}</p>
-                <p className="text-emerald-400">[Stage 3/3] Assembled updated dual-aspect MP4 deliverables (-14.0 LUFS)</p>
-                <p className="text-amber-300 font-bold mt-2">
-                  ✅ Evidence verified: Zero GPU waste, single-shot regeneration successful!
-                </p>
+              <div className="space-y-1 text-zinc-300">
+                <p className="text-zinc-200">{"{'model': '@cf/black-forest-labs/flux-2-klein-4b', 'generated': 1, 'cached': 9}"}</p>
+                <p className="text-zinc-400">[Stage 3/3] Re-assembled vertical 9:16 &amp; horizontal 16:9 masters (-14.0 LUFS)</p>
+                <p className="text-[#d4a359]">Done: 1 regenerated, 9 cached.</p>
               </div>
             )}
           </div>
         </div>
       )}
 
-      {/* =========================================================================
-          VIEW 3: AUDIO & VIDEO SIGNAL PROCESSING SCHEMATICS
-          ========================================================================= */}
+      {/* VIEW 3: SIGNAL SPECS */}
       {activeDiagramView === "signals" && (
-        <div className="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-800 bg-gradient-to-b from-slate-950 to-[#0a0f1d] animate-in fade-in duration-150 space-y-6">
+        <div className="glass-panel rounded-xl p-5 sm:p-6 space-y-6">
           <div>
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Activity className="w-4 h-4 text-sky-400" />
-              <span>Audio &amp; Visual Signal Processing Schematics (ARCHITECTURE.md §5)</span>
+            <h2 className="text-sm font-semibold text-zinc-100">
+              Audio &amp; Visual Signal Processing (FFmpeg)
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Broadcast mastering algorithms implemented in FFmpeg for sidechain audio ducking and dual-aspect composition.
+            <p className="text-xs text-zinc-400 mt-0.5">
+              Automated signal chain inside <code className="font-mono text-zinc-300">pipeline/assembly.py</code>.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-amber-300 flex items-center gap-2">
-                  <Volume2 className="w-4 h-4" />
-                  -12 dB Sidechain Music Ducking
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800 space-y-3">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-medium text-zinc-200 flex items-center gap-2">
+                  <Volume2 className="w-3.5 h-3.5 text-[#d4a359]" />
+                  Sidechain Ducking
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">
-                  EBU R128 (-14.0 LUFS)
-                </span>
+                <span className="font-mono text-[10px] text-zinc-500">-12 dB · -14.0 LUFS</span>
               </div>
-
-              <div className="h-32 rounded-xl bg-black/80 border border-slate-800 p-3 flex flex-col justify-between font-mono text-[10px]">
-                <div className="flex justify-between text-slate-500">
-                  <span>Voice Active (Narration)</span>
-                  <span className="text-amber-400 font-bold">-12 dB Attenuation</span>
-                </div>
-                <div className="w-full h-12 flex items-center gap-1">
-                  <div className="w-1/4 h-8 bg-sky-500/40 rounded flex items-center justify-center text-[9px] text-sky-200">
-                    Intro (0 dB)
-                  </div>
-                  <div className="w-2/4 h-3 bg-amber-500/80 rounded flex items-center justify-center text-[9px] text-slate-950 font-bold">
-                    Ducked (-12 dB)
-                  </div>
-                  <div className="w-1/4 h-8 bg-sky-500/40 rounded flex items-center justify-center text-[9px] text-sky-200">
-                    Outro (0 dB)
-                  </div>
-                </div>
-                <div className="flex justify-between text-slate-500 text-[9px]">
-                  <span>Attack: 300ms</span>
-                  <span>Ratio: 6:1</span>
-                  <span>Release: 1500ms</span>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-300 mt-3 leading-relaxed">
-                Narration triggers FFmpeg's <code className="text-amber-300 font-mono">sidechaincompress</code>. When Amharic voiceover speaks, the background krar music smoothly dips by 12 dB, then glides back up during pauses.
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Narration triggers <code className="text-zinc-300 font-mono">sidechaincompress</code> (ratio 6:1, 300ms attack, 1500ms release), dipping background music by 12 dB during speech before 2-pass <code className="text-zinc-300 font-mono">loudnorm</code> mastering.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-sky-300 flex items-center gap-2">
-                  <Film className="w-4 h-4" />
-                  Dual-Aspect Video Adaptation
+            <div className="p-4 rounded-lg bg-zinc-950 border border-zinc-800 space-y-3">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-medium text-zinc-200 flex items-center gap-2">
+                  <Film className="w-3.5 h-3.5 text-[#d4a359]" />
+                  Dual-Aspect Framing
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">
-                  16:9 &amp; 9:16
-                </span>
+                <span className="font-mono text-[10px] text-zinc-500">16:9 &amp; 9:16</span>
               </div>
-
-              <div className="h-32 rounded-xl bg-black/80 border border-slate-800 p-3 flex items-center justify-around font-mono text-[10px]">
-                <div className="w-36 h-20 bg-sky-900/30 border border-sky-500/40 rounded flex items-center justify-center relative overflow-hidden text-center">
-                  <div className="w-16 h-20 bg-sky-500/50 flex items-center justify-center text-[9px] font-bold text-white z-10">
-                    1080×1080
-                  </div>
-                  <span className="absolute bottom-0.5 right-1 text-[8px] text-sky-300">16:9 (Wings)</span>
-                </div>
-
-                <div className="w-14 h-24 bg-amber-500/30 border border-amber-500/60 rounded flex items-center justify-center text-center text-[9px] font-bold text-amber-200">
-                  9:16 Crop
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-300 mt-3 leading-relaxed">
-                Prevents harsh black pillarboxes in 16:9 widescreen by generating a background stream with <code className="text-sky-300 font-mono">gblur=sigma=36</code>. Vertical 9:16 uses an anchor-aware center crop.
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Widescreen 16:9 composites sharp square motion over 36-sigma Gaussian-blurred ambient wings (<code className="text-zinc-300 font-mono">gblur=sigma=36</code>); vertical 9:16 applies an anchor-aware focus crop.
               </p>
             </div>
           </div>
         </div>
       )}
 
-      {/* Node Inspector Card */}
-      <div className="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-800">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 mb-4 border-b border-slate-800">
+      {/* Inspector Card */}
+      <div className="glass-panel rounded-xl p-5 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 mb-4 border-b border-zinc-800">
           <div className="flex items-center gap-3">
-            <span className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 font-mono font-bold flex items-center justify-center text-xs border border-amber-500/30">
+            <span className="px-2 py-1 rounded bg-zinc-950 border border-zinc-800 text-[#d4a359] font-mono text-xs">
               {selectedNode.number}
             </span>
             <div>
-              <h3 className="text-base font-bold text-white">{selectedNode.title}</h3>
-              <p className="text-xs text-slate-400">{selectedNode.tech}</p>
+              <h3 className="text-sm font-semibold text-zinc-100">{selectedNode.title}</h3>
+              <p className="text-xs font-mono text-zinc-500">{selectedNode.tech}</p>
             </div>
           </div>
-          <span className={`px-2.5 py-1 rounded-full text-xs font-bold border self-start sm:self-auto ${selectedNode.badgeColor}`}>
+          <span className="px-2.5 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-300 self-start sm:self-auto">
             {selectedNode.badge}
           </span>
         </div>
 
-        <p className="text-xs sm:text-sm text-slate-200 mb-4 leading-relaxed">
+        <p className="text-xs sm:text-sm text-zinc-300 mb-4 leading-relaxed">
           {selectedNode.summary}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-          <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">Input Files</div>
-            <div className="font-semibold text-slate-200 mt-0.5 truncate">{selectedNode.inputs}</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4 text-xs">
+          <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase">Input</div>
+            <div className="text-zinc-200 mt-0.5 truncate">{selectedNode.inputs}</div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">Output Files</div>
-            <div className="font-semibold text-slate-200 mt-0.5 truncate">{selectedNode.outputs}</div>
+          <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase">Output</div>
+            <div className="text-zinc-200 mt-0.5 truncate">{selectedNode.outputs}</div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">Terminal Command</div>
-            <div className="font-mono text-amber-300 mt-0.5 truncate">{selectedNode.command}</div>
+          <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase">Command</div>
+            <div className="font-mono text-[#d4a359] mt-0.5 truncate">{selectedNode.command}</div>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">Latency / Cost</div>
-            <div className="font-semibold text-emerald-400 mt-0.5">{selectedNode.latency}</div>
+          <div className="p-3 rounded-lg bg-zinc-950 border border-zinc-800">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase">Performance</div>
+            <div className="text-zinc-200 mt-0.5 tabular-nums">{selectedNode.latency}</div>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-1.5">
-          <div className="font-bold text-amber-300 mb-1">Key Engineering Decisions:</div>
+        <div className="p-4 rounded-lg bg-zinc-950/70 border border-zinc-800/80 text-xs space-y-1.5">
+          <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-1">Implementation Details</div>
           {selectedNode.keyDetails.map((detail, idx) => (
-            <div key={idx} className="flex items-start gap-2 text-slate-300">
-              <span className="text-amber-400 shrink-0">•</span>
+            <div key={idx} className="flex items-start gap-2 text-zinc-300">
+              <span className="text-[#d4a359] shrink-0">·</span>
               <span>{detail}</span>
             </div>
           ))}

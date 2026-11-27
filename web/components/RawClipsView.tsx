@@ -1,28 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-  Video, 
-  Sparkles, 
-  Clock, 
-  Layers, 
-  Cpu, 
-  Download, 
-  ExternalLink, 
-  Play, 
-  CheckCircle2, 
-  Maximize2,
-  Eye,
-  Sliders
-} from "lucide-react";
-import { RAW_CLIPS, RawClipData } from "../lib/data";
+import { Download, ArrowUpRight } from "lucide-react";
+import { RAW_CLIPS } from "../lib/data";
 
 interface RawClipsViewProps {
   onNavigate?: (tab: string) => void;
 }
 
 export default function RawClipsView({ onNavigate }: RawClipsViewProps) {
-  const [selectedClip, setSelectedClip] = useState<RawClipData | null>(null);
   const [showKeyframeCompare, setShowKeyframeCompare] = useState<Record<string, boolean>>({});
 
   const toggleCompare = (shotId: string) => {
@@ -34,78 +20,68 @@ export default function RawClipsView({ onNavigate }: RawClipsViewProps) {
 
   return (
     <div className="space-y-6 sm:space-y-8 max-w-6xl mx-auto">
-      {/* Top Banner */}
-      <div className="glass-panel rounded-2xl p-4 sm:p-6 border border-slate-800 relative overflow-hidden bg-gradient-to-r from-slate-950 via-[#0a0f1d] to-slate-950">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      {/* Header */}
+      <div className="glass-panel rounded-xl p-5 sm:p-6">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           <div>
-            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-amber-400 mb-1.5">
-              <span className="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/30">
-                Kaggle • Wan 2.2 TI2V-5B
-              </span>
-              <span>•</span>
-              <span className="text-slate-400">Nvidia T4 GPU (16 GB VRAM)</span>
+            <div className="text-[11px] font-mono uppercase tracking-widest text-[#d4a359] mb-1.5">
+              Kaggle · Wan 2.2 TI2V-5B · 2× Nvidia T4
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Output • The 10 Raw Video Clips
+            <h1 className="text-2xl sm:text-3xl font-semibold text-zinc-100 tracking-tight">
+              Output · The 10 Raw Clips
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-3xl leading-relaxed">
-              Each clip as Wan 2.2 produced it on Kaggle before being temporally extended (1.35x slowdown + dynamic zoompan forward push) and cropped into dual-aspect masters. Compare the moving video directly against the still FLUX.1 keyframes under Storyboard.
+            <p className="text-xs sm:text-sm text-zinc-400 mt-2 max-w-3xl leading-relaxed">
+              Unprocessed video stems straight from Kaggle before 1.35× temporal slowing, subtle zoompan tail extensions, and dual-aspect reframing. Toggle <span className="text-zinc-200">Compare Still</span> to verify keyframe adherence.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
-            <a
-              href="/outputs/horizontal/harar_monument_horizontal_16x9.mp4"
-              download="harar_monument_horizontal_16x9.mp4"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition shadow-lg shadow-amber-500/20"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download Master Film</span>
-            </a>
-          </div>
+          <a
+            href="/outputs/horizontal/harar_monument_horizontal_16x9.mp4"
+            download="harar_monument_horizontal_16x9.mp4"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-zinc-100 text-zinc-950 font-semibold text-xs hover:bg-white transition shrink-0 self-start"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Download Final Film</span>
+          </a>
         </div>
 
-        {/* Quick Model Telemetry Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-4 border-t border-slate-800/80 text-xs">
-          <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800">
-            <span className="text-slate-400 text-[10px] uppercase font-mono block">Clip Resolution</span>
-            <span className="font-bold text-white text-sm">512×512 (480p)</span>
+        {/* Clean Metrics */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-4 border-t border-zinc-800/80 text-xs">
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Resolution</span>
+            <span className="font-medium text-zinc-200 tabular-nums">512×512 (480p)</span>
           </div>
-          <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800">
-            <span className="text-slate-400 text-[10px] uppercase font-mono block">Frames per Clip</span>
-            <span className="font-bold text-white text-sm">73 frames @ 24 fps</span>
-            <span className="text-[10px] text-slate-500 block">3.04s raw motion</span>
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Length per Clip</span>
+            <span className="font-medium text-zinc-200 tabular-nums">73 frames · 24 fps (3.04s)</span>
           </div>
-          <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800">
-            <span className="text-slate-400 text-[10px] uppercase font-mono block">Total Kaggle Compute</span>
-            <span className="font-bold text-amber-300 text-sm">77.2 GPU Minutes</span>
-            <span className="text-[10px] text-emerald-400 block">$0.00 (Kaggle Quota)</span>
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Kaggle Session Time</span>
+            <span className="font-medium text-[#d4a359] tabular-nums">131.15 GPU min ($0.00)</span>
           </div>
-          <div className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800">
-            <span className="text-slate-400 text-[10px] uppercase font-mono block">Peak VRAM Usage</span>
-            <span className="font-bold text-sky-400 text-sm">12.91 GB / 16 GB</span>
-            <span className="text-[10px] text-slate-500 block">CPU offload (FAIL-004)</span>
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Peak VRAM (FAIL-004)</span>
+            <span className="font-medium text-zinc-200 tabular-nums">12.91 / 15.64 GB (CPU offload)</span>
           </div>
         </div>
       </div>
 
-      {/* Grid of Raw Clips */}
+      {/* Grid of 10 Clips */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {RAW_CLIPS.map((clip) => {
           const isComparing = showKeyframeCompare[clip.shot_id];
           return (
             <div
               key={clip.shot_id}
-              className="glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-amber-500/40 transition flex flex-col justify-between bg-slate-950/80 shadow-lg group"
+              className="glass-card rounded-xl overflow-hidden flex flex-col justify-between"
             >
               <div>
-                {/* Media Stage: Video or Keyframe Toggle */}
-                <div className="relative aspect-square w-full bg-black overflow-hidden flex items-center justify-center border-b border-slate-800">
+                <div className="relative aspect-square w-full bg-black overflow-hidden border-b border-zinc-800/80">
                   {isComparing ? (
                     <img
                       src={clip.keyframe_path}
                       alt={clip.title}
-                      className="w-full h-full object-cover animate-in fade-in duration-200"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <video
@@ -120,73 +96,74 @@ export default function RawClipsView({ onNavigate }: RawClipsViewProps) {
                     </video>
                   )}
 
-                  {/* Top Badges */}
-                  <div className="absolute top-2.5 left-2.5 bg-black/85 backdrop-blur-md px-2 py-0.5 rounded-md text-[11px] font-bold text-white border border-slate-700 pointer-events-none">
-                    Shot 0{clip.order}
+                  <div className="absolute top-2 left-2 bg-zinc-950/85 px-2 py-0.5 rounded text-[10px] font-mono text-zinc-200 border border-zinc-800 pointer-events-none">
+                    Shot {clip.order}
                   </div>
 
                   <button
                     onClick={() => toggleCompare(clip.shot_id)}
-                    className="absolute top-2.5 right-2.5 bg-slate-900/90 hover:bg-amber-500 hover:text-slate-950 backdrop-blur-md px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold text-slate-300 border border-slate-700 transition"
-                    title="Toggle comparison with still keyframe"
+                    className="absolute top-2 right-2 bg-zinc-950/85 hover:bg-zinc-800 px-2 py-0.5 rounded text-[10px] font-mono text-zinc-300 border border-zinc-700 transition"
                   >
-                    {isComparing ? "View Video" : "Compare Still"}
+                    {isComparing ? "Video" : "Still"}
                   </button>
                 </div>
 
-                {/* Metadata & Tech Details */}
                 <div className="p-3.5 space-y-2">
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
-                    <span className="text-amber-300 font-bold">s{clip.order} • {clip.resolution.split(" ")[0]}</span>
+                  <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500 tabular-nums">
+                    <span>s{clip.order} · {clip.resolution.split(" ")[0]}</span>
                     <span>{clip.num_frames} frames</span>
                   </div>
 
-                  <div className="text-xs font-bold text-white truncate" title={clip.title}>
+                  <div className="text-xs font-semibold text-zinc-100 truncate" title={clip.title}>
                     {clip.title}
                   </div>
 
-                  <div className="p-2 rounded-lg bg-slate-900/70 border border-slate-800 text-[10px] text-slate-300 space-y-1">
+                  <div className="p-2 rounded bg-zinc-950/80 border border-zinc-800/80 text-[10px] text-zinc-400 space-y-1 font-mono tabular-nums">
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Kaggle T4:</span>
-                      <span className="text-emerald-400 font-mono font-semibold">{clip.gpu_inference_min} GPU min</span>
+                      <span className="text-zinc-500">Inference</span>
+                      <span className="text-zinc-200">{clip.gpu_inference_min} GPU min</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Seed:</span>
-                      <span className="font-mono text-slate-300">{clip.seed}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-500">Motion:</span>
-                      <span className="text-slate-300 truncate max-w-[120px]">{clip.camera.split("•")[0]}</span>
+                      <span className="text-zinc-500">Seed</span>
+                      <span className="text-zinc-300">{clip.seed}</span>
                     </div>
                   </div>
 
-                  <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed" title={clip.prompt}>
+                  <p className="text-[11px] text-zinc-400 line-clamp-2 leading-relaxed">
                     {clip.prompt}
                   </p>
                 </div>
               </div>
 
-              {/* Card Footer */}
-              <div className="p-3 pt-0">
-                <div className="text-[10px] text-slate-500 font-mono flex items-center justify-between border-t border-slate-800/80 pt-2">
-                  <span>Wan 2.2 I2V</span>
-                  <span className="text-amber-400">12.91 GB VRAM</span>
-                </div>
+              <div className="px-3.5 py-2.5 border-t border-zinc-800/80 text-[10px] font-mono text-zinc-500 flex items-center justify-between">
+                <span>Wan 2.2 TI2V</span>
+                <span className="text-[#d4a359]">12.91 GB VRAM</span>
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Deep-Dive Architectural Note */}
-      <div className="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950">
-        <h3 className="text-sm font-bold text-amber-300 mb-2 flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-amber-400" />
-          How the 3.04s Raw Clips Were Assembled into the 80s Short Film
-        </h3>
-        <p className="text-xs text-slate-300 leading-relaxed max-w-4xl">
-          On Kaggle’s free 16 GB Nvidia T4 GPU, Wan 2.2 generates a maximum of 73 frames (3.04s) before hitting out-of-memory limits. Rather than jarring abrupt loops or static pauses, our automated assembly engine (<code className="text-amber-300 font-mono">pipeline/assembly.py</code>) applies a <strong>1.35x temporal slowdown</strong> (stretching motion to 4.10s) and an automated <strong>subtle zoompan push (0% $\to$ 7%)</strong> on the cloned tail frames. This bridges each shot naturally to match the 8.5-second emotional Amharic narration.
-        </p>
+      {/* Technical Rationale */}
+      <div className="glass-panel rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <h3 className="text-xs font-mono uppercase tracking-wider text-[#d4a359]">
+            Temporal Extension Note
+          </h3>
+          <p className="text-xs text-zinc-400 leading-relaxed max-w-3xl">
+            Kaggle&apos;s 15.64 GB T4 VRAM limited raw generation to 73 frames (3.04s). During assembly, <code className="text-zinc-200 font-mono">pipeline/assembly.py</code> applies a 1.35× temporal slowdown and subtle 0%→7% zoompan continuation across tail frames to match each 6.5s–9.0s Amharic narration segment seamlessly.
+          </p>
+        </div>
+
+        {onNavigate && (
+          <button
+            onClick={() => onNavigate("storyboard")}
+            className="text-xs font-medium text-zinc-300 hover:text-white flex items-center gap-1 shrink-0"
+          >
+            <span>View Storyboard</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+        )}
       </div>
     </div>
   );

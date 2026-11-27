@@ -1,21 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-  Play, 
-  Pause, 
-  Volume2, 
-  Maximize2, 
-  Smartphone, 
-  Monitor, 
-  Info, 
-  Sparkles,
-  Cpu,
-  ArrowRight,
-  Database,
-  Film as FilmIcon,
-  CheckCircle2
-} from "lucide-react";
+import { Smartphone, Monitor, Cpu, ArrowRight } from "lucide-react";
 import { FILM_METADATA, SHOTS } from "../lib/data";
 
 interface FilmPlayerProps {
@@ -30,71 +16,80 @@ export default function FilmPlayer({ onNavigate }: FilmPlayerProps) {
 
   return (
     <div className="space-y-6 sm:space-y-8 max-w-6xl mx-auto">
-      {/* Header Banner */}
-      <div className="glass-panel rounded-2xl p-4 sm:p-6 relative overflow-hidden border border-slate-800">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 relative z-10">
+      {/* Header */}
+      <div className="glass-panel rounded-xl p-5 sm:p-7">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
           <div>
-            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-amber-400 mb-1.5">
-              <span className="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/30">
-                10 Academy Capstone
-              </span>
-              <span>•</span>
-              <span>Harar Heritage Short</span>
+            <div className="text-[11px] font-mono uppercase tracking-widest text-[#d4a359] mb-2">
+              10 Academy Capstone · Harar Heritage Short
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-zinc-100 tracking-tight">
               {FILM_METADATA.title}
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-400 mt-2.5 max-w-2xl leading-relaxed">
               {FILM_METADATA.summary}
             </p>
           </div>
 
-          <div className="flex items-center self-start sm:self-auto shrink-0">
-            <div className="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-700/80 shadow-lg">
+          <div className="flex items-center self-start shrink-0">
+            <div className="flex items-center bg-zinc-950 p-1 rounded-lg border border-zinc-800">
               <button
                 onClick={() => setAspect("vertical")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition ${
                   aspect === "vertical" 
-                    ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20" 
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-zinc-800 text-zinc-100" 
+                    : "text-zinc-500 hover:text-zinc-300"
                 }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
-                <span>Vertical 9:16</span>
+                <span>9:16 Vertical</span>
               </button>
               <button
                 onClick={() => setAspect("horizontal")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition ${
                   aspect === "horizontal" 
-                    ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20" 
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-zinc-800 text-zinc-100" 
+                    : "text-zinc-500 hover:text-zinc-300"
                 }`}
               >
                 <Monitor className="w-3.5 h-3.5" />
-                <span>Horizontal 16:9</span>
+                <span>16:9 Horizontal</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Quick Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-6 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
-          <div><span className="font-bold text-white">10</span> shots in contract</div>
-          <div><span className="font-bold text-white">83.0s</span> broadcast duration</div>
-          <div><span className="font-bold text-amber-400">-14.0 LUFS</span> EBU R128 mastered</div>
-          <div><span className="font-bold text-sky-400">0.15s</span> SHA-256 cache replay</div>
-          <div><span className="font-bold text-emerald-400">$0.00</span> spent (free tiers)</div>
+        {/* Clean Tabular Specs Bar */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6 pt-5 border-t border-zinc-800/80 text-xs">
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Storyboard</span>
+            <span className="font-medium text-zinc-200 tabular-nums">10 shots · 83.0s</span>
+          </div>
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Aspect Formats</span>
+            <span className="font-medium text-zinc-200">9:16 &amp; 16:9</span>
+          </div>
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Loudness</span>
+            <span className="font-medium text-zinc-200 tabular-nums">-14.0 LUFS (EBU R128)</span>
+          </div>
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Cache Replay</span>
+            <span className="font-medium text-zinc-200 tabular-nums">0.15s (SHA-256)</span>
+          </div>
+          <div>
+            <span className="text-zinc-500 block text-[10px] font-mono uppercase">Net Spend</span>
+            <span className="font-medium text-[#d4a359] tabular-nums">$0.00 (Free Tiers)</span>
+          </div>
         </div>
       </div>
 
-      {/* Cinema Player Stage */}
+      {/* Main Screening Area */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        {/* Main Video Viewport */}
-        <div className="lg:col-span-2 glass-panel rounded-2xl p-3 sm:p-5 flex flex-col items-center justify-center bg-black/50 border border-slate-800 min-h-[380px] sm:min-h-[480px]">
-          <div className={`relative overflow-hidden rounded-xl bg-black border border-slate-800 transition-all duration-300 shadow-2xl flex items-center justify-center ${
+        <div className="lg:col-span-2 glass-panel rounded-xl p-4 sm:p-5 flex flex-col items-center justify-center bg-black/60 min-h-[380px] sm:min-h-[470px]">
+          <div className={`relative overflow-hidden rounded-lg bg-black border border-zinc-800 flex items-center justify-center ${
             aspect === "vertical" 
-              ? "w-full max-w-[280px] sm:max-w-[320px] aspect-[9/16]" 
+              ? "w-full max-w-[270px] sm:max-w-[300px] aspect-[9/16]" 
               : "w-full aspect-video"
           }`}>
             <video
@@ -110,68 +105,64 @@ export default function FilmPlayer({ onNavigate }: FilmPlayerProps) {
             </video>
           </div>
 
-          <div className="w-full mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-slate-400 px-1">
-            <span className="flex items-center gap-1.5 text-amber-300 font-medium">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span>-12 dB Sidechain Ducking • ASS Balanced Subtitles</span>
-            </span>
-            <span className="text-slate-500 font-mono text-[11px]">24 fps • H.264 High@L4.1 • AAC Stereo</span>
+          <div className="w-full mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] font-mono text-zinc-500 px-1">
+            <span>-12 dB sidechain ducking · balanced ASS captions</span>
+            <span>24 fps · H.264 High@L4.1 · AAC 48kHz</span>
           </div>
         </div>
 
-        {/* Live Shot Narration & Subtitle Sync */}
+        {/* Script & Scene Chapters */}
         <div className="space-y-4">
-          <div className="glass-panel rounded-2xl p-4 sm:p-5 border border-slate-800">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xs font-bold tracking-wider uppercase text-slate-400">
-                Scene Chapter (Shot {currentShot.order} of 10)
+          <div className="glass-panel rounded-xl p-4 sm:p-5">
+            <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-zinc-800/80">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400">
+                Shot {currentShot.order} of 10
               </h3>
-              <div className="flex items-center gap-1 bg-slate-900 px-2 py-0.5 rounded text-[11px] font-mono text-amber-400 border border-slate-800">
-                <span>{currentShot.duration_seconds}s</span>
-              </div>
+              <span className="text-xs font-mono text-zinc-400 tabular-nums">
+                {currentShot.duration_seconds}s
+              </span>
             </div>
 
             <div className="space-y-3">
-              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
-                <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wide block mb-1">
-                  Amharic Narration (Gemini TTS)
+              <div className="p-3 rounded-lg bg-zinc-950/70 border border-zinc-800/80">
+                <span className="text-[10px] font-mono text-[#d4a359] uppercase tracking-wider block mb-1">
+                  Amharic Narration
                 </span>
-                <p className="text-sm font-medium text-slate-100 leading-relaxed font-sans">
+                <p className="text-sm text-zinc-100 leading-relaxed">
                   {currentShot.narration.am}
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
-                <span className="text-[10px] font-bold text-sky-400 uppercase tracking-wide block mb-1">
+              <div className="p-3 rounded-lg bg-zinc-950/70 border border-zinc-800/80">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider block mb-1">
                   English Subtitle
                 </span>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs text-zinc-300 leading-relaxed">
                   {currentShot.narration.en}
                 </p>
               </div>
 
-              <div className="text-[11px] text-slate-400 space-y-1 pt-1 border-t border-slate-800/80">
-                <p><strong className="text-slate-300">Camera:</strong> {currentShot.camera.movement} ({currentShot.camera.focal_length_hint})</p>
-                <p><strong className="text-slate-300">Framing:</strong> {currentShot.camera.framing}</p>
+              <div className="text-[11px] text-zinc-500 space-y-1 pt-2 border-t border-zinc-800/80">
+                <p><span className="text-zinc-300">Camera:</span> {currentShot.camera.movement} ({currentShot.camera.focal_length_hint})</p>
+                <p><span className="text-zinc-300">Framing:</span> {currentShot.camera.framing}</p>
               </div>
             </div>
           </div>
 
-          {/* Chapter Quick Selector */}
-          <div className="glass-panel rounded-2xl p-4 border border-slate-800">
-            <div className="flex items-center justify-between mb-2">
-              <h4 className="text-xs font-semibold text-slate-400">Jump to Shot</h4>
-              <span className="text-[10px] text-slate-500 font-mono">10 beats</span>
+          <div className="glass-panel rounded-xl p-4">
+            <div className="flex items-center justify-between mb-2.5">
+              <h4 className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">Scene Selector</h4>
+              <span className="text-[10px] font-mono text-zinc-600">10 beats</span>
             </div>
-            <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+            <div className="grid grid-cols-5 gap-1.5">
               {SHOTS.map((s, idx) => (
                 <button
                   key={s.shot_id}
                   onClick={() => setSelectedShot(idx)}
-                  className={`py-2 rounded-lg text-xs font-bold transition ${
+                  className={`py-1.5 rounded-md text-xs font-mono font-medium transition ${
                     selectedShot === idx
-                      ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                      : "bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800"
+                      ? "bg-zinc-100 text-zinc-950"
+                      : "bg-zinc-950 text-zinc-400 hover:text-zinc-200 border border-zinc-800"
                   }`}
                 >
                   S{s.order}
@@ -182,38 +173,31 @@ export default function FilmPlayer({ onNavigate }: FilmPlayerProps) {
         </div>
       </div>
 
-      {/* Pipeline Quick-View & Architecture Bar */}
-      <div className="glass-panel rounded-2xl p-5 border border-slate-800/90 relative overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-sm sm:text-base font-bold text-white">
-                  Automated Pipeline Architecture
-                </h3>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  1-Command Rebuild
-                </span>
-              </div>
-              <p className="text-xs text-slate-400 mt-0.5">
-                storyboard.json contract $\to$ Gemini TTS $\to$ FLUX.1 $\to$ Wan 2.2 $\to$ ACE-Step $\to$ FFmpeg Dual-Aspect
-              </p>
-            </div>
+      {/* Pipeline Shortcut Panel */}
+      <div className="glass-panel rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-start sm:items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-[#d4a359] shrink-0">
+            <Cpu className="w-4 h-4" />
           </div>
-
-          {onNavigate && (
-            <button
-              onClick={() => onNavigate("pipeline")}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:bg-amber-400 transition shadow-lg shadow-amber-500/20 shrink-0 self-stretch md:self-auto justify-center"
-            >
-              <span>Explore Interactive Pipeline Graph</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          )}
+          <div>
+            <h3 className="text-sm font-semibold text-zinc-100">
+              Reproducible Pipeline Architecture
+            </h3>
+            <p className="text-xs text-zinc-400 mt-0.5 font-mono">
+              storyboard.json → SHA-256 Cache → Gemini TTS / FLUX / Wan 2.2 / ACE-Step → FFmpeg
+            </p>
+          </div>
         </div>
+
+        {onNavigate && (
+          <button
+            onClick={() => onNavigate("pipeline")}
+            className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-100 text-xs font-medium hover:bg-zinc-800 transition shrink-0"
+          >
+            <span>Inspect Pipeline Diagram</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#d4a359]" />
+          </button>
+        )}
       </div>
     </div>
   );
