@@ -85,55 +85,55 @@ export default function PipelineVisualizer() {
     tts: {
       id: "tts",
       number: "03A",
-      title: "Amharic Narration (Gemini 2.5 Flash TTS)",
-      badge: "Gemini 2.5 Flash",
+      title: "Amharic Narration (Gemini 3.8 Flash TTS)",
+      badge: "gemini-3.8-flash-tts",
       badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/40",
-      summary: "Synthesizes native Amharic narration with authentic pacing and breathing, synced to Daniel's personal timeline.",
-      tech: "Gemini 2.5 Flash TTS • Voice am-ET-Standard-B",
+      summary: "Synthesizes native Amharic narration (voice Charon) with natural pauses, calibrated to Daniel's personal timeline.",
+      tech: "gemini-3.8-flash-tts • Voice Charon (3 RPM limit)",
       inputs: "Amharic script lines per shot in storyboard.json",
-      outputs: "assets/narration/shot-*.wav (24 kHz PCM)",
+      outputs: "assets/narration/shot-*.wav (24 kHz PCM, 64.85s spoken audio)",
       command: "python -m pipeline.narration",
       latency: "21.0s pacing (rate-limit safe)",
       keyDetails: [
-        "Selected over ElevenLabs for superior, culturally authentic Amharic cadence (EXP-001).",
-        "21.0s exponential backoff prevents HTTP 429 quota exhaustion (FAIL-001).",
-        "10 audio stems totaled 80.0s of continuous narrative."
+        "Selected over alternatives for natural Amharic delivery, verified via Gemini QA (EXP-001).",
+        "21.0s pacing & retryDelay backoff eliminated HTTP 429 quota failures (FAIL-001).",
+        "10 audio stems totaled 64.85s spoken audio padded into the 80.0s timeline."
       ]
     },
     keyframes: {
       id: "keyframes",
       number: "03B",
-      title: "Photorealistic Keyframes (FLUX.1-schnell)",
-      badge: "FLUX.1-schnell",
+      title: "Photorealistic Keyframes (FLUX.2 Klein 4B)",
+      badge: "flux-2-klein-4b",
       badgeColor: "bg-sky-500/20 text-sky-300 border-sky-500/40",
-      summary: "Generates 1024×1024 character, street, and monument keyframes conditioned on Harar architectural references.",
-      tech: "FLUX.1-schnell • Hugging Face / Cloudflare AI",
-      inputs: "Shot prompts, camera framing hints, reference IDs",
+      summary: "Generates 1024×1024 character, street, and monument keyframes conditioned on Step 6 reference sheets.",
+      tech: "Cloudflare Workers AI • @cf/black-forest-labs/flux-2-klein-4b",
+      inputs: "Shot prompts, camera framing hints, 4 Harar reference PNGs",
       outputs: "assets/keyframes/shot-*.png (1024×1024)",
       command: "python -m pipeline.keyframes",
-      latency: "1.2s – 2.4s per keyframe",
+      latency: "139.33s across 11 calls ($0.00)",
       keyDetails: [
         "Consistent Harar Jugol limestone textures, retro clothing, and equestrian bronze monument geometry.",
         "Deterministic seeds (2001–2010) preserve visual reproducibility across rebuilds.",
-        "Feeds directly into Phase 2 Kaggle Nvidia T4 GPU video generation."
+        "Feeds directly into Phase 2 Kaggle 2× T4 GPU video generation."
       ]
     },
     video: {
       id: "video",
       number: "03C",
-      title: "Phase 2: Kaggle Wan 2.2 Video Motion",
+      title: "Video Motion Clips (Kaggle Wan 2.2 TI2V-5B)",
       badge: "Wan 2.2 TI2V-5B",
       badgeColor: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
-      summary: "Upgrades the 10 Phase-1 still keyframes into real moving 73-frame MP4 clips on Kaggle's free Nvidia T4 GPU.",
-      tech: "Wan 2.2 TI2V-5B I2V • Kaggle Nvidia T4 (16 GB VRAM)",
+      summary: "Upgrades the 10 Phase-1 still keyframes into real moving 73-frame MP4 clips on Kaggle's free 2× Nvidia T4 GPU.",
+      tech: "Wan-AI/Wan2.2-TI2V-5B-Diffusers • Kaggle 2× T4 (15.64 GB)",
       inputs: "assets/keyframes/shot-*.png + seeds 3001–3020",
-      outputs: "assets/clips/shot-*.mp4 (73 frames @ 24fps)",
+      outputs: "assets/clips/shot-*.mp4 (512×512, 73 frames @ 24fps)",
       command: "python -m pipeline.video",
-      latency: "77.2 GPU min total ($0.00)",
+      latency: "131.15 GPU session min ($0.00)",
       keyDetails: [
         "CPU UMT5 text-encoding offload solved 16 GB VRAM OOM crashes on Kaggle (FAIL-004, Peak VRAM: 12.91 GB).",
         "Produces 10 raw clips of 3.04s each, inspectable under the 'Kaggle - Wan 2.2' tab.",
-        "Looped cleanly back up into Assembly Engine for 1.35× temporal slowdown and tail zoompan."
+        "Cached in assets/clips/ via SHA-256 hash and fed cleanly into Assembly Engine."
       ]
     },
     music: {
@@ -302,7 +302,7 @@ export default function PipelineVisualizer() {
                   <object
                     type="image/svg+xml"
                     data="/assets/pipeline_diagram.svg"
-                    className="w-full aspect-[1560/980] pointer-events-none block rounded-lg"
+                    className="w-full aspect-[1600/1050] pointer-events-none block rounded-lg"
                     aria-label="Full Animated System Pipeline Diagram"
                   >
                     <img
