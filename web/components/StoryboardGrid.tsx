@@ -49,13 +49,13 @@ export default function StoryboardGrid() {
 
               {/* Body */}
               <div className="p-4 space-y-2.5">
-                <p className="text-xs text-slate-200 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-slate-200 leading-relaxed">
                   {shot.visual_description}
                 </p>
 
-                <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 text-[11px] space-y-1">
-                  <p className="font-medium text-amber-300 line-clamp-1">{shot.narration.am}</p>
-                  <p className="text-slate-400 line-clamp-1 italic">{shot.narration.en}</p>
+                <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 text-[11px] space-y-1.5">
+                  <p className="font-medium text-amber-300 leading-relaxed">{shot.narration.am}</p>
+                  <p className="text-slate-300 italic leading-relaxed">{shot.narration.en}</p>
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function StoryboardGrid() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
                   <h5 className="font-semibold text-amber-300 mb-1">Amharic Narration</h5>
                   <p className="text-slate-200">{selectedShot.narration.am}</p>
